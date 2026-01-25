@@ -1,17 +1,16 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, LogOut } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { supabase } from "@/integrations/supabase/client";
-import { User } from "@supabase/supabase-js";
 import tssLogo from "@/assets/tss-logo.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
-  { 
-    name: "For You", 
+  {
+    name: "For You",
     children: [
       { name: "For Students", path: "/students" },
       { name: "For Colleges", path: "/colleges" },
@@ -26,28 +25,7 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [user, setUser] = useState<User | null>(null);
   const location = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setUser(session?.user ?? null);
-      }
-    );
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate("/");
-  };
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -104,8 +82,8 @@ const Navbar = () => {
                   <Link
                     to={link.path}
                     className={`px-4 py-2 text-sm font-medium transition-colors ${
-                      isActive(link.path) 
-                        ? "text-primary" 
+                      isActive(link.path)
+                        ? "text-primary"
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
@@ -118,17 +96,10 @@ const Navbar = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-3">
-            {user ? (
-              <Button variant="outline" size="sm" onClick={handleLogout}>
-                <LogOut className="w-4 h-4 mr-2" />
-                Logout
-              </Button>
-            ) : (
-              <Button variant="outline" size="sm" asChild>
+            <Button variant="outline" size="sm" asChild>
                 <Link to="/auth">Login / Signup</Link>
-              </Button>
-            )}
-            <Button variant="secondary" size="sm" asChild>
+            </Button>
+            <Button asChild className="bg-yellow-400 text-black hover:bg-yellow-500">
               <Link to="/contact">Partner With Us</Link>
             </Button>
           </div>
@@ -187,17 +158,10 @@ const Navbar = () => {
                 </div>
               ))}
               <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-border">
-                {user ? (
-                  <Button variant="outline" onClick={() => { handleLogout(); setIsOpen(false); }}>
-                    <LogOut className="w-4 h-4 mr-2" />
-                    Logout
-                  </Button>
-                ) : (
-                  <Button variant="outline" asChild>
-                    <Link to="/auth" onClick={() => setIsOpen(false)}>Login / Signup</Link>
-                  </Button>
-                )}
-                <Button variant="secondary" asChild>
+                <Button variant="outline" asChild>
+                  <Link to="/auth" onClick={() => setIsOpen(false)}>Login / Signup</Link>
+                </Button>
+                <Button asChild className="bg-yellow-400 text-black hover:bg-yellow-500">
                   <Link to="/contact" onClick={() => setIsOpen(false)}>Partner With Us</Link>
                 </Button>
               </div>
