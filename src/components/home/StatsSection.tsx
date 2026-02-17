@@ -8,7 +8,7 @@ interface StatItem {
 }
 
 const stats: StatItem[] = [
-  { value: 10000, suffix: "+", label: "Students Onboarded" },
+  { value: 20000, suffix: "+", label: "Students Onboarded" },
   { value: 500, suffix: "+", label: "Internships Completed" },
   { value: 200, suffix: "+", label: "Students Placed" },
   { value: 50, suffix: "+", label: "Colleges Partnered" },

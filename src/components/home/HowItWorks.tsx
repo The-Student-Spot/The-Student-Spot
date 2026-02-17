@@ -33,7 +33,7 @@ const audiences = [
   },
   {
     icon: Users,
-    title: "For Mentors",
+    title: "For Mentors/Speakers/Trainers",
     description: "Guide the next generation. Share your experience and make a lasting impact.",
     features: ["Mentor sessions", "Industry exposure", "Community access", "Recognition"],
     cta: "Become a Mentor",

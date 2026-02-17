@@ -41,7 +41,7 @@ const HeroSection = () => {
               className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6"
             >
               <Sparkles className="w-4 h-4" />
-              One Student Ecosystem
+              students → founder ecosystem
             </motion.div>
 
             <motion.h1
@@ -92,7 +92,7 @@ const HeroSection = () => {
             >
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-success" />
-                10,000+ Students
+                20,000+ Students
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-success" />

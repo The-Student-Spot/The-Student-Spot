@@ -27,14 +27,11 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: MessageCircle, href: "https://wa.me/919581929676?text=Hello+TheStudentSpot%21", label: "WhatsApp" },
-    { icon: ExternalLink, href: "https://aratt.ai/@thestudentspot", label: "Aratt" },
-    { icon: MessageCircle, href: "https://whatsapp.com/channel/0029Vb6ft6072WTxJ5eMKA2I", label: "WhatsApp Channel" },
     { icon: Send, href: "https://t.me/thestudentspot", label: "Telegram" },
     { icon: Instagram, href: "https://www.instagram.com/the_studentspot", label: "Instagram" },
     { icon: Twitter, href: "https://x.com/the_studentspot?s=09", label: "Twitter" },
     { icon: Linkedin, href: "https://www.linkedin.com/company/thestudentspot", label: "LinkedIn" },
     { icon: Youtube, href: "https://youtube.com/@the.studentspot", label: "YouTube" },
-    { icon: ExternalLink, href: "https://bento.me/thestudentspot", label: "Link Hub" },
   ];
 
   return (

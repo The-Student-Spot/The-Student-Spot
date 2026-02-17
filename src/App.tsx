@@ -24,6 +24,8 @@ import StudentDashboard from "@/pages/StudentDashboard";
 import EntrepreneurDashboard from "@/pages/EntrepreneurDashboard";
 import CollegeDashboard from "@/pages/CollegeDashboard";
 import CompanyDashboard from "@/pages/CompanyDashboard";
+import FloatingSocials from "./components/home/FloatingSocials";
+
 
 const queryClient = new QueryClient();
 
@@ -34,6 +36,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <FloatingSocials />
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
