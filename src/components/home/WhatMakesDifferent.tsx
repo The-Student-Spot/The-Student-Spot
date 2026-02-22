@@ -6,6 +6,7 @@ const WhatMakesDifferent = () => {
     { icon: Users, text: "Not just a community" },
     { icon: Building, text: "Not just a job portal" },
     { icon: Award, text: "Not just courses" },
+    { icon: Zap, text: "Not just events" },
   ];
 
   return (
@@ -22,7 +23,7 @@ const WhatMakesDifferent = () => {
               <Zap className="w-4 h-4" />
               What Makes TSS Different
             </div>
-            
+
             <h2 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-8">
               TSS is an <span className="text-gradient">Outcome Engine</span>
             </h2>
@@ -52,10 +53,10 @@ const WhatMakesDifferent = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="bg-card rounded-2xl p-8 lg:p-10 border border-border shadow-card"
             >
-              <p className="text-muted-foreground mb-6">
-                Traditional platforms offer pieces. TSS delivers the complete puzzle.
+              <p className="text-muted-foreground mb-6 text-lg">
+                Traditional platforms offer fragments. TSS delivers the full ecosystem.
               </p>
-              
+
               <div className="flex flex-wrap items-center justify-center gap-3 lg:gap-4">
                 {[
                   { label: "Skills", color: "bg-primary/10 text-primary" },
@@ -74,8 +75,18 @@ const WhatMakesDifferent = () => {
                 ))}
                 <span className="text-2xl text-muted-foreground">=</span>
                 <span className="bg-gradient-to-r from-primary to-secondary text-primary-foreground px-6 py-2 rounded-xl font-heading font-bold text-lg shadow-glow">
-                  Careers
+                  Careers & Founders
                 </span>
+              </div>
+
+              <div className="mt-12 flex flex-wrap justify-center items-center gap-4 text-sm md:text-base font-medium text-muted-foreground bg-accent/50 p-6 rounded-2xl border border-border">
+                <span>From clarity</span>
+                <span className="text-primary">→</span>
+                <span>to capability</span>
+                <span className="text-primary">→</span>
+                <span>to credibility</span>
+                <span className="text-primary">→</span>
+                <span className="text-foreground font-bold">to opportunity.</span>
               </div>
             </motion.div>
           </motion.div>

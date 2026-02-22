@@ -3,24 +3,24 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "TSS helped me land my first internship when I had zero industry connections. The mentorship and exposure changed my career trajectory.",
+    quote: "TSS helped me land my first internship when I had zero industry connections. The mentorship and exposure changed everything.",
     name: "Charan",
     role: "Software Developer",
     company: "Tech Startup",
     image: null,
   },
   {
-    quote: "As a college placement officer, partnering with TSS transformed our placement rates. Students now have access to opportunities we couldn't provide alone.",
-    name: "Varshitha ",
+    quote: "Partnering with TSS improved our placement outcomes and exposed students to startup opportunities we couldn’t provide alone.",
+    name: "Varshitha",
     role: "Placement Director",
     company: "Engineering College",
     image: null,
   },
   {
-    quote: "We found motivated, trained interns through TSS. The quality of candidates is remarkable compared to traditional hiring channels.",
+    quote: "We hired highly motivated interns through TSS. The difference in quality and readiness was clear.",
     name: "Harish",
     role: "HR Manager",
-    company: "Growing Startup",
+    company: "Startup",
     image: null,
   },
 ];
@@ -29,7 +29,7 @@ const Testimonials = () => {
   return (
     <section className="py-16 lg:py-24 bg-background">
       <div className="container mx-auto px-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -40,7 +40,7 @@ const Testimonials = () => {
             Success <span className="text-secondary">Stories</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Real people. Real outcomes. Real transformation.
+            Real builders. Real outcomes. Real growth.
           </p>
         </motion.div>
 
@@ -53,7 +53,7 @@ const Testimonials = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-card rounded-2xl p-6 lg:p-8 border border-border hover:shadow-lg transition-all"
-              >
+            >
               <Quote className="w-10 h-10 text-secondary/50 mb-4" />
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 "{testimonial.quote}"

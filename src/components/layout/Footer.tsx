@@ -46,8 +46,9 @@ const Footer = () => {
               </div>
               <span className="font-heading font-bold text-xl">The Student Spot</span>
             </Link>
-            <p className="text-primary-foreground/80 mb-6 max-w-sm">
-              From Campus to Career - One Student Ecosystem. Connecting students, colleges, and companies for real opportunities across India.
+            <p className="text-primary-foreground/90 font-medium mb-2">From Student to Founder</p>
+            <p className="text-primary-foreground/80 mb-6 max-w-sm text-sm">
+              India’s growing Student-to-Founder ecosystem — connecting ambition with execution across campuses, startups, and companies.
             </p>
 
             {/* Social Links */}

@@ -39,9 +39,7 @@ const CTASection = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="font-heading text-3xl lg:text-5xl font-bold text-primary-foreground mb-6 max-w-3xl mx-auto"
             >
-              Your future doesn't start after graduation.
-              <br />
-              <span className="text-primary-foreground/80">It starts now.</span>
+              Your Journey Starts Now
             </motion.h2>
 
             <motion.p
@@ -49,9 +47,19 @@ const CTASection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-primary-foreground/90 text-xl font-medium mb-4 max-w-2xl mx-auto"
+            >
+              Your future doesn’t begin after graduation. It begins today.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
               className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto"
             >
-              Join thousands of students who are building skills, gaining exposure, and landing real opportunities.
+              Join thousands of students building skills, networks, proof, and opportunities inside one powerful ecosystem.
             </motion.p>
 
             <motion.div
