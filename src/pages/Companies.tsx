@@ -2,9 +2,9 @@ import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { 
-  Briefcase, Users, Award, TrendingUp, Target, 
-  ArrowRight, CheckCircle, Building, Zap 
+import {
+  Briefcase, Users, Award, TrendingUp, Target,
+  ArrowRight, CheckCircle, Building, Zap
 } from "lucide-react";
 
 const Companies = () => {
@@ -46,7 +46,7 @@ const Companies = () => {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-muted-foreground mb-8"
               >
-                We do not send random resumes. We connect you with trained, tested, and motivated 
+                We do not send random resumes. We connect you with trained, tested, and motivated
                 students who are ready to contribute from their very first day.
               </motion.p>
               <motion.div
@@ -182,9 +182,9 @@ const Companies = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="gradient-hero rounded-3xl p-8 lg:p-16 text-center"
+            className="bg-background rounded-3xl p-8 lg:p-16 text-center border border-border mt-16"
           >
-            <h2 className="font-heading text-3xl lg:text-4xl font-bold text-primary-foreground mb-6">
+            <h2 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-6">
               Find talent that is actually ready to work.
             </h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

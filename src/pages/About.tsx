@@ -219,13 +219,13 @@ const About = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 lg:py-24 bg-foreground text-background">
+      <section className="py-16 lg:py-24 bg-background text-foreground border-t border-border mt-16">
         <div className="container mx-auto px-4 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-heading text-3xl lg:text-4xl font-bold mb-6"
+            className="font-heading text-3xl lg:text-4xl font-bold mb-6 text-foreground"
           >
             Ready to Be Part of the Ecosystem?
           </motion.h2>
@@ -234,10 +234,10 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-background/90 text-lg mb-8 max-w-2xl mx-auto"
+            className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto"
           >
             Join India’s fast-growing Student-to-Founder movement.<br /><br />
-            <span className="flex flex-wrap justify-center gap-x-4 gap-y-2 font-medium">
+            <span className="flex flex-wrap justify-center gap-x-4 gap-y-2 font-medium text-foreground">
               <span>• Build skills.</span>
               <span>• Build networks.</span>
               <span>• Build proof.</span>

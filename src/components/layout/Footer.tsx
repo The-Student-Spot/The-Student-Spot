@@ -35,16 +35,16 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-primary to-secondary text-primary-foreground">
+    <footer className="bg-primary text-primary-foreground py-16 lg:py-24">
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" onClick={scrollToTop} className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-primary-foreground/20 flex items-center justify-center overflow-hidden">
+              <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center overflow-hidden">
                 <img src={tssLogo} alt="The Student Spot" className="w-8 h-8 object-contain" />
               </div>
-              <span className="font-heading font-bold text-xl">The Student Spot</span>
+              <span className="font-heading font-bold text-xl text-primary-foreground">The Student Spot</span>
             </Link>
             <p className="text-primary-foreground font-semibold mb-1">From Student to Founder.</p>
             <p className="text-primary-foreground/80 mb-6 max-w-sm text-sm">
@@ -61,7 +61,7 @@ const Footer = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-9 h-9 rounded-lg bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center transition-colors"
+                    className="w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors text-primary-foreground"
                     aria-label={social.label}
                     title={social.label}
                   >
@@ -133,13 +133,13 @@ const Footer = () => {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-primary-foreground/20 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mt-12 pt-8 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-primary-foreground/70 text-sm">© {currentYear} The Student Spot. All rights reserved.</p>
           <div className="flex gap-6 text-sm text-primary-foreground/70">
-            <Link to="/privacy" onClick={scrollToTop} className="hover:text-primary-foreground transition-colors">
+            <Link to="/privacy" onClick={scrollToTop} className="hover:text-white transition-colors">
               Privacy Policy
             </Link>
-            <Link to="/terms" onClick={scrollToTop} className="hover:text-primary-foreground transition-colors">
+            <Link to="/terms" onClick={scrollToTop} className="hover:text-white transition-colors">
               Terms of Service
             </Link>
           </div>

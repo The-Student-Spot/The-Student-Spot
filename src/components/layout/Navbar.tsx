@@ -67,9 +67,8 @@ const Navbar = () => {
                             <Link
                               key={child.path}
                               to={child.path}
-                              className={`block px-4 py-3 text-sm hover:bg-accent transition-colors ${
-                                isActive(child.path) ? "text-primary bg-accent" : "text-foreground"
-                              }`}
+                              className={`block px-4 py-3 text-sm hover:bg-accent transition-colors ${isActive(child.path) ? "text-primary bg-accent" : "text-foreground"
+                                }`}
                             >
                               {child.name}
                             </Link>
@@ -81,11 +80,10 @@ const Navbar = () => {
                 ) : (
                   <Link
                     to={link.path}
-                    className={`px-4 py-2 text-sm font-medium transition-colors ${
-                      isActive(link.path)
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
+                    className={`px-4 py-2 text-sm font-medium transition-colors ${isActive(link.path)
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                      }`}
                   >
                     {link.name}
                   </Link>
@@ -97,9 +95,9 @@ const Navbar = () => {
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center gap-3">
             <Button variant="outline" size="sm" asChild>
-                <Link to="/auth">Login / Signup</Link>
+              <Link to="/auth">Login / Signup</Link>
             </Button>
-            <Button asChild className="bg-yellow-400 text-black hover:bg-yellow-500">
+            <Button asChild className="bg-yellow-400 text-foreground font-bold hover:bg-yellow-500">
               <Link to="/contact">Partner With Us</Link>
             </Button>
           </div>
@@ -134,9 +132,8 @@ const Navbar = () => {
                           <Link
                             key={child.path}
                             to={child.path}
-                            className={`block py-2 text-sm ${
-                              isActive(child.path) ? "text-primary" : "text-foreground"
-                            }`}
+                            className={`block py-2 text-sm ${isActive(child.path) ? "text-primary" : "text-foreground"
+                              }`}
                             onClick={() => setIsOpen(false)}
                           >
                             {child.name}
@@ -147,9 +144,8 @@ const Navbar = () => {
                   ) : (
                     <Link
                       to={link.path}
-                      className={`block py-3 text-sm font-medium ${
-                        isActive(link.path) ? "text-primary" : "text-foreground"
-                      }`}
+                      className={`block py-3 text-sm font-medium ${isActive(link.path) ? "text-primary" : "text-foreground"
+                        }`}
                       onClick={() => setIsOpen(false)}
                     >
                       {link.name}
@@ -161,7 +157,7 @@ const Navbar = () => {
                 <Button variant="outline" asChild>
                   <Link to="/auth" onClick={() => setIsOpen(false)}>Login / Signup</Link>
                 </Button>
-                <Button asChild className="bg-yellow-400 text-black hover:bg-yellow-500">
+                <Button asChild className="bg-yellow-400 text-foreground font-bold hover:bg-yellow-500">
                   <Link to="/contact" onClick={() => setIsOpen(false)}>Partner With Us</Link>
                 </Button>
               </div>

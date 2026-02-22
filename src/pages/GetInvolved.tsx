@@ -1,8 +1,8 @@
 import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { 
-  Users, Award, BookOpen, ArrowRight, 
+import {
+  Users, Award, BookOpen, ArrowRight,
   CheckCircle, Mic, GraduationCap, Target, Heart, Lightbulb, TrendingUp
 } from "lucide-react";
 import {
@@ -250,7 +250,7 @@ const GetInvolved = () => {
               <h3 className="font-heading text-2xl font-bold text-foreground">Campus Team (College Chapters)</h3>
             </div>
             <p className="text-lg text-muted-foreground mb-6">Lead and grow The Student Spot chapter in your college.</p>
-            
+
             <div className="grid lg:grid-cols-3 gap-6 mb-6">
               <div>
                 <h4 className="font-semibold text-foreground mb-3">Who can apply</h4>
@@ -291,7 +291,7 @@ const GetInvolved = () => {
                 </ul>
               </div>
             </div>
-            
+
             <Button variant="default" size="lg" asChild>
               <a href={FORM_URL} target="_blank" rel="noopener noreferrer">
                 Apply for Campus Team <ArrowRight className="w-4 h-4" />
@@ -313,7 +313,7 @@ const GetInvolved = () => {
               <h3 className="font-heading text-2xl font-bold text-foreground">Mentors & Industry Experts</h3>
             </div>
             <p className="text-lg text-muted-foreground mb-6">Guide students with real-world insights and experience.</p>
-            
+
             <div className="grid lg:grid-cols-3 gap-6 mb-6">
               <div>
                 <h4 className="font-semibold text-foreground mb-3">Who can apply</h4>
@@ -355,7 +355,7 @@ const GetInvolved = () => {
                 </ul>
               </div>
             </div>
-            
+
             <Button variant="success" size="lg" asChild>
               <a href={FORM_URL} target="_blank" rel="noopener noreferrer">
                 Become a Mentor <ArrowRight className="w-4 h-4" />
@@ -377,7 +377,7 @@ const GetInvolved = () => {
               <h3 className="font-heading text-2xl font-bold text-foreground">Speakers & Trainers</h3>
             </div>
             <p className="text-lg text-muted-foreground mb-6">Inspire students through talks, sessions, and masterclasses.</p>
-            
+
             <div className="grid lg:grid-cols-3 gap-6 mb-6">
               <div>
                 <h4 className="font-semibold text-foreground mb-3">Who can apply</h4>
@@ -423,7 +423,7 @@ const GetInvolved = () => {
                 </ul>
               </div>
             </div>
-            
+
             <Button variant="secondary" size="lg" asChild>
               <a href={FORM_URL} target="_blank" rel="noopener noreferrer">
                 Become a Speaker <ArrowRight className="w-4 h-4" />
@@ -549,7 +549,7 @@ const GetInvolved = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 lg:py-24 bg-foreground text-background">
+      <section className="py-16 lg:py-24 bg-background text-foreground border-t border-border mt-16">
         <div className="container mx-auto px-4 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -564,7 +564,7 @@ const GetInvolved = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-xl text-background/80 mb-2"
+            className="text-xl text-muted-foreground mb-2"
           >
             Build leadership. Mentor talent. Inspire students.
           </motion.p>
@@ -573,7 +573,7 @@ const GetInvolved = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-background/70 mb-8 max-w-xl mx-auto"
+            className="text-muted-foreground mb-8 max-w-xl mx-auto"
           >
             Be part of India's fastest-growing student-led movement.
           </motion.p>
