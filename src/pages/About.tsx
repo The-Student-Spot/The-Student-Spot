@@ -7,10 +7,10 @@ import founderImage from "@/assets/founder.png";
 
 const About = () => {
   const values = [
-    { icon: Target, title: "Results First", description: "We measure success by real outcomes, not just activities." },
-    { icon: Eye, title: "Access for Everyone", description: "Every student deserves opportunities, regardless of their background." },
-    { icon: Heart, title: "Community Spirit", description: "We grow together. Your success is our success." },
-    { icon: Award, title: "Excellence", description: "We do not settle for average. We aim for the best." },
+    { icon: Target, title: "Results First", description: "We measure success by real internships, jobs, startups, and growth — not just engagement." },
+    { icon: Eye, title: "Equal Access", description: "Opportunity should not depend on background, location, or connections." },
+    { icon: Heart, title: "Community Power", description: "We grow together. Every win strengthens the ecosystem." },
+    { icon: Award, title: "Excellence", description: "We aim beyond average. We build for impact." },
   ];
 
   const founderLinks = [
@@ -38,16 +38,17 @@ const About = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="font-heading text-4xl lg:text-5xl font-bold text-foreground mb-6"
             >
-              Building India's Largest <span className="text-gradient">Student Ecosystem</span>
+              Building India’s Largest <span className="text-gradient">Student-to-Founder Ecosystem</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg text-muted-foreground max-w-2xl mx-auto"
+              className="text-lg text-muted-foreground max-w-3xl mx-auto"
             >
-              The Student Spot is a Pan-India student ecosystem built to solve one simple problem:
-              Students do not fail because they lack talent. They fail because they lack access and direction.
+              The Student Spot is a Pan-India ecosystem built on one truth:<br /><br />
+              Students don’t fail because they lack talent. They fail because they lack access, direction, and the right ecosystem.<br /><br />
+              <span className="text-foreground font-semibold">We are building that missing system.</span>
             </motion.p>
           </div>
         </div>
@@ -67,11 +68,17 @@ const About = () => {
                 <Target className="w-7 h-7 text-primary" />
               </div>
               <h2 className="font-heading text-2xl font-bold text-foreground mb-4">Our Mission</h2>
-              <p className="text-muted-foreground">
-                To help every student gain clarity, skills, confidence, and real opportunities 
-                through structured guidance and hands-on experience. We are not here to just motivate - 
-                we are here to build the actual path to success.
-              </p>
+              <div className="space-y-4 text-muted-foreground">
+                <p>
+                  To give every student clarity, skills, confidence, and real opportunities through structured pathways and hands-on execution.
+                </p>
+                <div className="space-y-1 font-medium text-foreground">
+                  <p>• We don’t just inspire.</p>
+                  <p>• We build the roadmap.</p>
+                  <p>• We connect the dots.</p>
+                  <p>• We create outcomes.</p>
+                </div>
+              </div>
             </motion.div>
 
             <motion.div
@@ -84,11 +91,17 @@ const About = () => {
                 <Eye className="w-7 h-7" />
               </div>
               <h2 className="font-heading text-2xl font-bold mb-4">Our Vision</h2>
-              <p className="text-primary-foreground/90">
-                To build India's largest student infrastructure connecting education with industry 
-                and real outcomes. A future where every student - regardless of their background - 
-                has access to the same opportunities.
-              </p>
+              <div className="space-y-4 text-primary-foreground/90">
+                <p>
+                  To build India’s largest student infrastructure connecting education, startups, and industry into one powerful ecosystem.
+                </p>
+                <p>
+                  A future where every student — regardless of background — has equal access to networks, mentorship, proof of work, and opportunity.
+                </p>
+                <div className="pt-2 font-bold border-t border-primary-foreground/20 italic">
+                  From student to career. <br /> From student to founder.
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -120,9 +133,9 @@ const About = () => {
                 <div className="lg:col-span-1">
                   <div className="relative">
                     <div className="w-48 h-48 mx-auto lg:w-full lg:h-auto aspect-square rounded-2xl overflow-hidden border-4 border-primary/20">
-                      <img 
-                        src={founderImage} 
-                        alt="Rajkamal Panthagani - Founder of The Student Spot" 
+                      <img
+                        src={founderImage}
+                        alt="Rajkamal Panthagani - Founder of The Student Spot"
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -149,16 +162,16 @@ const About = () => {
                 </div>
                 <div className="lg:col-span-2">
                   <p className="text-lg text-foreground leading-relaxed mb-6">
-                    The Student Spot was founded by <strong>Rajkamal Panthagani</strong>, an MBA graduate 
-                    who personally experienced job rejections, introversion, and lack of proper guidance during his student life.
+                    The Student Spot was founded by <strong>Rajkamal Panthagani</strong>, an MBA graduate
+                    who personally experienced job rejections, introversion, and the absence of structured guidance during his student journey.
                   </p>
                   <p className="text-lg text-foreground leading-relaxed mb-6">
-                    Instead of waiting for someone else to fix these problems, he decided to build what he wished 
-                    existed during his college days - a system where students do not have to struggle alone.
+                    Instead of waiting for change, he built what he wished
+                    existed during his college days — a platform where students don’t struggle alone,
+                    don’t guess their path, and don’t miss opportunities due to lack of access.
                   </p>
                   <p className="text-lg text-muted-foreground leading-relaxed">
-                    Today, The Student Spot provides not just motivation, but actual access, structure, and real 
-                    opportunities to thousands of students across India.
+                    Today, The Student Spot empowers thousands of students across India with real exposure, structured growth, and outcome-driven opportunities.
                   </p>
                 </div>
               </div>
@@ -214,16 +227,22 @@ const About = () => {
             viewport={{ once: true }}
             className="font-heading text-3xl lg:text-4xl font-bold mb-6"
           >
-            Ready to Join the Movement?
+            Ready to Be Part of the Ecosystem?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-background/70 mb-8 max-w-xl mx-auto"
+            className="text-background/90 text-lg mb-8 max-w-2xl mx-auto"
           >
-            Be part of India's fastest-growing student ecosystem.
+            Join India’s fast-growing Student-to-Founder movement.<br /><br />
+            <span className="flex flex-wrap justify-center gap-x-4 gap-y-2 font-medium">
+              <span>• Build skills.</span>
+              <span>• Build networks.</span>
+              <span>• Build proof.</span>
+              <span>• Build your future.</span>
+            </span>
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
