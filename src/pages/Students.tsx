@@ -2,9 +2,9 @@ import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { 
-  GraduationCap, Target, Briefcase, Award, Users, Zap, 
-  ArrowRight, CheckCircle, BookOpen, Calendar 
+import {
+  GraduationCap, Target, Briefcase, Award, Users, Zap,
+  ArrowRight, CheckCircle, BookOpen, Calendar
 } from "lucide-react";
 
 const Students = () => {
@@ -55,8 +55,8 @@ const Students = () => {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-muted-foreground mb-8"
               >
-                Your career journey does not have to wait till after graduation. Join thousands of 
-                students who are already building skills, gaining experience, and landing real 
+                Your career journey does not have to wait till after graduation. Join thousands of
+                students who are already building skills, gaining experience, and landing real
                 opportunities right now.
               </motion.p>
               <motion.div
@@ -71,7 +71,7 @@ const Students = () => {
                   </a>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <Link to="/opportunities">Browse Opportunities</Link>
+                  <a href="https://chat.whatsapp.com/LxA5xaAdlKp3nvZmIGxLcp" target="_blank" rel="noopener noreferrer">Contact Us</a>
                 </Button>
               </motion.div>
             </div>

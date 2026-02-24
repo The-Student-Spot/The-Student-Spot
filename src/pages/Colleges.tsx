@@ -2,9 +2,9 @@ import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { 
-  Building2, Users, Award, Calendar, TrendingUp, 
-  ArrowRight, CheckCircle, Globe, Briefcase 
+import {
+  Building2, Users, Award, Calendar, TrendingUp,
+  ArrowRight, CheckCircle, Globe, Briefcase
 } from "lucide-react";
 
 const Colleges = () => {
@@ -52,7 +52,7 @@ const Colleges = () => {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-muted-foreground mb-8"
               >
-                Partner with The Student Spot to give your students industry exposure, skill training, 
+                Partner with The Student Spot to give your students industry exposure, skill training,
                 and real opportunities. Let us prepare students not just for exams, but for life and careers.
               </motion.p>
               <motion.div
@@ -104,11 +104,11 @@ const Colleges = () => {
                 A college is not just about infrastructure.
               </h2>
               <p className="text-lg text-muted-foreground mb-6">
-                It is about the doors it opens for students. Every year, lakhs of students complete 
+                It is about the doors it opens for students. Every year, lakhs of students complete
                 their degrees. But very few walk out with clarity, confidence, and direction.
               </p>
               <p className="text-lg text-foreground font-medium">
-                Not because students lack talent. But because most colleges still focus only on 
+                Not because students lack talent. But because most colleges still focus only on
                 exams, not on preparing students for the real world.
               </p>
             </motion.div>
@@ -194,7 +194,7 @@ const Colleges = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-16 lg:py-24 bg-foreground text-background">
+      <section className="py-16 lg:py-24 bg-background text-foreground border-t border-border mt-16">
         <div className="container mx-auto px-4 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}

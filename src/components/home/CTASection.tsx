@@ -19,7 +19,7 @@ const CTASection = () => {
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-secondary/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
           </div>
-          
+
           <div className="relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -31,7 +31,7 @@ const CTASection = () => {
               <Sparkles className="w-4 h-4" />
               Your future starts now
             </motion.div>
-            
+
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -39,21 +39,29 @@ const CTASection = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="font-heading text-3xl lg:text-5xl font-bold text-primary-foreground mb-6 max-w-3xl mx-auto"
             >
-              Your future doesn't start after graduation.
-              <br />
-              <span className="text-primary-foreground/80">It starts now.</span>
+              Your Journey Starts Now
             </motion.h2>
-            
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-primary-foreground/90 text-xl font-medium mb-4 max-w-2xl mx-auto"
+            >
+              Your future doesn’t begin after graduation. It begins today.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
               className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto"
             >
-              Join thousands of students who are building skills, gaining exposure, and landing real opportunities.
+              Join thousands of students building skills, networks, proof, and opportunities inside one powerful ecosystem.
             </motion.p>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -61,13 +69,13 @@ const CTASection = () => {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <Button variant="hero" size="xl" className="animate-pulse-glow" asChild>
+              <Button variant="hero" size="xl" className="animate-pulse-glow min-w-[200px]" asChild>
                 <Link to="/auth">
                   Login / Signup
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </Button>
-              <Button variant="hero-outline" size="xl" asChild>
+              <Button variant="hero-outline" size="xl" className="min-w-[200px]" asChild>
                 <Link to="/contact">
                   Partner With Us
                 </Link>

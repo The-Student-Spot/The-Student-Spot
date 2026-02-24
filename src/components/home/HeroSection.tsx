@@ -41,7 +41,10 @@ const HeroSection = () => {
               className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6"
             >
               <Sparkles className="w-4 h-4" />
+
               Students → Founder Ecosystem
+
+
             </motion.div>
 
             <motion.h1
@@ -50,6 +53,7 @@ const HeroSection = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight"
             >
+
               From Students
               <br />
               <span className="text-gradient">To Founder</span>
@@ -59,11 +63,10 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-lg lg:text-xl text-muted-foreground mb-8 max-w-xl mx-auto lg:mx-0"
+              className="text-lg lg:text-xl text-muted-foreground mb-6 max-w-xl mx-auto lg:mx-0"
             >
-              We transform ambitious students into confident builders and future
-              founders through skills, mentorship, exposure, and real
-              opportunities.
+
+              We transform ambitious students into confident builders and future founders through skills, mentorship, exposure, and real opportunities.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -84,17 +87,41 @@ const HeroSection = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="flex flex-col gap-2 mb-8 text-foreground font-medium"
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                <span>Start as a student.</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                <span>Build with purpose.</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-success" />
+                <span>Lead as a founder.</span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <Button variant="hero" size="xl" className="group" asChild>
+              <Button variant="hero" size="xl" className="group min-w-[200px]" asChild>
                 <Link to="/auth">
                   Login / Signup
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
-              <Button variant="outline" size="xl" asChild>
-                <Link to="/contact">Partner With Us</Link>
+
+              <Button variant="outline" size="xl" className="min-w-[200px]" asChild>
+                <Link to="/contact">
+                  Partner With Us
+                </Link>
+
               </Button>
             </motion.div>
 

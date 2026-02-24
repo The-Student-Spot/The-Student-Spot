@@ -7,8 +7,8 @@ const audiences = [
   {
     icon: GraduationCap,
     title: "For Students",
-    description: "Get clarity, skills, and real opportunities. Build your career while still in college.",
-    features: ["Career guidance", "Internships & jobs", "Skills training", "Certificates & proof"],
+    description: "Move from confusion to confidence. Build your career — or your startup — while still in college.",
+    features: ["Career clarity", "Startup exposure", "Internships & jobs", "Skills training", "Real project proof", "Founder pathways"],
     cta: "Start Your Journey",
     path: "/students",
     color: "primary",
@@ -16,26 +16,26 @@ const audiences = [
   {
     icon: Building2,
     title: "For Colleges",
-    description: "Transform campus placement outcomes. Connect students with real industry opportunities.",
-    features: ["Campus chapters", "Placement support", "Industry workshops", "National exposure"],
+    description: "Transform campuses into innovation hubs.",
+    features: ["Campus chapters", "Startup ecosystem integration", "Placement enhancement", "Industry & founder workshops", "National exposure"],
     cta: "Partner With Us",
     path: "/colleges",
     color: "secondary",
   },
   {
     icon: Briefcase,
-    title: "For Companies",
-    description: "Hire trained, motivated talent ready to contribute from day one.",
-    features: ["Pre-screened candidates", "Campus branding", "Bulk hiring", "Employer visibility"],
+    title: "For Companies & Startups",
+    description: "Hire builders, not just resumes.",
+    features: ["Pre-screened, trained talent", "Startup-ready interns", "Bulk hiring support", "Campus branding", "Employer visibility"],
     cta: "Hire Talent",
     path: "/companies",
     color: "primary",
   },
   {
     icon: Users,
-    title: "For Mentors/Speakers/Trainers",
-    description: "Guide the next generation. Share your experience and make a lasting impact.",
-    features: ["Mentor sessions", "Industry exposure", "Community access", "Recognition"],
+    title: "For Mentors / Founders / Industry Experts",
+    description: "Shape the next generation of builders.",
+    features: ["Mentor sessions", "Founder talks", "Industry exposure", "Community visibility", "Recognition"],
     cta: "Become a Mentor",
     path: "/get-involved",
     color: "secondary",
@@ -46,7 +46,7 @@ const HowItWorks = () => {
   return (
     <section className="py-16 lg:py-24">
       <div className="container mx-auto px-4">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -57,7 +57,7 @@ const HowItWorks = () => {
             Who Is <span className="text-gradient">TSS</span> For?
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            One ecosystem connecting everyone who shapes student futures.
+            One ecosystem connecting everyone shaping student and startup futures.
           </p>
         </motion.div>
 
@@ -71,19 +71,18 @@ const HowItWorks = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group bg-card rounded-2xl p-6 lg:p-8 border border-border hover:border-primary/30 hover:shadow-card-hover transition-all duration-300"
             >
-              <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${
-                audience.color === "primary" ? "bg-primary/10 text-primary" : "bg-secondary/10 text-secondary"
-              }`}>
+              <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${audience.color === "primary" ? "bg-primary/10 text-primary" : "bg-secondary/10 text-secondary"
+                }`}>
                 <audience.icon className="w-7 h-7" />
               </div>
-              
+
               <h3 className="font-heading text-xl lg:text-2xl font-bold text-foreground mb-3">
                 {audience.title}
               </h3>
               <p className="text-muted-foreground mb-6">
                 {audience.description}
               </p>
-              
+
               <ul className="space-y-2 mb-6">
                 {audience.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-2 text-sm text-foreground">
@@ -92,9 +91,9 @@ const HowItWorks = () => {
                   </li>
                 ))}
               </ul>
-              
-              <Button 
-                variant={audience.color === "primary" ? "default" : "secondary"} 
+
+              <Button
+                variant={audience.color === "primary" ? "default" : "secondary"}
                 className="group/btn"
                 asChild
               >

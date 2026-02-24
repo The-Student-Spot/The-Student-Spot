@@ -2,9 +2,9 @@ import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { 
-  GraduationCap, Users, TrendingUp, Target, Award, 
-  CheckCircle, ArrowRight, Building2, Megaphone, 
+import {
+  GraduationCap, Users, TrendingUp, Target, Award,
+  CheckCircle, ArrowRight, Building2, Megaphone,
   BarChart3, Handshake
 } from "lucide-react";
 
@@ -47,8 +47,8 @@ const CoachingPartners = () => {
                 transition={{ delay: 0.2 }}
                 className="text-lg text-muted-foreground mb-8"
               >
-                Connect your coaching institute with thousands of motivated students across India. 
-                Whether you prepare students for government jobs, IT careers, or competitive exams - 
+                Connect your coaching institute with thousands of motivated students across India.
+                Whether you prepare students for government jobs, IT careers, or competitive exams -
                 we help you reach the right audience.
               </motion.p>
               <motion.div
@@ -185,9 +185,9 @@ const CoachingPartners = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="gradient-hero rounded-3xl p-8 lg:p-16 text-center"
+            className="bg-background rounded-3xl p-8 lg:p-16 text-center border border-border mt-16"
           >
-            <h2 className="font-heading text-3xl lg:text-4xl font-bold text-primary-foreground mb-6">
+            <h2 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-6">
               Grow your institute with The Student Spot.
             </h2>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

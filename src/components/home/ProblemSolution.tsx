@@ -18,15 +18,17 @@ const ProblemSolution = () => {
               The Problem
             </div>
             <h3 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-6">
-              Students have talent.<br />
-              <span className="text-muted-foreground">But they lack clarity, access, and real opportunities.</span>
+              Students have potential.<br />
+              <span className="text-muted-foreground">But potential without direction stays unused.</span>
             </h3>
             <ul className="space-y-4">
               {[
-                "Students don't know what to do, how to do it, or where to start",
-                "Opportunities are scattered, hidden, or inaccessible",
-                "Colleges lack real industry integration",
-                "Companies struggle to find job-ready talent",
+                "No clarity on what to build or where to start",
+                "No access to the right mentors or networks",
+                "Opportunities are scattered and hard to reach",
+                "Colleges lack deep startup & industry integration",
+                "Companies struggle to find execution-ready talent",
+                "Future founders don’t get early ecosystem support",
               ].map((item, index) => (
                 <motion.li
                   key={index}
@@ -43,6 +45,10 @@ const ProblemSolution = () => {
                 </motion.li>
               ))}
             </ul>
+            <p className="mt-8 text-foreground font-semibold">
+              Talent exists.<br />
+              <span className="text-destructive">The system is broken.</span>
+            </p>
           </motion.div>
 
           {/* Solution */}
@@ -58,18 +64,21 @@ const ProblemSolution = () => {
               The Solution
             </div>
             <h3 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-6">
-              The Student Spot connects everyone.<br />
-              <span className="text-primary">One ecosystem. Real outcomes.</span>
+              The Student Spot — A Student to Founder Ecosystem<br />
+              <span className="text-primary">One ecosystem. Real execution. Real outcomes.</span>
             </h3>
             <p className="text-muted-foreground mb-6">
-              TSS connects students, colleges, startups, companies, and mentors into one ecosystem that focuses on real outcomes, not just activity.
+              TSS connects students, colleges, startups, companies, and mentors into a single growth engine — focused not on activity, but transformation.
+            </p>
+            <p className="text-foreground font-medium mb-6 italic">
+              "We don’t just prepare students for jobs. We prepare them to build."
             </p>
             <div className="bg-card rounded-2xl p-6 border border-border">
               <p className="font-heading font-semibold text-foreground mb-4">
                 The TSS Formula:
               </p>
               <div className="flex flex-wrap items-center gap-2 text-sm">
-                {["Skills", "Network", "Proof", "Opportunity"].map((item, index) => (
+                {["Skills", "Network", "Proof of Work", "Opportunity"].map((item, index) => (
                   <span key={item} className="flex items-center gap-2">
                     <span className="bg-primary/10 text-primary px-3 py-1.5 rounded-lg font-medium">
                       {item}
@@ -80,7 +89,7 @@ const ProblemSolution = () => {
                 <span className="text-muted-foreground">=</span>
                 <span className="bg-success/10 text-success px-3 py-1.5 rounded-lg font-semibold flex items-center gap-1">
                   <CheckCircle className="w-4 h-4" />
-                  Careers
+                  Careers & Founders
                 </span>
               </div>
             </div>
