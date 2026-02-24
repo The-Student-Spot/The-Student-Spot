@@ -14,73 +14,85 @@ const CTASection = () => {
           transition={{ duration: 0.6 }}
           className="relative overflow-hidden rounded-3xl gradient-hero p-8 lg:p-16 text-center"
         >
-          {/* Background decoration */}
+          {/* Background glow effects */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-secondary/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
           </div>
 
           <div className="relative z-10">
+
+            {/* Small badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md border border-white/20 text-primary-foreground px-4 py-2 rounded-full text-sm font-medium mb-6"
+            >
+              <Sparkles className="w-4 h-4" />
+              Your Future Starts Now
+            </motion.div>
+
+            {/* Main heading */}
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="font-heading text-3xl lg:text-5xl font-bold text-primary-foreground mb-8 max-w-3xl mx-auto"
+            >
+              Your Future Starts Now
+            </motion.h2>
+
+            {/* Lines */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md border border-white/20 text-primary-foreground px-4 py-2 rounded-full text-sm font-medium mb-6"
+              className="space-y-3 text-primary-foreground/90 text-lg lg:text-xl font-medium mb-8"
             >
-              <Sparkles className="w-4 h-4" />
-              Your future starts now
+              <p>Your career doesn’t begin after graduation.</p>
+              <p>Your startup doesn’t begin after funding.</p>
+              <p>It begins with the right ecosystem.</p>
+              <p className="text-primary-foreground font-semibold">
+                Join thousands already building their path.
+              </p>
             </motion.div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="font-heading text-3xl lg:text-5xl font-bold text-primary-foreground mb-6 max-w-3xl mx-auto"
-            >
-              Your Journey Starts Now
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-primary-foreground/90 text-xl font-medium mb-4 max-w-2xl mx-auto"
-            >
-              Your future doesn’t begin after graduation. It begins today.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto"
-            >
-              Join thousands of students building skills, networks, proof, and opportunities inside one powerful ecosystem.
-            </motion.p>
-
+            {/* Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <Button variant="hero" size="xl" className="animate-pulse-glow min-w-[200px]" asChild>
-                <Link to="/auth">
-                  Login / Signup
+              <Button
+                variant="hero"
+                size="xl"
+                className="animate-pulse-glow min-w-[220px]"
+                asChild
+              >
+                <Link to="/students">
+                  Join as a Student
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </Button>
-              <Button variant="hero-outline" size="xl" className="min-w-[200px]" asChild>
+
+              <Button
+                variant="hero-outline"
+                size="xl"
+                className="min-w-[220px]"
+                asChild
+              >
                 <Link to="/contact">
-                  Partner With Us
+                  Become a Partner
                 </Link>
               </Button>
             </motion.div>
+
           </div>
         </motion.div>
       </div>

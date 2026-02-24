@@ -42,8 +42,7 @@ const HeroSection = () => {
             >
               <Sparkles className="w-4 h-4" />
 
-              Students → Founder Ecosystem
-
+              India’s Growing Student Ecosystem
 
             </motion.div>
 
@@ -56,7 +55,7 @@ const HeroSection = () => {
 
               From Students
               <br />
-              <span className="text-gradient">To Founder</span>
+              <span className="text-gradient">To Founders</span>
             </motion.h1>
 
             <motion.p
@@ -66,7 +65,7 @@ const HeroSection = () => {
               className="text-lg lg:text-xl text-muted-foreground mb-6 max-w-xl mx-auto lg:mx-0"
             >
 
-              We transform ambitious students into confident builders and future founders through skills, mentorship, exposure, and real opportunities.
+            We connect students, colleges, companies, startups, incubators, recruiters, mentors, and speakers into one powerful, outcome-driven ecosystem.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -75,33 +74,18 @@ const HeroSection = () => {
               className="mb-8 space-y-1 text-center lg:text-left"
             >
               <p className="text-sm lg:text-base text-muted-foreground font-medium">
-                Start as a student.
+              Build skills.
               </p>
               <p className="text-sm lg:text-base text-muted-foreground font-medium">
-                Build with purpose.
+                Build proof.
               </p>
               <p className="text-sm lg:text-base font-semibold text-primary">
-                Lead as a founder.
+                Build startups.
               </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-              className="flex flex-col gap-2 mb-8 text-foreground font-medium"
-            >
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                <span>Start as a student.</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-secondary" />
-                <span>Build with purpose.</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-success" />
-                <span>Lead as a founder.</span>
-              </div>
+              <p className="text-sm lg:text-base font-semibold text-primary">
+                Build careers.
+              </p>
+              
             </motion.div>
 
             <motion.div
@@ -112,7 +96,7 @@ const HeroSection = () => {
             >
               <Button variant="hero" size="xl" className="group min-w-[200px]" asChild>
                 <Link to="/auth">
-                  Login / Signup
+                  Join Now
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>

@@ -3,25 +3,25 @@ import { Quote } from "lucide-react";
 
 const testimonials = [
   {
-    quote: "TSS helped me land my first internship when I had zero industry connections. The mentorship and exposure changed everything.",
+    quote:
+      "TSS helped me land my first internship when I had zero industry connections. The mentorship and exposure changed everything.",
     name: "Charan",
     role: "Software Developer",
     company: "Tech Startup",
-    image: null,
   },
   {
-    quote: "Partnering with TSS improved our placement outcomes and exposed students to startup opportunities we couldn’t provide alone.",
+    quote:
+      "Partnering with TSS improved our placement outcomes and exposed students to startup opportunities we couldn’t provide alone.",
     name: "Varshitha",
     role: "Placement Director",
     company: "Engineering College",
-    image: null,
   },
   {
-    quote: "We hired highly motivated interns through TSS. The difference in quality and readiness was clear.",
+    quote:
+      "We hired highly motivated interns through TSS. The difference in quality and readiness was clear.",
     name: "Harish",
     role: "HR Manager",
     company: "Startup",
-    image: null,
   },
 ];
 
@@ -29,22 +29,25 @@ const Testimonials = () => {
   return (
     <section className="py-16 lg:py-24 bg-background">
       <div className="container mx-auto px-4">
+
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <h2 className="font-heading text-3xl lg:text-4xl font-bold mb-4">
+          <h2 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-4">
             Success <span className="text-secondary">Stories</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg">
             Real builders. Real outcomes. Real growth.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        {/* Testimonial Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.name}
@@ -52,24 +55,36 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-card rounded-2xl p-6 lg:p-8 border border-border hover:shadow-lg transition-all"
+              className="bg-card rounded-2xl p-6 lg:p-8 border border-border hover:shadow-card-hover transition-all duration-300"
             >
-              <Quote className="w-10 h-10 text-secondary/50 mb-4" />
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                "{testimonial.quote}"
+              {/* Quote Icon */}
+              <Quote className="w-10 h-10 text-secondary/40 mb-4" />
+
+              {/* Quote Text */}
+              <p className="text-foreground/80 leading-relaxed mb-6">
+                “{testimonial.quote}”
               </p>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-heading font-bold">
+
+              {/* Profile */}
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-secondary/15 text-secondary font-heading font-bold flex items-center justify-center">
                   {testimonial.name.charAt(0)}
                 </div>
+
                 <div>
-                  <p className="font-semibold text-foreground">{testimonial.name}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}, {testimonial.company}</p>
+                  <p className="font-semibold text-foreground">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {testimonial.role}
+                    {testimonial.company && `, ${testimonial.company}`}
+                  </p>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   );

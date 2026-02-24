@@ -5,8 +5,9 @@ const ProblemSolution = () => {
   return (
     <section className="py-16 lg:py-24 overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Problem */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+          {/* PROBLEM */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -17,18 +18,22 @@ const ProblemSolution = () => {
               <AlertTriangle className="w-4 h-4" />
               The Problem
             </div>
-            <h3 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-6">
-              Students have potential.<br />
-              <span className="text-muted-foreground">But potential without direction stays unused.</span>
+
+            <h3 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-6 leading-snug">
+              Students don’t fail because they lack talent.
+              <br />
+              <span className="text-muted-foreground">
+                They fail because they lack clarity, access, and structured direction.
+              </span>
             </h3>
-            <ul className="space-y-4">
+
+            <ul className="space-y-4 mb-8">
               {[
-                "No clarity on what to build or where to start",
-                "No access to the right mentors or networks",
-                "Opportunities are scattered and hard to reach",
-                "Colleges lack deep startup & industry integration",
-                "Companies struggle to find execution-ready talent",
-                "Future founders don’t get early ecosystem support",
+                "Opportunities are scattered",
+                "Colleges lack deep industry integration",
+                "Companies struggle to find job-ready talent",
+                "Startups lack execution support",
+                "Student founders lack incubation & exposure",
               ].map((item, index) => (
                 <motion.li
                   key={index}
@@ -45,13 +50,15 @@ const ProblemSolution = () => {
                 </motion.li>
               ))}
             </ul>
-            <p className="mt-8 text-foreground font-semibold">
-              Talent exists.<br />
-              <span className="text-destructive">The system is broken.</span>
+
+            <p className="text-foreground font-semibold text-lg">
+              The gap is not talent.
+              <br />
+              <span className="text-destructive">It’s the ecosystem.</span>
             </p>
           </motion.div>
 
-          {/* Solution */}
+          {/* SOLUTION */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -63,30 +70,49 @@ const ProblemSolution = () => {
               <Lightbulb className="w-4 h-4" />
               The Solution
             </div>
-            <h3 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-6">
-              The Student Spot — A Student to Founder Ecosystem<br />
-              <span className="text-primary">One ecosystem. Real execution. Real outcomes.</span>
+
+            <h3 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-4 leading-snug">
+              The Student Spot
+              <br />
+              <span className="text-primary">
+                One Ecosystem. Real Outcomes.
+              </span>
             </h3>
+
             <p className="text-muted-foreground mb-6">
-              TSS connects students, colleges, startups, companies, and mentors into a single growth engine — focused not on activity, but transformation.
+              We bridge the gap between:
             </p>
-            <p className="text-foreground font-medium mb-6 italic">
-              "We don’t just prepare students for jobs. We prepare them to build."
+
+            <p className="font-medium text-foreground mb-6">
+              Students ↔ Colleges ↔ Companies ↔ Startups ↔ Incubators ↔ Mentors
             </p>
+
+            <p className="text-muted-foreground mb-6">
+              We focus on execution, not just activity.
+            </p>
+
+            {/* FORMULA */}
             <div className="bg-card rounded-2xl p-6 border border-border">
               <p className="font-heading font-semibold text-foreground mb-4">
-                The TSS Formula:
+                The TSS Formula
               </p>
+
               <div className="flex flex-wrap items-center gap-2 text-sm">
-                {["Skills", "Network", "Proof of Work", "Opportunity"].map((item, index) => (
-                  <span key={item} className="flex items-center gap-2">
-                    <span className="bg-primary/10 text-primary px-3 py-1.5 rounded-lg font-medium">
-                      {item}
+                {["Skills", "Network", "Proof of Work", "Opportunity"].map(
+                  (item, index) => (
+                    <span key={item} className="flex items-center gap-2">
+                      <span className="bg-primary/10 text-primary px-3 py-1.5 rounded-lg font-medium">
+                        {item}
+                      </span>
+                      {index < 3 && (
+                        <span className="text-muted-foreground">+</span>
+                      )}
                     </span>
-                    {index < 3 && <span className="text-muted-foreground">+</span>}
-                  </span>
-                ))}
+                  )
+                )}
+
                 <span className="text-muted-foreground">=</span>
+
                 <span className="bg-success/10 text-success px-3 py-1.5 rounded-lg font-semibold flex items-center gap-1">
                   <CheckCircle className="w-4 h-4" />
                   Careers & Founders
@@ -94,6 +120,7 @@ const ProblemSolution = () => {
               </div>
             </div>
           </motion.div>
+
         </div>
       </div>
     </section>
