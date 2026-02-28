@@ -11,6 +11,7 @@ import About from "@/pages/About";
 import Students from "@/pages/Students";
 import Colleges from "@/pages/Colleges";
 import Companies from "@/pages/Companies";
+import Startups from "@/pages/Startups";
 import Opportunities from "@/pages/Opportunities";
 import GetInvolved from "@/pages/GetInvolved";
 import CoachingPartners from "@/pages/CoachingPartners";
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/students" element={<Students />} />
             <Route path="/colleges" element={<Colleges />} />
             <Route path="/companies" element={<Companies />} />
+            <Route path="/startups" element={<Startups />} />
             <Route path="/opportunities" element={<Opportunities />} />
             <Route path="/get-involved" element={<GetInvolved />} />
             <Route path="/coaching-partners" element={<CoachingPartners />} />

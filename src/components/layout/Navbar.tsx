@@ -15,6 +15,7 @@ const navLinks = [
       { name: "For Students", path: "/students" },
       { name: "For Colleges", path: "/colleges" },
       { name: "For Companies", path: "/companies" },
+      { name: "For Startups", path: "/startups" },
       { name: "For Coaching Institutes", path: "/coaching-partners" },
     ]
   },
