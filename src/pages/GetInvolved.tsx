@@ -3,472 +3,463 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   Users, Award, BookOpen, ArrowRight,
-  CheckCircle, Mic, GraduationCap, Target, Heart, Lightbulb, TrendingUp
+  CheckCircle, Mic, GraduationCap, Target, Heart, Lightbulb, TrendingUp, Handshake, MessageSquare, Briefcase
 } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-
-const whyGetInvolved = [
-  "Build real leadership and execution experience",
-  "Access a nationwide student and professional network",
-  "Improve placement readiness and industry exposure",
-  "Mentor and guide future talent",
-  "Speak at colleges and events across India",
-  "Grow your personal brand and professional visibility",
-];
-
-const campusRoles = [
-  "Campus Lead",
-  "Co-Lead",
-  "Social Media Manager",
-  "Content Creator",
-  "Event Coordinator",
-  "Creative & Design",
-  "PR & Community",
-  "Outreach & Operations",
-];
-
-const campusGains = [
-  "Leadership certificate and LOR",
-  "Hands-on event and project experience",
-  "Priority access to internships and jobs",
-  "Growth to District, State, and National leadership roles",
-];
-
-const mentorResponsibilities = [
-  "Conduct webinars or workshops",
-  "Guide student leaders and interns",
-  "Share career journeys and industry insights",
-  "Support placement and skill readiness",
-];
-
-const mentorBenefits = [
-  "Visibility across colleges nationwide",
-  "Personal brand building",
-  "Recognition and certificates",
-  "Access to high-potential student talent",
-];
-
-const speakerOpportunities = [
-  "College workshops",
-  "Career talks",
-  "Skill masterclasses",
-  "Panel discussions",
-  "National and state-level events",
-];
-
-const speakerBenefits = [
-  "Speaking opportunities across India",
-  "Professional recognition",
-  "Brand visibility with students and institutions",
-  "Paid and unpaid speaking options based on events",
-];
-
-const structureLevels = [
-  {
-    level: "College Level",
-    description: "Campus Leads and teams execute events, build communities, and drive engagement.",
-  },
-  {
-    level: "District Level",
-    description: "District Directors manage multiple colleges and support growth.",
-  },
-  {
-    level: "State Level",
-    description: "State Leads coordinate expansion, partnerships, and performance.",
-  },
-  {
-    level: "National Level",
-    description: "National Team handles strategy, partnerships, revenue, technology, and growth.",
-  },
-];
-
-const whoShouldJoin = [
-  { icon: GraduationCap, text: "Students who want more than classroom learning" },
-  { icon: Users, text: "Leaders who want to build communities" },
-  { icon: Heart, text: "Professionals who want to give back" },
-  { icon: Mic, text: "Speakers who want real student impact" },
-  { icon: Lightbulb, text: "Mentors who want to shape future talent" },
-];
-
-const faqs = [
-  {
-    question: "What is The Student Spot?",
-    answer: "The Student Spot is a nationwide student and professional ecosystem focused on leadership, placements, skills, and opportunities.",
-  },
-  {
-    question: "Is this paid or unpaid?",
-    answer: "Campus roles start as leadership and learning roles. Performance-based monetization and paid opportunities are available at higher levels.",
-  },
-  {
-    question: "How much time commitment is required?",
-    answer: "Average commitment is 8–10 hours per week, flexible around academics or work.",
-  },
-  {
-    question: "Can first-year students apply?",
-    answer: "Yes. Passion and commitment matter more than year of study.",
-  },
-  {
-    question: "Do mentors and speakers get paid?",
-    answer: "Some sessions are paid depending on event type and partnerships. All mentors and speakers receive recognition and certificates.",
-  },
-  {
-    question: "How does growth work?",
-    answer: "Performance-based promotions from Campus → District → State → National levels.",
-  },
-  {
-    question: "Will I get a certificate or LOR?",
-    answer: "Yes, based on performance and contribution.",
-  },
-];
-
-const FORM_URL = "https://forms.gle/HJn2GQDYa64gmvnYA";
 
 const GetInvolved = () => {
+  const whyGetInvolved = [
+    "Build real leadership & execution experience",
+    "Access a nationwide student & professional network",
+    "Improve career visibility & industry exposure",
+    "Mentor and guide future talent",
+    "Speak at colleges & national events",
+    "Strengthen your personal brand",
+    "Gain certificates, LORs & recognition",
+    "Contribute to India’s Student-to-Founder ecosystem"
+  ];
+
+  const opportunities = [
+    {
+      id: "campus-team",
+      icon: Users,
+      title: "1. Campus Team (College Chapters)",
+      subtitle: "Lead and grow The Student Spot chapter in your college.",
+      sections: [
+        {
+          heading: "Who Can Apply",
+          items: [
+            "Undergraduate & postgraduate students",
+            "Passionate about leadership & community building",
+            "Ready to take ownership and work in a structured team"
+          ]
+        },
+        {
+          heading: "Campus Roles",
+          tags: ["Campus Lead", "Co-Lead", "Social Media Manager", "Content Creator", "Event Coordinator", "Creative & Design", "PR & Community", "Outreach & Operations"]
+        },
+        {
+          heading: "What You Gain",
+          items: [
+            "Leadership Certificate & LOR",
+            "Hands-on event & project experience",
+            "Priority access to internships & jobs",
+            "Growth to District, State & National roles"
+          ]
+        }
+      ],
+      link: "https://forms.gle/GGGKNDZYFXBgqsqw8",
+      linkText: "Apply for Campus Team"
+    },
+    {
+      id: "core-team",
+      icon: Target,
+      title: "2. TSS Core Team",
+      subtitle: "Build. Lead. Scale. Drive national strategy, partnerships, and ecosystem expansion.",
+      sections: [
+        {
+          heading: "Who Can Apply",
+          items: [
+            "Highly driven students or young professionals",
+            "Former Campus Leads (preferred)",
+            "Strong ownership & execution mindset"
+          ]
+        },
+        {
+          heading: "What You’ll Do",
+          items: [
+            "Lead national initiatives",
+            "Build corporate & startup partnerships",
+            "Manage state & campus growth",
+            "Create scalable systems"
+          ]
+        },
+        {
+          heading: "What You Gain",
+          items: [
+            "National leadership exposure",
+            "Direct access to founders & corporates",
+            "Strong LOR & credibility",
+            "Fast-track growth opportunities"
+          ]
+        }
+      ],
+      link: "https://forms.gle/DyfMSzGJdQMVBbqRA",
+      linkText: "Apply for Core Team"
+    },
+    {
+      id: "mentors",
+      icon: BookOpen,
+      title: "3. Mentors & Industry Experts",
+      subtitle: "Guide students with real-world insights and experience.",
+      sections: [
+        {
+          heading: "Who Can Apply",
+          items: [
+            "Working professionals (2+ years preferred)",
+            "Startup founders & entrepreneurs",
+            "Domain experts (Tech, Marketing, Finance, HR, AI, Design, etc.)"
+          ]
+        },
+        {
+          heading: "Responsibilities",
+          items: [
+            "Conduct webinars/workshops",
+            "Guide student leaders & interns",
+            "Share career journeys",
+            "Support placement readiness"
+          ]
+        },
+        {
+          heading: "Benefits",
+          items: [
+            "Nationwide visibility",
+            "Personal brand building",
+            "Recognition & certificates",
+            "Access to high-potential talent"
+          ]
+        }
+      ],
+      link: "https://forms.gle/buTfbTq9pE1mAGTo9",
+      linkText: "Apply as a Mentor"
+    },
+    {
+      id: "speakers",
+      icon: Mic,
+      title: "4. Speakers & Trainers",
+      subtitle: "Inspire and educate students through impactful sessions.",
+      sections: [
+        {
+          heading: "Opportunities",
+          items: [
+            "College workshops",
+            "Career talks",
+            "Skill masterclasses",
+            "Panel discussions",
+            "State & national-level events"
+          ]
+        },
+        {
+          heading: "Benefits",
+          items: [
+            "Speaking opportunities across India",
+            "Brand visibility with campuses",
+            "Professional recognition",
+            "Paid & unpaid options depending on event type"
+          ]
+        }
+      ],
+      link: "https://forms.gle/buTfbTq9pE1mAGTo9",
+      linkText: "Apply as a Speaker"
+    },
+    {
+      id: "volunteers",
+      icon: Heart,
+      title: "5. Event Volunteers",
+      subtitle: "Support on-ground & virtual events, workshops, and large-scale initiatives.",
+      sections: [
+        {
+          heading: "Who Can Apply",
+          items: [
+            "Students interested in event management",
+            "Individuals who want exposure to real execution",
+            "Beginners looking for hands-on experience"
+          ]
+        },
+        {
+          heading: "What You Gain",
+          items: [
+            "Event experience",
+            "Certificates",
+            "Networking access",
+            "Leadership growth opportunities"
+          ]
+        }
+      ],
+      link: "https://forms.gle/BQThbSQ9NGzLHJ9i8",
+      linkText: "Register as a Volunteer"
+    },
+    {
+      id: "collaborations",
+      icon: Handshake,
+      title: "6. Collaborations & Promotions",
+      subtitle: "Colleges, companies, startups, incubators, and institutes can collaborate for:",
+      sections: [
+        {
+          heading: "Opportunities",
+          items: [
+            "Workshops & campus events",
+            "Hiring drives",
+            "Startup programs",
+            "Promotions & campaigns",
+            "Co-branded initiatives"
+          ]
+        }
+      ],
+      link: "https://forms.gle/ZjNXgeujjKk46D72A",
+      linkText: "Collaboration Form"
+    },
+    {
+      id: "feedback",
+      icon: MessageSquare,
+      title: "7. Community Feedback & Suggestions",
+      subtitle: "Help us improve and build better opportunities for everyone in The Student Spot ecosystem.",
+      sections: [
+        {
+          heading: "Why Feedback Matters",
+          items: [
+            "Your suggestions, ideas, and honest feedback help us grow stronger and serve you better.",
+            "Takes just 2 minutes."
+          ]
+        }
+      ],
+      link: "https://forms.gle/z68HmXkPvHGvTaQb6",
+      linkText: "Submit Feedback"
+    }
+  ];
+
+  const structureLevels = [
+    {
+      level: "1. College Level",
+      description: "Campus teams execute events and drive local growth.",
+    },
+    {
+      level: "2. District Level",
+      description: "District Directors manage multiple colleges.",
+    },
+    {
+      level: "3. State Level",
+      description: "State Leads coordinate partnerships and expansion.",
+    },
+    {
+      level: "4. National Level",
+      description: "The core team handles strategy, technology, revenue, and ecosystem building.",
+    },
+  ];
+
+  const whoShouldJoin = [
+    { icon: GraduationCap, text: "Students who want more than classroom learning" },
+    { icon: Users, text: "Leaders who want to build communities" },
+    { icon: Briefcase, text: "Professionals who want to give back" },
+    { icon: Mic, text: "Speakers who want real student impact" },
+    { icon: Lightbulb, text: "Mentors shaping future founders" },
+    { icon: Heart, text: "Volunteers who want hands-on exposure" },
+  ];
+
   return (
     <Layout>
-      {/* Hero */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-2 rounded-full text-sm font-medium mb-6"
-            >
-              <TrendingUp className="w-4 h-4" />
-              Get Involved
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="font-heading text-4xl lg:text-5xl font-bold text-foreground mb-6"
-            >
-              Get Involved with <span className="text-gradient">The Student Spot</span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl font-semibold text-foreground mb-4"
-            >
-              Build. Lead. Mentor. Speak. Grow.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-lg text-muted-foreground mb-8"
-            >
-              The Student Spot is building India's fastest-growing student-led ecosystem connecting students, professionals, mentors, and organizations across colleges nationwide.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-muted-foreground mb-8"
-            >
-              Whether you are a student leader, mentor, industry professional, or speaker, there is a place for you to create impact.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <Button variant="hero" size="xl" asChild>
-                <a href={FORM_URL} target="_blank" rel="noopener noreferrer">
-                  Get Involved Today <ArrowRight className="w-5 h-5" />
-                </a>
-              </Button>
-            </motion.div>
+      {/* Hero Section */}
+      <section className="py-20 lg:py-32 bg-gradient-to-br from-primary/10 via-background to-accent/20 relative overflow-hidden">
+        {/* Dynamic Background Blurs */}
+        <div className="absolute top-10 right-20 w-96 h-96 bg-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="absolute bottom-10 left-10 w-80 h-80 bg-secondary/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div className="container mx-auto px-4 relative z-10 text-center lg:text-left">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-12 xl:col-span-8 mx-auto xl:mx-0 text-center xl:text-left">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="inline-flex items-center gap-2 bg-primary/10 text-primary px-5 py-2.5 rounded-full text-sm font-bold tracking-wide uppercase mb-6 border border-primary/20 shadow-sm mx-auto xl:mx-0"
+              >
+                <TrendingUp className="w-4 h-4" />
+                Get Involved
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                className="font-heading text-4xl md:text-5xl lg:text-7xl font-extrabold text-foreground mb-6 leading-tight"
+              >
+                Get Involved with <br className="hidden md:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">The Student Spot</span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-2xl md:text-3xl font-bold text-foreground mb-6"
+              >
+                Build. Lead. Mentor. Speak. Volunteer. Grow.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto xl:mx-0 space-y-4"
+              >
+                <p>
+                  The Student Spot is one of India’s fastest-growing student-led ecosystems connecting
+                  students, professionals, startups, colleges, incubators, and organizations nationwide.
+                </p>
+                <p className="font-semibold text-foreground">
+                  Whether you are a student leader, mentor, speaker, volunteer, or industry professional,
+                  there is a place for you to create real impact.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="flex justify-center xl:justify-start"
+              >
+                <Button variant="hero" size="xl" className="h-16 px-10 text-lg shadow-xl shadow-primary/25 rounded-full hover:scale-105 transition-transform" onClick={() => document.getElementById('opportunities-section')?.scrollIntoView({ behavior: 'smooth' })}>
+                  Get Involved Today <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Why Get Involved */}
-      <section className="py-16 lg:py-24">
+      <section className="py-20 lg:py-28 bg-foreground text-background">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="lg:col-span-5"
+            >
+              <h2 className="font-heading text-4xl lg:text-5xl font-bold mb-6 text-white leading-tight">
+                Why Get <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Involved?</span>
+              </h2>
+              <div className="w-20 h-2 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full mb-8"></div>
+              <p className="text-xl text-white/80 font-medium">
+                We offer a platform for growth, networking, and leadership across India.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="lg:col-span-7 grid sm:grid-cols-2 gap-4"
+            >
+              {whyGetInvolved.map((item, index) => (
+                <div key={index} className="flex items-start gap-3 bg-white/5 border border-white/10 p-5 rounded-2xl hover:bg-white/10 transition-colors">
+                  <CheckCircle className="w-6 h-6 text-primary shrink-0 mt-0.5" />
+                  <span className="text-white font-medium">{item}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Opportunities Section */}
+      <section id="opportunities-section" className="py-24 lg:py-32 bg-accent/30 relative">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16 lg:mb-24"
           >
-            <h2 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              Why Get Involved with <span className="text-gradient">The Student Spot</span>
+            <h2 className="font-heading text-4xl lg:text-5xl font-bold text-foreground mb-4">
+              Opportunities to <span className="text-gradient">Get Involved</span>
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            {whyGetInvolved.map((reason, index) => (
+          <div className="grid gap-10 max-w-5xl mx-auto">
+            {opportunities.map((opp, index) => (
               <motion.div
-                key={reason}
+                key={opp.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="flex items-start gap-3 p-4 bg-card rounded-xl border border-border"
+                className="bg-card rounded-[2rem] p-8 lg:p-10 border border-border shadow-lg hover:shadow-2xl hover:border-primary/40 transition-all duration-300 relative overflow-hidden group"
               >
-                <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
-                <span className="text-foreground">{reason}</span>
+                {/* Accent glow on hover */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+                <div className="flex flex-col md:flex-row md:items-center gap-6 mb-8 relative z-10 border-b border-border/50 pb-6">
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/10 flex items-center justify-center shrink-0 shadow-sm">
+                    <opp.icon className="w-10 h-10 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-3xl font-bold text-foreground mb-2">{opp.title}</h3>
+                    <p className="text-lg text-muted-foreground font-medium">{opp.subtitle}</p>
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10 relative z-10">
+                  {opp.sections.map((section, idx) => (
+                    <div key={idx} className={opp.sections.length === 1 ? "md:col-span-2 lg:col-span-3" : ""}>
+                      <h4 className="font-bold text-foreground mb-4 text-lg border-l-4 border-primary pl-3">{section.heading}</h4>
+
+                      {section.items && (
+                        <ul className="space-y-3">
+                          {section.items.map((item, i) => (
+                            <li key={i} className="flex items-start gap-2 text-muted-foreground">
+                              <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0"></div>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                      {section.tags && (
+                        <div className="flex flex-wrap gap-2">
+                          {section.tags.map((tag, i) => (
+                            <span key={i} className="px-3 py-1.5 bg-secondary/10 text-secondary text-sm font-medium rounded-full border border-secondary/20">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="relative z-10">
+                  <Button variant="default" size="lg" className="rounded-full px-8 shadow-md hover:scale-105 transition-transform" asChild>
+                    <a href={opp.link} target="_blank" rel="noopener noreferrer">
+                      {opp.linkText} <ArrowRight className="ml-2 w-4 h-4" />
+                    </a>
+                  </Button>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Opportunities Section */}
-      <section className="py-16 lg:py-24 bg-accent">
+      {/* How The Student Spot Works */}
+      <section className="py-24 lg:py-32">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16 lg:mb-24"
           >
-            <h2 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              Opportunities to <span className="text-gradient">Get Involved</span>
-            </h2>
-          </motion.div>
-
-          {/* 1. Campus Team */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-card rounded-2xl p-6 lg:p-8 border border-border mb-8"
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
-                <Users className="w-7 h-7 text-primary" />
-              </div>
-              <h3 className="font-heading text-2xl font-bold text-foreground">Campus Team (College Chapters)</h3>
-            </div>
-            <p className="text-lg text-muted-foreground mb-6">Lead and grow The Student Spot chapter in your college.</p>
-
-            <div className="grid lg:grid-cols-3 gap-6 mb-6">
-              <div>
-                <h4 className="font-semibold text-foreground mb-3">Who can apply</h4>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-1" />
-                    Undergraduate and postgraduate students
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-1" />
-                    Passionate about leadership, community building, and careers
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-1" />
-                    Ready to take ownership and work with a structured team
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold text-foreground mb-3">Available Campus Roles</h4>
-                <div className="flex flex-wrap gap-2">
-                  {campusRoles.map((role) => (
-                    <span key={role} className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full">
-                      {role}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h4 className="font-semibold text-foreground mb-3">What you gain</h4>
-                <ul className="space-y-2">
-                  {campusGains.map((gain) => (
-                    <li key={gain} className="flex items-start gap-2 text-muted-foreground">
-                      <Award className="w-4 h-4 text-secondary flex-shrink-0 mt-1" />
-                      {gain}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <Button variant="default" size="lg" asChild>
-              <a href={FORM_URL} target="_blank" rel="noopener noreferrer">
-                Apply for Campus Team <ArrowRight className="w-4 h-4" />
-              </a>
-            </Button>
-          </motion.div>
-
-          {/* 2. Mentors & Industry Experts */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-card rounded-2xl p-6 lg:p-8 border border-border mb-8"
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-success/10 flex items-center justify-center">
-                <BookOpen className="w-7 h-7 text-success" />
-              </div>
-              <h3 className="font-heading text-2xl font-bold text-foreground">Mentors & Industry Experts</h3>
-            </div>
-            <p className="text-lg text-muted-foreground mb-6">Guide students with real-world insights and experience.</p>
-
-            <div className="grid lg:grid-cols-3 gap-6 mb-6">
-              <div>
-                <h4 className="font-semibold text-foreground mb-3">Who can apply</h4>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-1" />
-                    Working professionals (2+ years preferred)
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-1" />
-                    Startup founders, entrepreneurs, consultants
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-1" />
-                    Domain experts in tech, marketing, finance, HR, design, AI, etc.
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold text-foreground mb-3">Mentor Responsibilities</h4>
-                <ul className="space-y-2">
-                  {mentorResponsibilities.map((resp) => (
-                    <li key={resp} className="flex items-start gap-2 text-muted-foreground">
-                      <Target className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
-                      {resp}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold text-foreground mb-3">Benefits for Mentors</h4>
-                <ul className="space-y-2">
-                  {mentorBenefits.map((benefit) => (
-                    <li key={benefit} className="flex items-start gap-2 text-muted-foreground">
-                      <Award className="w-4 h-4 text-secondary flex-shrink-0 mt-1" />
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <Button variant="success" size="lg" asChild>
-              <a href={FORM_URL} target="_blank" rel="noopener noreferrer">
-                Become a Mentor <ArrowRight className="w-4 h-4" />
-              </a>
-            </Button>
-          </motion.div>
-
-          {/* 3. Speakers & Trainers */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-card rounded-2xl p-6 lg:p-8 border border-border"
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center">
-                <Mic className="w-7 h-7 text-secondary" />
-              </div>
-              <h3 className="font-heading text-2xl font-bold text-foreground">Speakers & Trainers</h3>
-            </div>
-            <p className="text-lg text-muted-foreground mb-6">Inspire students through talks, sessions, and masterclasses.</p>
-
-            <div className="grid lg:grid-cols-3 gap-6 mb-6">
-              <div>
-                <h4 className="font-semibold text-foreground mb-3">Who can apply</h4>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-1" />
-                    Industry leaders
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-1" />
-                    Startup founders
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-1" />
-                    Career coaches
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-success flex-shrink-0 mt-1" />
-                    Trainers and educators
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold text-foreground mb-3">Speaker Opportunities</h4>
-                <ul className="space-y-2">
-                  {speakerOpportunities.map((opp) => (
-                    <li key={opp} className="flex items-start gap-2 text-muted-foreground">
-                      <Mic className="w-4 h-4 text-secondary flex-shrink-0 mt-1" />
-                      {opp}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-semibold text-foreground mb-3">Benefits</h4>
-                <ul className="space-y-2">
-                  {speakerBenefits.map((benefit) => (
-                    <li key={benefit} className="flex items-start gap-2 text-muted-foreground">
-                      <Award className="w-4 h-4 text-secondary flex-shrink-0 mt-1" />
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <Button variant="secondary" size="lg" asChild>
-              <a href={FORM_URL} target="_blank" rel="noopener noreferrer">
-                Become a Speaker <ArrowRight className="w-4 h-4" />
-              </a>
-            </Button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* How The Student Spot Works (Structure) */}
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h2 className="font-heading text-4xl lg:text-5xl font-bold text-foreground mb-4">
               How The Student Spot <span className="text-gradient">Works</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              This structure ensures clear communication, accountability, and fast execution.
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium">
+              Structured leadership ensures clarity, accountability, and fast execution.
             </p>
           </motion.div>
 
-          <div className="max-w-4xl mx-auto space-y-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {structureLevels.map((level, index) => (
               <motion.div
                 key={level.level}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-card rounded-2xl p-6 border border-border"
+                className="bg-card rounded-2xl p-8 border border-border shadow-sm text-center relative overflow-hidden group hover:border-primary/40 transition-colors"
               >
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-primary-foreground font-heading font-bold flex-shrink-0">
-                    {index + 1}
-                  </div>
-                  <div>
-                    <h3 className="font-heading font-semibold text-foreground mb-1">{level.level}</h3>
-                    <p className="text-muted-foreground">{level.description}</p>
-                  </div>
-                </div>
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-secondary scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+
+                <h3 className="font-heading text-2xl font-bold text-foreground mb-4">{level.level}</h3>
+                <p className="text-muted-foreground text-lg">{level.description}</p>
               </motion.div>
             ))}
           </div>
@@ -476,118 +467,72 @@ const GetInvolved = () => {
       </section>
 
       {/* Who Should Join */}
-      <section className="py-16 lg:py-24">
+      <section className="py-20 lg:py-28 bg-accent/20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              Who Should <span className="text-gradient">Join</span> The Student Spot
+            <h2 className="font-heading text-4xl lg:text-5xl font-bold text-foreground mb-4">
+              Who Should <span className="text-gradient">Join?</span>
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {whoShouldJoin.map((item, index) => (
               <motion.div
                 key={item.text}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-card rounded-xl p-4 border border-border text-center"
+                className="bg-card rounded-2xl p-6 border border-border flex items-center gap-5 hover:shadow-md transition-shadow"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                  <item.icon className="w-6 h-6 text-primary" />
+                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                  <item.icon className="w-7 h-7 text-primary" />
                 </div>
-                <p className="text-sm text-foreground">{item.text}</p>
+                <p className="text-lg font-bold text-foreground leading-snug">{item.text}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* FAQs */}
-      <section className="py-16 lg:py-24 bg-accent">
+      {/* Final CTA */}
+      <section className="py-20 lg:py-28 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="gradient-hero rounded-[3rem] p-10 lg:p-20 text-center relative overflow-hidden shadow-2xl border border-primary/20 max-w-6xl mx-auto"
           >
-            <h2 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              Frequently Asked <span className="text-gradient">Questions</span>
-            </h2>
-          </motion.div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-[50px] pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-foreground/10 rounded-full blur-[50px] pointer-events-none"></div>
 
-          <div className="max-w-3xl mx-auto">
-            <Accordion type="single" collapsible className="space-y-4">
-              {faqs.map((faq, index) => (
-                <motion.div
-                  key={faq.question}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                >
-                  <AccordionItem value={`item-${index}`} className="bg-card rounded-xl border border-border px-6">
-                    <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline">
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                </motion.div>
-              ))}
-            </Accordion>
-          </div>
-        </div>
-      </section>
+            <div className="relative z-10">
+              <h2 className="font-heading text-4xl lg:text-6xl font-extrabold text-primary-foreground mb-6 leading-tight">
+                Ready to Make an Impact?
+              </h2>
 
-      {/* Final CTA */}
-      <section className="py-16 lg:py-24 bg-background text-foreground border-t border-border mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-heading text-3xl lg:text-4xl font-bold mb-4"
-          >
-            Ready to Make an Impact?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-xl text-muted-foreground mb-2"
-          >
-            Build leadership. Mentor talent. Inspire students.
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-muted-foreground mb-8 max-w-xl mx-auto"
-          >
-            Be part of India's fastest-growing student-led movement.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <Button variant="secondary" size="xl" asChild>
-              <a href={FORM_URL} target="_blank" rel="noopener noreferrer">
-                Get Involved Today <ArrowRight className="w-5 h-5" />
-              </a>
-            </Button>
+              <div className="flex flex-wrap justify-center gap-4 mb-10">
+                {["Build leadership.", "Mentor talent.", "Inspire students.", "Create opportunities."].map((text, i) => (
+                  <div key={i} className="bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-full text-white font-medium text-lg">
+                    {text}
+                  </div>
+                ))}
+              </div>
+
+              <p className="text-xl md:text-2xl text-white/90 font-medium mb-12 max-w-3xl mx-auto">
+                Be part of India’s growing Student-to-Founder movement.
+              </p>
+
+              <Button variant="hero" size="xl" className="h-16 px-12 text-xl rounded-full shadow-2xl hover:scale-105 transition-transform bg-white text-primary hover:bg-white/90" onClick={() => document.getElementById('opportunities-section')?.scrollIntoView({ behavior: 'smooth' })}>
+                Get Involved Today <ArrowRight className="ml-3 w-6 h-6" />
+              </Button>
+            </div>
           </motion.div>
         </div>
       </section>

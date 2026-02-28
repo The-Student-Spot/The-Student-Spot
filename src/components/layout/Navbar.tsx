@@ -17,6 +17,7 @@ const navLinks = [
       { name: "For Companies", path: "/companies" },
       { name: "For Startups", path: "/startups" },
       { name: "For Coaching Institutes", path: "/coaching-partners" },
+      { name: "For Incubators", path: "/incubators" },
     ]
   },
   { name: "Get Involved", path: "/get-involved" },
