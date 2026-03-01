@@ -280,22 +280,26 @@ const Contact = () => {
       </section>
 
       {/* Closing Statement */}
-      <section className="py-20 bg-foreground text-background">
-        <div className="container mx-auto px-4 text-center">
+      <section className="py-24 relative overflow-hidden bg-primary/5 border-t border-primary/10">
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="max-w-4xl mx-auto space-y-4"
           >
-            <h2 className="font-heading text-2xl md:text-4xl font-bold leading-tight text-white/90">
+            <h2 className="font-heading text-2xl md:text-4xl font-bold leading-tight text-foreground/90">
               Whether you’re a student looking for direction,<br />
               a company looking for talent,<br />
               a mentor ready to guide,<br />
               or an incubator building innovation—
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full my-8"></div>
-            <p className="font-heading text-3xl md:text-5xl font-extrabold text-white">
+            <div className="w-24 h-1.5 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full my-8 shadow-sm"></div>
+            <p className="font-heading text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary pb-2">
               We’re ready to build with you.
             </p>
           </motion.div>
