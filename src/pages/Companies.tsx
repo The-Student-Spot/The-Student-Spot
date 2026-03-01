@@ -221,7 +221,7 @@ const Companies = () => {
                   Start Hiring <ArrowRight className="w-5 h-5" />
                 </Link>
               </Button>
-              <Button variant="hero-outline" size="xl" asChild>
+              <Button variant="outline" size="xl" asChild>
                 <Link to="/opportunities">Post a Job</Link>
               </Button>
             </div>
