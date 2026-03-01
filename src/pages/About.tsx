@@ -322,7 +322,7 @@ const About = () => {
                 Join Now <ArrowRight className="ml-2 w-5 h-5" />
               </a>
             </Button>
-            <Button variant="hero-outline" size="lg" asChild className="text-lg px-8 py-6 h-auto">
+            <Button variant="outline" size="lg" asChild className="text-lg px-8 py-6 h-auto">
               <Link to="/contact">Contact Us</Link>
             </Button>
           </motion.div>
