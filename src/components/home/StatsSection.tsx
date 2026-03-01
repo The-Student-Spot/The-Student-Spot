@@ -12,7 +12,7 @@ const stats: StatItem[] = [
   { value: 20000, suffix: "+", label: "Students" },
   { value: 100, suffix: "+", label: "Campuses" },
   { value: 100, suffix: "+", label: "Mentors" },
-  { value: 10, suffix: "+", label: "Active Opportunities" },
+  { value: 100, suffix: "+", label: "Active Opportunities" },
   { textValue: "Growing", label: "Startup Collaborations" },
 ];
 

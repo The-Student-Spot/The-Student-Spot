@@ -9,6 +9,8 @@ import {
   Mail, Phone, MapPin, Linkedin, Instagram,
   Send, MessageCircle, ArrowRight, Twitter, Youtube, User, Globe
 } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+import founderImage from "@/assets/founder.png";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -38,7 +40,7 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { icon: MessageCircle, label: "WhatsApp Channel", href: "https://whatsapp.com/channel/0029Vb6ft6072WTxJ5eMKA2I" },
+    { icon: FaWhatsapp, label: "WhatsApp Channel", href: "https://whatsapp.com/channel/0029Vb6ft6072WTxJ5eMKA2I" },
     { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/the_studentspot" },
     { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/thestudentspot/" },
     { icon: Twitter, label: "X (Twitter)", href: "https://x.com/the_studentspot" },
@@ -223,8 +225,12 @@ const Contact = () => {
                   <div className="absolute -right-10 -top-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl pointer-events-none"></div>
 
                   <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 relative z-10 text-center sm:text-left">
-                    <div className="w-20 h-20 rounded-2xl bg-white/50 backdrop-blur-md border border-white/20 flex items-center justify-center shrink-0 shadow-sm">
-                      <User className="w-10 h-10 text-primary" />
+                    <div className="w-24 h-24 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-primary/20 shadow-sm shrink-0">
+                      <img
+                        src={founderImage}
+                        alt="Rajkamal Panthagani"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div>
                       <h4 className="font-heading text-xs uppercase tracking-widest text-primary font-bold mb-1">Founder Contact</h4>

@@ -2,7 +2,7 @@ import { FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 
 const FloatingSocials = () => {
   return (
-    <div className="fixed right-0 top-[65%] z-[9999] flex flex-col">
+    <div className="hidden md:flex fixed right-0 top-[65%] z-[9999] flex-col">
 
       {/* Instagram */}
       <a

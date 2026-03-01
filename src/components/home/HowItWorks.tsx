@@ -41,7 +41,7 @@ const audiences: Audience[] = [
       "Mentor access",
     ],
     cta: "Join as a Student",
-    path: "/students",
+    path: "/auth",
     variant: "default",
     dotColor: "bg-primary",
     iconBg: "bg-primary/10 text-primary",

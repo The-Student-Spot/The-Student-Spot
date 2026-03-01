@@ -23,6 +23,69 @@ const testimonials = [
     role: "HR Manager",
     company: "Startup",
   },
+  {
+    quote:
+      "The networking events organized by TSS introduced me to my co-founder. We went from an idea to a funded startup in six months.",
+    name: "Rahul",
+    role: "Startup Founder",
+    company: "FinTech Pro",
+  },
+  {
+    quote:
+      "I was struggling to find the right direction. The mentorship program connected me with an industry veteran whose guidance helped me secure a top-tier tech job.",
+    name: "Ananya",
+    role: "Frontend Engineer",
+    company: "Global Innovations",
+  },
+  {
+    quote:
+      "TSS provided us with a steady pipeline of project-ready talent. It significantly reduced our hiring time and onboarding costs.",
+    name: "Vikram",
+    role: "CEO",
+    company: "NextGen Solutions",
+  },
+  {
+    quote:
+      "Being a campus lead gave me hands-on leadership experience that no classroom could teach. It was the highlight of my resume.",
+    name: "Priya",
+    role: "Product Manager",
+    company: "EduTech Core",
+  },
+  {
+    quote:
+      "We hosted a successful hackathon in collaboration with TSS. The sheer talent and innovation from the participating students were mind-blowing.",
+    name: "Siddharth",
+    role: "Developer Advocate",
+    company: "Cloud Systems",
+  },
+  {
+    quote:
+      "Thanks to the freelance network at TSS, I started taking up real-world branding projects while still in my second year of college.",
+    name: "Neha",
+    role: "UI/UX Designer",
+    company: "Freelance",
+  },
+  {
+    quote:
+      "As a speaker, I love the energy and curiosity of the students here. TSS is building a truly impactful community.",
+    name: "Arjun",
+    role: "Industry Expert",
+    company: "Consulting Firm",
+  },
+  {
+    quote:
+      "Our incubator partnered with TSS to discover promising student startups, and we've already incubated three amazing teams from their ecosystem.",
+    name: "Kavya",
+    role: "Incubator Director",
+    company: "Venture Hub",
+  },
+  {
+    quote:
+      "The practical workshops bridged the gap between academic knowledge and industry expectations. I felt completely prepared for my first job.",
+    name: "Rohit",
+    role: "Data Analyst",
+    company: "Quantico Data",
+  },
 ];
 
 const Testimonials = () => {

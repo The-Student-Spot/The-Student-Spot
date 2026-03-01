@@ -75,7 +75,7 @@ const CTASection = () => {
                 className="animate-pulse-glow min-w-[220px]"
                 asChild
               >
-                <Link to="/students">
+                <Link to="/auth">
                   Join as a Student
                   <ArrowRight className="w-5 h-5" />
                 </Link>

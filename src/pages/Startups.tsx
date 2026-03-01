@@ -71,7 +71,7 @@ const Startups = () => {
                                     </Link>
                                 </Button>
                                 <Button variant="outline" size="xl" className="h-16 px-10 text-lg rounded-full border-primary/30 hover:bg-primary/5" asChild>
-                                    <Link to="/opportunities">Post a Job</Link>
+                                    <Link to="/auth">Post a Job</Link>
                                 </Button>
                             </motion.div>
                         </div>
@@ -111,23 +111,28 @@ const Startups = () => {
             </section>
 
             {/* Corporate Connections & Investor Access */}
-            <section className="py-24 lg:py-32 bg-foreground text-background">
-                <div className="container mx-auto px-4">
+            <section className="py-24 lg:py-32 relative overflow-hidden">
+                {/* Subtle Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5 -z-10"></div>
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -z-10"></div>
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[120px] -z-10"></div>
+
+                <div className="container mx-auto px-4 z-10 relative">
                     <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <div className="inline-flex items-center gap-2 bg-white/10 text-white px-4 py-2 rounded-full text-sm font-bold mb-6 border border-white/10 uppercase tracking-widest">
+                            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-bold mb-6 border border-primary/20 uppercase tracking-widest shadow-sm">
                                 <Handshake className="w-4 h-4" />
                                 Strategic Access
                             </div>
-                            <h2 className="font-heading text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+                            <h2 className="font-heading text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
                                 Connect With <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Client Companies</span>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Client Companies</span>
                             </h2>
-                            <p className="text-xl text-white/80 font-medium mb-8">
+                            <p className="text-xl text-muted-foreground font-medium mb-8">
                                 We connect startups to companies inside our ecosystem for:
                             </p>
 
@@ -138,16 +143,16 @@ const Startups = () => {
                                     "Strategic collaborations",
                                     "Vendor partnerships",
                                 ].map((item, index) => (
-                                    <div key={index} className="flex items-start gap-3 bg-white/5 border border-white/10 p-5 rounded-2xl">
+                                    <div key={index} className="flex items-start gap-3 bg-card border border-border/50 p-5 rounded-2xl shadow-sm hover:shadow-md hover:border-primary/20 transition-all">
                                         <CheckCircle className="w-6 h-6 text-primary shrink-0 mt-0.5" />
-                                        <span className="text-white font-medium">{item}</span>
+                                        <span className="text-foreground font-medium">{item}</span>
                                     </div>
                                 ))}
                             </div>
 
-                            <div className="mt-8 bg-white/5 border border-white/10 p-6 rounded-2xl">
-                                <h4 className="font-heading text-xl font-bold text-white mb-2">Corporate Startup Collaboration</h4>
-                                <p className="text-white/80">Companies can test solutions by working directly with startups in our network, helping validate, refine, and scale innovative ideas.</p>
+                            <div className="mt-8 bg-card border border-border/50 p-6 rounded-2xl shadow-sm">
+                                <h4 className="font-heading text-xl font-bold text-foreground mb-2">Corporate Startup Collaboration</h4>
+                                <p className="text-muted-foreground">Companies can test solutions by working directly with startups in our network, helping validate, refine, and scale innovative ideas.</p>
                             </div>
                         </motion.div>
 
@@ -156,7 +161,7 @@ const Startups = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <div className="bg-card text-foreground rounded-[2.5rem] p-8 lg:p-12 shadow-2xl relative overflow-hidden">
+                            <div className="bg-card text-foreground rounded-[2.5rem] p-8 lg:p-12 shadow-2xl relative overflow-hidden border border-border/50">
                                 <div className="absolute top-0 right-0 w-48 h-48 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
                                 <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6">
                                     <Lightbulb className="w-8 h-8 text-secondary" />
@@ -266,7 +271,7 @@ const Startups = () => {
                                     </Link>
                                 </Button>
                                 <Button variant="outline" size="xl" className="h-16 px-10 text-xl rounded-full border-white/50 text-white hover:bg-white hover:text-primary transition-colors" asChild>
-                                    <Link to="/opportunities">Post a Job</Link>
+                                    <Link to="/auth">Post a Job</Link>
                                 </Button>
                             </div>
                         </div>

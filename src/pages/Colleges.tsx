@@ -301,25 +301,28 @@ const Colleges = () => {
       </section>
 
       {/* Long Term Impact */}
-      <section className="py-20 bg-foreground text-background">
-        <div className="container mx-auto px-4">
+      <section className="py-20 lg:py-28 bg-gradient-to-br from-primary/5 via-background to-secondary/5 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="font-heading text-3xl lg:text-5xl font-bold mb-6">
+              <h2 className="font-heading text-3xl lg:text-5xl font-bold text-foreground mb-6">
                 The Long-Term Impact
               </h2>
-              <p className="text-xl text-white/80 font-medium mb-10 pl-6 border-l-4 border-secondary/50">
+              <p className="text-xl text-muted-foreground font-medium mb-10 pl-6 border-l-4 border-secondary/50">
                 Colleges known for outcomes attract better students.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {longTermImpact.map((impact) => (
-                  <div key={impact} className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10">
+                  <div key={impact} className="flex items-center gap-3 p-4 rounded-xl bg-card border border-border shadow-sm">
                     <TrendingUp className="w-5 h-5 text-secondary" />
-                    <span className="font-medium">{impact}</span>
+                    <span className="font-medium text-foreground">{impact}</span>
                   </div>
                 ))}
               </div>
@@ -329,9 +332,11 @@ const Colleges = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white/5 rounded-3xl p-10 border border-white/10 text-center lg:text-left"
+              className="bg-card shadow-xl rounded-3xl p-10 border border-border text-center lg:text-left relative overflow-hidden"
             >
-              <h3 className="text-3xl lg:text-4xl font-bold text-white mb-8 space-y-3">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none"></div>
+
+              <h3 className="text-3xl lg:text-4xl font-bold text-foreground mb-8 space-y-3 relative z-10">
                 <div className="flex items-center justify-center lg:justify-start gap-3">
                   <CheckCircle className="w-8 h-8 text-primary" /> Build Professionals.
                 </div>
@@ -342,7 +347,7 @@ const Colleges = () => {
                   <CheckCircle className="w-8 h-8 text-success" /> Build Innovation.
                 </div>
               </h3>
-              <p className="text-xl text-white/70 italic max-w-sm mx-auto lg:mx-0">
+              <p className="text-xl text-muted-foreground italic max-w-sm mx-auto lg:mx-0 relative z-10">
                 "Build More Than Graduates."
               </p>
             </motion.div>

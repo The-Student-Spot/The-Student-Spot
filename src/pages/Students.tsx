@@ -91,12 +91,9 @@ const Students = () => {
                 className="flex flex-col sm:flex-row gap-4"
               >
                 <Button variant="hero" size="lg" className="h-14 px-8 text-lg shadow-lg shadow-primary/25" asChild>
-                  <a href="https://forms.gle/HJn2GQDYa64gmvnYA" target="_blank" rel="noopener noreferrer">
+                  <Link to="/auth">
                     Join as a Student <ArrowRight className="ml-2 w-5 h-5" />
-                  </a>
-                </Button>
-                <Button variant="outline" size="lg" className="h-14 px-8 text-lg" asChild>
-                  <Link to="/opportunities">Explore Opportunities</Link>
+                  </Link>
                 </Button>
               </motion.div>
             </div>
@@ -328,25 +325,29 @@ const Students = () => {
       </section>
 
       {/* The Bigger Difference */}
-      <section className="py-24 bg-foreground text-background">
-        <div className="container mx-auto px-4 text-center">
+      <section className="py-24 lg:py-32 bg-gradient-to-br from-primary/5 via-background to-accent/20 relative overflow-hidden">
+        {/* Dynamic Background Blurs */}
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+        <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-heading text-3xl lg:text-5xl font-bold mb-8">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-bold tracking-wide uppercase mb-6 border border-primary/20 shadow-sm">
               The Bigger Difference
-            </h2>
-            <div className="text-xl lg:text-2xl text-muted/80 mb-12 max-w-2xl mx-auto leading-relaxed">
-              <p className="mb-4">Most students wait.</p>
-              <p className="font-bold text-white text-3xl">TSS students build.</p>
             </div>
+            <h2 className="font-heading text-4xl lg:text-5xl font-extrabold mb-8 text-foreground">
+              Most students wait.<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">TSS students build.</span>
+            </h2>
 
-            <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-lg lg:text-xl font-bold mb-16">
-              {['skills', 'income', 'networks', 'startups', 'your future'].map((item) => (
-                <span key={item} className="flex items-center gap-2">
-                  <span className="text-primary">Build</span> {item}.
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-lg lg:text-xl font-bold mb-10">
+              {['Skills', 'Income', 'Networks', 'Startups', 'Your Future'].map((item) => (
+                <span key={item} className="flex items-center gap-2 bg-card px-6 py-3 rounded-xl border border-border shadow-sm">
+                  <span className="text-primary">Build</span> <span className="text-foreground">{item}</span>
                 </span>
               ))}
             </div>
@@ -370,15 +371,15 @@ const Students = () => {
             <div className="relative z-10">
               <h2 className="font-heading text-4xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
                 Don’t Wait for Opportunities.<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-indigo-200">Prepare for them. Create them.</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white">Prepare for them. Create them.</span>
               </h2>
               <p className="text-xl text-primary-foreground/80 mb-10 max-w-2xl mx-auto">
                 Join a Pan-India ecosystem focused on growth, skills, and execution.
               </p>
               <Button variant="hero" size="xl" className="h-16 px-10 text-xl rounded-full shadow-2xl hover:scale-105 transition-transform" asChild>
-                <a href="https://forms.gle/HJn2GQDYa64gmvnYA" target="_blank" rel="noopener noreferrer">
+                <Link to="/auth">
                   Join as a Student <ArrowRight className="ml-3 w-6 h-6" />
-                </a>
+                </Link>
               </Button>
             </div>
           </motion.div>

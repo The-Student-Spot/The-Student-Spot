@@ -10,8 +10,8 @@ import {
 
 const Incubators = () => {
     const whyPartner = [
-        "Access to 10,000+ ambitious students",
-        "Presence across 50+ campuses",
+        "Access to 20,000+ ambitious students",
+        "Presence across 100+ campuses",
         "Early-stage founder discovery pipeline",
         "Startup-ready student teams",
         "Corporate collaboration network",
@@ -196,8 +196,11 @@ const Incubators = () => {
             </section>
 
             {/* Why Partner With The Student Spot */}
-            <section className="py-20 lg:py-28 bg-foreground text-background">
-                <div className="container mx-auto px-4">
+            <section className="py-20 lg:py-28 bg-gradient-to-br from-primary/5 via-background to-secondary/5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+                <div className="container mx-auto px-4 relative z-10">
                     <div className="grid lg:grid-cols-12 gap-12 items-center">
                         <motion.div
                             initial={{ opacity: 0, x: -30 }}
@@ -205,12 +208,12 @@ const Incubators = () => {
                             viewport={{ once: true }}
                             className="lg:col-span-5"
                         >
-                            <h2 className="font-heading text-4xl lg:text-5xl font-bold mb-6 text-white leading-tight">
-                                Why Partner With <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">The Student Spot?</span>
+                            <h2 className="font-heading text-4xl lg:text-5xl font-bold mb-6 text-foreground leading-tight">
+                                Why Partner With <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">The Student Spot?</span>
                             </h2>
-                            <p className="text-xl text-white/80 font-medium mb-8">
+                            <p className="text-xl text-muted-foreground font-medium mb-8">
                                 We don’t just connect you to ideas.<br />
-                                <span className="text-white font-bold text-2xl">We help you build a consistent startup funnel.</span>
+                                <span className="text-foreground font-bold text-2xl">We help you build a consistent startup funnel.</span>
                             </p>
                         </motion.div>
 
@@ -221,9 +224,9 @@ const Incubators = () => {
                             className="lg:col-span-7 grid sm:grid-cols-2 gap-4"
                         >
                             {whyPartner.map((item, index) => (
-                                <div key={index} className="flex items-start gap-3 bg-white/5 border border-white/10 p-5 rounded-2xl hover:bg-white/10 transition-colors">
+                                <div key={index} className="flex items-start gap-3 bg-card border border-border shadow-sm p-5 rounded-2xl hover:shadow-md hover:border-primary/20 transition-all">
                                     <CheckCircle className="w-6 h-6 text-primary shrink-0 mt-0.5" />
-                                    <span className="text-white font-medium">{item}</span>
+                                    <span className="text-foreground font-medium">{item}</span>
                                 </div>
                             ))}
                         </motion.div>

@@ -333,8 +333,11 @@ const GetInvolved = () => {
       </section>
 
       {/* Why Get Involved */}
-      <section className="py-20 lg:py-28 bg-foreground text-background">
-        <div className="container mx-auto px-4">
+      <section className="py-24 lg:py-32 bg-gradient-to-br from-primary/5 via-background to-secondary/5 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -342,11 +345,11 @@ const GetInvolved = () => {
               viewport={{ once: true }}
               className="lg:col-span-5"
             >
-              <h2 className="font-heading text-4xl lg:text-5xl font-bold mb-6 text-white leading-tight">
-                Why Get <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Involved?</span>
+              <h2 className="font-heading text-4xl lg:text-5xl font-bold mb-6 text-foreground leading-tight">
+                Why Get <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Involved?</span>
               </h2>
-              <div className="w-20 h-2 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full mb-8"></div>
-              <p className="text-xl text-white/80 font-medium">
+              <div className="w-20 h-2 bg-gradient-to-r from-primary to-secondary rounded-full mb-8"></div>
+              <p className="text-xl text-muted-foreground font-medium">
                 We offer a platform for growth, networking, and leadership across India.
               </p>
             </motion.div>
@@ -358,9 +361,9 @@ const GetInvolved = () => {
               className="lg:col-span-7 grid sm:grid-cols-2 gap-4"
             >
               {whyGetInvolved.map((item, index) => (
-                <div key={index} className="flex items-start gap-3 bg-white/5 border border-white/10 p-5 rounded-2xl hover:bg-white/10 transition-colors">
+                <div key={index} className="flex items-start gap-3 bg-card border border-border shadow-sm p-5 rounded-2xl hover:shadow-md hover:border-primary/20 transition-all">
                   <CheckCircle className="w-6 h-6 text-primary shrink-0 mt-0.5" />
-                  <span className="text-white font-medium">{item}</span>
+                  <span className="text-foreground font-medium">{item}</span>
                 </div>
               ))}
             </motion.div>

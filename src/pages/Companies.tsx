@@ -84,7 +84,7 @@ const Companies = () => {
                   </Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <Link to="/opportunities">Post Opportunities</Link>
+                  <Link to="/auth">Post Opportunities</Link>
                 </Button>
               </motion.div>
             </div>
@@ -222,7 +222,7 @@ const Companies = () => {
                 </Link>
               </Button>
               <Button variant="outline" size="xl" asChild>
-                <Link to="/opportunities">Post a Job</Link>
+                <Link to="/auth">Post a Job</Link>
               </Button>
             </div>
           </motion.div>

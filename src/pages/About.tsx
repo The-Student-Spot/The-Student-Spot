@@ -7,15 +7,15 @@ import founderImage from "@/assets/founder.png";
 
 const About = () => {
   const values = [
-    { icon: Target, title: "1. Results First", description: "We focus on real outcomes: careers, skills, and startups." },
-    { icon: Globe, title: "2. Access for All", description: "Opportunity should never depend on background or connections." },
-    { icon: Heart, title: "3. Community Power", description: "We grow together students, founders, mentors, and recruiters." },
-    { icon: BookOpen, title: "4. Continuous Learning", description: "Lifelong skill development and curiosity drive success." },
-    { icon: Users, title: "5. Collaboration", description: "Shared knowledge creates a bigger impact." },
-    { icon: Award, title: "6. Excellence", description: "We aim beyond average and build systems that scale." },
-    { icon: Shield, title: "7. Integrity", description: "Transparency, responsibility, and trust guide our work." },
-    { icon: Lightbulb, title: "8. Innovation", description: "We encourage new ideas, experimentation, and bold thinking." },
-    { icon: Hammer, title: "9. Builder Mindset", description: "Take ownership. Execute. Create opportunities." },
+    { icon: Target, title: " Results First", description: "We focus on real outcomes: careers, skills, and startups." },
+    { icon: Globe, title: " Access for All", description: "Opportunity should never depend on background or connections." },
+    { icon: Heart, title: " Community Power", description: "We grow together students, founders, mentors, and recruiters." },
+    { icon: BookOpen, title: " Continuous Learning", description: "Lifelong skill development and curiosity drive success." },
+    { icon: Users, title: " Collaboration", description: "Shared knowledge creates a bigger impact." },
+    { icon: Award, title: " Excellence", description: "We aim beyond average and build systems that scale." },
+    { icon: Shield, title: " Integrity", description: "Transparency, responsibility, and trust guide our work." },
+    { icon: Lightbulb, title: " Innovation", description: "We encourage new ideas, experimentation, and bold thinking." },
+    { icon: Hammer, title: " Builder Mindset", description: "Take ownership. Execute. Create opportunities." },
   ];
 
   const founderLinks = [
