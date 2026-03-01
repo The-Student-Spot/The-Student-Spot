@@ -5,6 +5,7 @@ import {
   Users, Award, BookOpen, ArrowRight,
   CheckCircle, Mic, GraduationCap, Target, Heart, Lightbulb, TrendingUp, Handshake, MessageSquare, Briefcase
 } from "lucide-react";
+import tssLogo from "@/assets/tss-logo.png";
 
 const GetInvolved = () => {
   const whyGetInvolved = [
@@ -308,6 +309,23 @@ const GetInvolved = () => {
                 <Button variant="hero" size="xl" className="h-16 px-10 text-lg shadow-xl shadow-primary/25 rounded-full hover:scale-105 transition-transform" onClick={() => document.getElementById('opportunities-section')?.scrollIntoView({ behavior: 'smooth' })}>
                   Get Involved Today <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
+              </motion.div>
+            </div>
+
+            {/* Logo column on the right */}
+            <div className="hidden xl:flex xl:col-span-4 justify-center items-center relative">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ delay: 0.4, duration: 0.6, type: "spring", stiffness: 100 }}
+                className="relative z-10 w-full max-w-sm"
+              >
+                <img
+                  src={tssLogo}
+                  alt="The Student Spot Logo"
+                  className="w-full h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl -z-10 w-3/4 h-3/4 m-auto"></div>
               </motion.div>
             </div>
           </div>
