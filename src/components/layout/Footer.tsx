@@ -8,7 +8,6 @@ import {
   Phone,
   Twitter,
   Youtube,
-  ArrowRight,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import tssLogo from "@/assets/tss-logo.png";
@@ -28,15 +27,7 @@ const Footer = () => {
       { name: "For Companies, Recruiters & Startups", path: "/companies" },
       { name: "For Coaching Institutes", path: "/coaching-partners" },
       { name: "For Incubators", path: "/incubators" },
-      { name: "For Startups", path: "/startups" },
-    ],
-    ecosystem: [
-      { name: "Opportunities", path: "/opportunities" },
-      { name: "Internships & Jobs", path: "/jobs" },
-      { name: "Freelance Projects", path: "/freelance" },
-      { name: "Startup & Incubation Support", path: "/incubation" },
-      { name: "Workshops & Events", path: "/events" },
-      { name: "Campus Chapters", path: "/chapters" },
+      { name: "For Mentors & Speakers", path: "/get-involved" },
     ],
     company: [
       { name: "About Us", path: "/about" },
@@ -47,10 +38,11 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: Instagram, href: "https://www.instagram.com/the_studentspot", label: "Instagram" },
-    { icon: Linkedin, href: "https://www.linkedin.com/company/thestudentspot/", label: "LinkedIn" },
-    { icon: Youtube, href: "https://youtube.com/@the.studentspot", label: "YouTube" },
     { icon: FaWhatsapp, href: "https://whatsapp.com/channel/0029Vb6ft6072WTxJ5eMKA2I", label: "WhatsApp Channel" },
+    { icon: Instagram, href: "https://www.instagram.com/the_studentspot", label: "Instagram" },
+    { icon: Linkedin, href: "https://www.linkedin.com/company/thestudentspot/", label: "LinkedIn Page" },
+    { icon: Twitter, href: "https://x.com/the_studentspot", label: "X (Twitter)" },
+    { icon: Youtube, href: "https://youtube.com/@the.studentspot", label: "YouTube" },
     { icon: Send, href: "https://t.me/thestudentspot", label: "Telegram" },
   ];
 
@@ -81,8 +73,8 @@ const Footer = () => {
                   <span className="font-heading text-2xl font-bold text-orange-950 tracking-tight">
                     The Student Spot
                   </span>
-                  <span className="text-xs font-bold text-orange-600 uppercase tracking-[0.2em] mt-1">
-                    One National Ecosystem
+                  <span className="text-xs font-bold text-orange-600 uppercase tracking-[0.15em] mt-1">
+                    From Student to Founder: One National Ecosystem
                   </span>
                 </div>
               </div>
@@ -118,7 +110,7 @@ const Footer = () => {
                   <div className="w-10 h-10 rounded-full bg-white border border-orange-200/50 flex items-center justify-center">
                     <MapPin className="w-4 h-4 text-orange-600" />
                   </div>
-                  3rd Floor, eternal corporate services, Hash include, Durgam Cheruvu Rd, D Block, Kavuri Hills, Madhapur, Hyderabad, Telangana 500081
+                  Hyderabad, India
                 </li>
               </ul>
             </div>
@@ -148,14 +140,14 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Ecosystem */}
+            {/* Company */}
             <div className="flex flex-col">
               <h4 className="font-heading text-sm font-bold text-orange-950 mb-6 uppercase tracking-[0.15em] flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-orange-400"></span>
-                Ecosystem
+                Company
               </h4>
               <ul className="space-y-4">
-                {footerLinks.ecosystem.map((link) => (
+                {footerLinks.company.map((link) => (
                   <li key={link.path}>
                     <Link
                       to={link.path}
@@ -169,43 +161,27 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Company & Socials */}
+            {/* Follow Us */}
             <div className="flex flex-col">
               <h4 className="font-heading text-sm font-bold text-orange-950 mb-6 uppercase tracking-[0.15em] flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-orange-300"></span>
-                Company
+                Follow Us
               </h4>
-              <ul className="space-y-4 mb-12">
-                {footerLinks.company.map((link) => (
-                  <li key={link.path}>
-                    <Link
-                      to={link.path}
-                      onClick={scrollToTop}
-                      className="text-[15px] font-medium text-orange-800/80 hover:text-orange-950 hover:translate-x-1 hover:font-bold transition-all duration-300 flex items-center w-fit"
+              <ul className="space-y-4">
+                {socialLinks.map((social) => (
+                  <li key={social.label}>
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[15px] font-medium text-orange-800/80 hover:text-orange-950 hover:translate-x-1 transition-all duration-300 flex items-center gap-3 w-fit"
                     >
-                      {link.name}
-                    </Link>
+                      <social.icon className="w-5 h-5 text-orange-500" />
+                      {social.label}
+                    </a>
                   </li>
                 ))}
               </ul>
-
-              <h4 className="font-heading text-sm font-bold text-white mb-4 uppercase tracking-wider">
-                Follow Us
-              </h4>
-              <div className="flex flex-wrap gap-4">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-11 h-11 rounded-full bg-white border border-orange-200/60 hover:bg-orange-50 hover:border-orange-400 hover:text-orange-700 text-orange-500 flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(249,115,22,0.15)]"
-                    title={social.label}
-                  >
-                    <social.icon className="w-5 h-5" />
-                  </a>
-                ))}
-              </div>
             </div>
 
           </div>

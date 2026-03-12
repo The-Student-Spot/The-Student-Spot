@@ -218,11 +218,11 @@ const Students = () => {
               </div>
               <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-2">The Journey</p>
               <div className="flex items-center gap-2 text-lg font-bold text-foreground">
-                <span className="text-primary hover:text-primary/80 transition-colors">idea</span>
+                <span className="text-primary hover:text-primary/80 transition-colors">Idea</span>
                 <ArrowRight className="w-5 h-5 text-muted-foreground" />
-                <span className="text-secondary hover:text-secondary/80 transition-colors">prototype</span>
+                <span className="text-secondary hover:text-secondary/80 transition-colors">Prototype</span>
                 <ArrowRight className="w-5 h-5 text-muted-foreground" />
-                <span className="text-success hover:text-success/80 transition-colors">traction</span>
+                <span className="text-success hover:text-success/80 transition-colors">Traction</span>
               </div>
             </motion.div>
 
