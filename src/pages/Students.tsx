@@ -91,7 +91,7 @@ const Students = () => {
                 className="flex flex-col sm:flex-row gap-4"
               >
                 <Button variant="hero" size="lg" className="h-14 px-8 text-lg shadow-lg shadow-primary/25" asChild>
-                  <Link to="/auth">
+                  <Link to="/login?role=student">
                     Join as a Student <ArrowRight className="ml-2 w-5 h-5" />
                   </Link>
                 </Button>

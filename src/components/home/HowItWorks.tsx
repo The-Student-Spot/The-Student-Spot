@@ -41,7 +41,7 @@ const audiences: Audience[] = [
       "Mentor access",
     ],
     cta: "Join as a Student",
-    path: "/auth",
+    path: "/login?role=student",
     variant: "default",
     dotColor: "bg-primary",
     iconBg: "bg-primary/10 text-primary",
@@ -59,7 +59,7 @@ const audiences: Audience[] = [
       "Corporate project collaboration",
     ],
     cta: "Become a Partner",
-    path: "/colleges",
+    path: "/login?role=college",
     variant: "secondary",
     dotColor: "bg-secondary",
     iconBg: "bg-secondary/10 text-secondary",
@@ -76,7 +76,7 @@ const audiences: Audience[] = [
       "Talent pipeline building",
     ],
     cta: "Hire Talent",
-    path: "/companies",
+    path: "/login?role=company",
     variant: "default",
     dotColor: "bg-primary",
     iconBg: "bg-primary/10 text-primary",
@@ -96,7 +96,7 @@ const audiences: Audience[] = [
       "National visibility",
     ],
     cta: "Become a Partner",
-    path: "/coaching",
+    path: "/contact",
     variant: "secondary", // 🔴 LEFT RED
     dotColor: "bg-secondary",
     iconBg: "bg-secondary/10 text-secondary",
@@ -113,7 +113,7 @@ const audiences: Audience[] = [
       "Corporate collaboration access",
     ],
     cta: "Become a Partner",
-    path: "/incubators",
+    path: "/contact",
     variant: "default", // 🟡 MIDDLE YELLOW
     dotColor: "bg-primary",
     iconBg: "bg-primary/10 text-primary",
@@ -130,7 +130,7 @@ const audiences: Audience[] = [
       "National student visibility",
     ],
     cta: "Become a Mentor/Speaker",
-    path: "/mentors",
+    path: "/contact",
     variant: "secondary", // 🔴 RIGHT RED
     dotColor: "bg-secondary",
     iconBg: "bg-secondary/10 text-secondary",
@@ -166,8 +166,7 @@ const HowItWorks = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="group bg-card rounded-2xl p-6 lg:p-8 border border-border hover:shadow-card-hover transition-all duration-300"
-            >
+              className="group bg-card rounded-2xl p-6 lg:p-8 border border-border hover:shadow-card-hover transition-all duration-300 flex flex-col h-full">
               {/* Icon */}
               <div
                 className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${audience.iconBg}`}
@@ -201,7 +200,7 @@ const HowItWorks = () => {
               </ul>
 
               {/* Button */}
-              <Button variant={audience.variant} asChild className="group/btn">
+              <Button variant={audience.variant} asChild className="group/btn mt-auto">
                 <Link to={audience.path}>
                   {audience.cta}
                   <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
