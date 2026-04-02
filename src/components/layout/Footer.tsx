@@ -13,6 +13,8 @@ import { FaWhatsapp } from "react-icons/fa";
 import tssLogo from "@/assets/tss-logo.png";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   const scrollToTop = () => {
     document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
     document.body.scrollTo({ top: 0, behavior: "smooth" });
@@ -20,19 +22,15 @@ const Footer = () => {
 
   const footerLinks = {
     platform: [
-      { name: "Ecosystem Partnerships", path: "/ecosystem-partnerships" },
       { name: "For Students", path: "/students" },
       { name: "For Colleges", path: "/colleges" },
-      { name: "For Companies & Recruiters", path: "/companies" },
-      { name: "For Startups", path: "/startups" },
+      { name: "For Companies, Recruiters & Startups", path: "/companies" },
       { name: "For Coaching Institutes", path: "/coaching-partners" },
       { name: "For Incubators", path: "/incubators" },
-      { name: "For CSR / NGOs / Skill Centers", path: "/ecosystem-partnerships" },
+      { name: "For Mentors & Speakers", path: "/get-involved" },
     ],
     company: [
       { name: "About Us", path: "/about" },
-      { name: "Ecosystem Partnerships", path: "/ecosystem-partnerships" },
-      { name: "Get Involved", path: "/get-involved" },
       { name: "Contact Us", path: "/contact" },
       { name: "Privacy Policy", path: "/privacy" },
       { name: "Terms of Service", path: "/terms" },
@@ -42,7 +40,7 @@ const Footer = () => {
   const socialLinks = [
     { icon: FaWhatsapp, href: "https://whatsapp.com/channel/0029Vb6ft6072WTxJ5eMKA2I", label: "WhatsApp Channel" },
     { icon: Instagram, href: "https://www.instagram.com/the_studentspot", label: "Instagram" },
-    { icon: Linkedin, href: "https://www.linkedin.com/company/thestudentspot/", label: "LinkedIn" },
+    { icon: Linkedin, href: "https://www.linkedin.com/company/thestudentspot/", label: "LinkedIn Page" },
     { icon: Twitter, href: "https://x.com/the_studentspot", label: "X (Twitter)" },
     { icon: Youtube, href: "https://youtube.com/@the.studentspot", label: "YouTube" },
     { icon: Send, href: "https://t.me/thestudentspot", label: "Telegram" },
@@ -76,7 +74,7 @@ const Footer = () => {
                     The Student Spot
                   </span>
                   <span className="text-xs font-bold text-orange-600 uppercase tracking-[0.15em] mt-1">
-                    From Students to Founders Ecosystem
+                    From Student to Founder: One National Ecosystem
                   </span>
                 </div>
               </div>
@@ -84,8 +82,7 @@ const Footer = () => {
 
             <p className="text-base text-orange-900/80 leading-relaxed mb-8 max-w-sm font-medium">
               Connecting students, colleges, companies, startups, recruiters,
-              incubators, CSR organizations, non-profits, and skill development
-              centers to create real career, income, and startup outcomes across India.
+              and incubators to create real career and startup outcomes across India.
             </p>
 
             <div className="mt-auto">
@@ -113,7 +110,7 @@ const Footer = () => {
                   <div className="w-10 h-10 rounded-full bg-white border border-orange-200/50 flex items-center justify-center">
                     <MapPin className="w-4 h-4 text-orange-600" />
                   </div>
-                  Hyderabad, Telangana, India
+                  Hyderabad, India
                 </li>
               </ul>
             </div>
@@ -193,11 +190,11 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-20 pt-8 border-t border-orange-200/50 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[15px] font-medium text-orange-900/60 flex items-center gap-2">
-            © 2026 The Student Spot. All Rights Reserved.
+            © {currentYear} The Student Spot. All Rights Reserved.
           </p>
 
           <p className="text-[15px] text-orange-950 font-bold tracking-wide">
-            Building India’s Largest Students to Founders Ecosystem
+            Building India’s Largest Student-to-Founder Ecosystem.
           </p>
         </div>
       </div>

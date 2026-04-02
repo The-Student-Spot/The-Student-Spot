@@ -11,9 +11,9 @@ interface StatItem {
 const stats: StatItem[] = [
   { value: 20000, suffix: "+", label: "Students" },
   { value: 100, suffix: "+", label: "Campuses" },
-  { value: 100, suffix: "+", label: "Mentors & Speakers" },
-  { value: 100, suffix: "+", label: "Event Collaborations" },
-  { textValue: "Growing", label: "Startup & Corporate Network" },
+  { value: 100, suffix: "+", label: "Mentors" },
+  { value: 100, suffix: "+", label: "Active Opportunities" },
+  { textValue: "Growing", label: "Startup Collaborations" },
 ];
 
 const AnimatedCounter = ({

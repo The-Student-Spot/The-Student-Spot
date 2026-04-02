@@ -4,77 +4,16 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import {
   GraduationCap, Target, Briefcase, Award, Users, Zap,
-  ArrowRight, CheckCircle, Rocket, LineChart, BadgeCheck, Lightbulb, Compass, MonitorPlay
+  ArrowRight, CheckCircle, BookOpen, Rocket, LineChart, BadgeCheck, Lightbulb, Compass, MonitorPlay
 } from "lucide-react";
 
 const Students = () => {
   const whatYouGet = [
-    {
-      icon: Compass,
-      title: "1. Career Clarity",
-      description: "Stop guessing your future.",
-      points: [
-        "What suits your strengths",
-        "What industries actually demand",
-        "What skills to build now",
-        "How to plan your next 6-12 months",
-      ],
-      footer: "Clarity removes confusion. Direction builds confidence.",
-    },
-    {
-      icon: Briefcase,
-      title: "2. Real Opportunities",
-      description: "You do not just learn. You apply.",
-      points: [
-        "Internships",
-        "Full-time roles",
-        "Startup positions",
-        "Freelance projects",
-        "Campus ambassador programs",
-        "Corporate collaborations",
-      ],
-      footer: "Experience before graduation = advantage after graduation.",
-    },
-    {
-      icon: Zap,
-      title: "3. Skills That Actually Matter",
-      description: "Learn what companies and startups truly value.",
-      points: [
-        "Communication",
-        "Digital and tech fundamentals",
-        "Business basics",
-        "Resume and interview mastery",
-        "Execution mindset",
-      ],
-      footer: "Beyond textbooks. Focused on real-world outcomes.",
-    },
-    {
-      icon: BadgeCheck,
-      title: "4. Proof of Work",
-      description: "Build credibility before you graduate.",
-      points: [
-        "Certificates",
-        "Live project experience",
-        "Portfolio development",
-        "Recommendations",
-        "Internship records",
-      ],
-      footer: "Your resume becomes proof, not promises.",
-    },
-    {
-      icon: LineChart,
-      title: "5. Freelance and Paid Work",
-      description: "Start earning while learning.",
-      points: [
-        "Digital marketing",
-        "Content creation",
-        "Design",
-        "Web development",
-        "Research",
-        "Operations",
-      ],
-      footer: "Build income. Build confidence. Build real-world experience.",
-    },
+    { icon: Compass, title: "1. Career Clarity", description: "Stop guessing your path.", points: ["What suits you", "What industries demand", "What skills to build", "How to plan 6–12 months ahead"] },
+    { icon: Briefcase, title: "2. Real Opportunities", description: "You don’t just learn. You apply.", points: ["Internships", "Full-time roles", "Startup positions", "Freelance projects", "Campus ambassador programs"] },
+    { icon: Zap, title: "3. Skills That Matter", description: "Beyond textbooks. Focused on outcomes.", points: ["Communication", "Digital skills", "Tech & business basics", "Interview & resume mastery", "Execution mindset"] },
+    { icon: BadgeCheck, title: "4. Proof of Work", description: "Your resume becomes proof, not claims.", points: ["Certificates", "Live project experience", "Portfolio development", "Recommendations", "Internship records"] },
+    { icon: LineChart, title: "5. Freelance & Earning", description: "Build income and confidence.", points: ["Digital marketing", "Content creation", "Design", "Web development", "Research & Operations"] },
   ];
 
   const steps = [
@@ -94,59 +33,11 @@ const Students = () => {
   ];
 
   const startupSupport = [
-    {
-      title: "Startup Awareness",
-      desc: "Founder talks, bootcamps, and idea validation sessions.",
-    },
-    {
-      title: "Incubation Support",
-      desc: "Business model guidance, MVP direction, market research, feedback systems, and pitch deck creation.",
-    },
-    {
-      title: "Corporate Pilot Projects",
-      desc: "Work on real tasks with companies to validate your startup.",
-    },
-    {
-      title: "Mentor Access",
-      desc: "Learn directly from founders, consultants, and industry experts.",
-    },
-    {
-      title: "Investor and Corporate Exposure",
-      desc: "Connect with strategic partners, potential clients, and ecosystem supporters.",
-    },
-  ];
-
-  const founderExtras = [
-    {
-      title: "Find Co-Founders and Collaborators",
-      points: [
-        "Connect with like-minded builders",
-        "Find co-founders",
-        "Join startup teams",
-        "Collaborate on real projects",
-        "Mentor each other",
-      ],
-      footer: "Do not build alone. Build together.",
-    },
-    {
-      title: "Student Micro-Investment Opportunity",
-      points: [
-        "Support promising student startups",
-        "Participate in early-stage funding",
-        "₹1,000 - ₹1,00,000 contribution models",
-        "Learn real startup economics",
-      ],
-      footer: "Support innovation. Understand investing. Grow with startups.",
-    },
-  ];
-
-  const networkingItems = [
-    "100+ Industry Mentors",
-    "Startup founders",
-    "Recruiters",
-    "Corporate professionals",
-    "Incubators",
-    "Students across 100+ campuses",
+    { title: "Startup Awareness", desc: "Founder talks, bootcamps, and idea validation workshops." },
+    { title: "Incubation Support", desc: "Business model guidance, MVP development direction, Market research support, Feedback loops, Pitch deck creation." },
+    { title: "Real Corporate Projects", desc: "Companies in our ecosystem may assign pilot tasks to student startups, giving you real validation." },
+    { title: "Access to Mentors", desc: "Learn directly from founders, consultants, and industry leaders." },
+    { title: "Investor & Corporate Exposure", desc: "Opportunities to connect with strategic partners, potential clients, and ecosystem supporters." },
   ];
 
   return (
@@ -185,8 +76,9 @@ const Students = () => {
               >
                 <p className="font-semibold text-foreground">You don’t have to figure it out alone.</p>
                 <p>
-                  The Student Spot is a Students to Founders Ecosystem designed to help you gain clarity,
-                  build real skills, access opportunities, earn income, and launch your own startup while still in college.
+                  The Student Spot is a Student-to-Founder Ecosystem designed to help you gain clarity,
+                  build skills, access real opportunities, and even launch your own startup while still in
+                  college.
                 </p>
                 <p className="text-xl font-medium text-primary border-l-4 border-primary pl-4 py-1">
                   Your future doesn’t start after graduation. It starts now.
@@ -221,7 +113,7 @@ const Students = () => {
                     <LineChart className="w-10 h-10 text-primary-foreground" />
                   </div>
                   <h3 className="font-heading text-2xl font-bold text-foreground tracking-tight">Your Growth Dashboard</h3>
-                  <p className="text-sm font-medium text-muted-foreground mt-1 bg-muted/50 inline-block px-3 py-1 rounded-full">Everything you need. One powerful ecosystem.</p>
+                  <p className="text-sm font-medium text-muted-foreground mt-1 bg-muted/50 inline-block px-3 py-1 rounded-full">Everything you need. One ecosystem.</p>
                 </div>
 
                 <div className="space-y-4">
@@ -230,8 +122,7 @@ const Students = () => {
                     "8+ Monthly Workshops",
                     "100+ Industry Mentors",
                     "Startup & Incubation Support",
-                    "Freelance & Paid Projects",
-                    "Corporate Pilot Opportunities"
+                    "Freelance & Project Access"
                   ].map((item, i) => (
                     <div key={item} className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted/50 transition-colors border border-transparent hover:border-border/50">
                       <div className="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center shrink-0">
@@ -243,8 +134,8 @@ const Students = () => {
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-border/50 text-center">
-                    <p className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-                      No confusion. No random steps. Just structured growth.
+                  <p className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                    No confusion. No random steps. Structured growth.
                   </p>
                 </div>
               </div>
@@ -266,7 +157,7 @@ const Students = () => {
               What You <span className="text-gradient">Get</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              From clarity to execution to outcomes, this is your structured path to career and startup growth.
+              Stop guessing your path. Get structured guidance to understand where to go and how to get there.
             </p>
           </motion.div>
 
@@ -293,7 +184,6 @@ const Students = () => {
                     </li>
                   ))}
                 </ul>
-                <p className="text-sm font-semibold text-foreground mt-6 border-t border-border pt-4">{benefit.footer}</p>
               </motion.div>
             ))}
           </div>
@@ -320,7 +210,7 @@ const Students = () => {
               </p>
               <p className="text-lg text-muted-foreground mb-8">
                 We don’t just talk about startups.<br />
-                <span className="font-bold text-primary text-xl">We help you build them.</span>
+                <span className="font-bold text-primary text-xl">We help you start.</span>
               </p>
               <div className="inline-flex items-center gap-3 px-6 py-3 bg-card rounded-2xl border border-border shadow-sm mb-8">
                 <Lightbulb className="w-6 h-6 text-warning" />
@@ -357,60 +247,6 @@ const Students = () => {
               </div>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* Founder Extras */}
-      <section className="py-20 lg:py-28">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-8">
-            {founderExtras.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.08 }}
-                className="bg-card rounded-3xl border border-border p-8 shadow-sm"
-              >
-                <h3 className="font-heading text-2xl font-bold text-foreground mb-5">{item.title}</h3>
-                <ul className="space-y-3 mb-6">
-                  {item.points.map((point) => (
-                    <li key={point} className="flex items-start gap-3 text-muted-foreground">
-                      <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0"></div>
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-sm font-semibold text-foreground border-t border-border pt-4">{item.footer}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Networking */}
-      <section className="py-20 lg:py-28 bg-accent/40">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <h2 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-6">
-              Networking That Changes Your Path
-            </h2>
-            <p className="text-muted-foreground mb-8 text-lg">Connect with:</p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-              {networkingItems.map((item) => (
-                <div key={item} className="bg-background rounded-xl border border-border p-4 font-medium text-foreground">
-                  {item}
-                </div>
-              ))}
-            </div>
-            <p className="text-lg font-semibold text-primary">Your network becomes your opportunity engine.</p>
-          </motion.div>
         </div>
       </section>
 
@@ -515,9 +351,6 @@ const Students = () => {
                 </span>
               ))}
             </div>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Do not wait for opportunities. Prepare for them. Create them.
-            </p>
           </motion.div>
         </div>
       </section>
@@ -537,13 +370,14 @@ const Students = () => {
 
             <div className="relative z-10">
               <h2 className="font-heading text-4xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
-                Start Your Journey Today
+                Don’t Wait for Opportunities.<br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white">Prepare for them. Create them.</span>
               </h2>
               <p className="text-xl text-primary-foreground/80 mb-10 max-w-2xl mx-auto">
-                Join India’s fast-growing Students to Founders movement and build skills, networks, proof, and your future.
+                Join a Pan-India ecosystem focused on growth, skills, and execution.
               </p>
               <Button variant="hero" size="xl" className="h-16 px-10 text-xl rounded-full shadow-2xl hover:scale-105 transition-transform" asChild>
-                <Link to="/login?role=student">
+                <Link to="/auth">
                   Join as a Student <ArrowRight className="ml-3 w-6 h-6" />
                 </Link>
               </Button>

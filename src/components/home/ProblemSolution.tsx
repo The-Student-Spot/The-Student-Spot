@@ -30,10 +30,10 @@ const ProblemSolution = () => {
             <ul className="space-y-4 mb-8">
               {[
                 "Opportunities are scattered",
-                "Colleges lack real industry integration",
+                "Colleges lack deep industry integration",
                 "Companies struggle to find job-ready talent",
                 "Startups lack execution support",
-                "Student founders lack incubation and exposure",
+                "Student founders lack incubation & exposure",
               ].map((item, index) => (
                 <motion.li
                   key={index}
@@ -52,9 +52,9 @@ const ProblemSolution = () => {
             </ul>
 
             <p className="text-foreground font-semibold text-lg">
-              The problem is not talent.
+              The gap is not talent.
               <br />
-              <span className="text-destructive">The problem is the ecosystem.</span>
+              <span className="text-destructive">It’s the ecosystem.</span>
             </p>
           </motion.div>
 
@@ -88,37 +88,35 @@ const ProblemSolution = () => {
             </p>
 
             <p className="text-muted-foreground mb-6">
-              We don&apos;t focus on activity.
-              <br />
-              We focus on execution and outcomes.
+              We focus on execution, not just activity.
             </p>
 
             {/* FORMULA */}
             <div className="bg-card rounded-2xl p-6 border border-border">
-              <p className="font-heading font-semibold text-foreground mb-6">
+              <p className="font-heading font-semibold text-foreground mb-4">
                 The TSS Formula
               </p>
 
-              <div className="flex flex-wrap items-center gap-2 text-lg text-muted-foreground mb-3">
-                {[
-                  "Skills",
-                  "Network",
-                  "Proof of Work",
-                  "Opportunity",
-                ].map((item, index, arr) => (
-                  <div key={item} className="flex items-center gap-2">
-                    <span className="px-4 py-2 rounded-2xl bg-primary/10 text-primary font-medium leading-none">
-                      {item}
+              <div className="flex flex-wrap items-center gap-2 text-sm">
+                {["Skills", "Network", "Proof of Work", "Opportunity"].map(
+                  (item, index) => (
+                    <span key={item} className="flex items-center gap-2">
+                      <span className="bg-primary/10 text-primary px-3 py-1.5 rounded-lg font-medium">
+                        {item}
+                      </span>
+                      {index < 3 && (
+                        <span className="text-muted-foreground">+</span>
+                      )}
                     </span>
-                    {index < arr.length - 1 ? <span className="px-1">+</span> : null}
-                  </div>
-                ))}
-                <span className="px-1">=</span>
-              </div>
+                  )
+                )}
 
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-success/10 text-success font-semibold text-base">
-                <CheckCircle className="w-5 h-5" />
-                Careers & Founders
+                <span className="text-muted-foreground">=</span>
+
+                <span className="bg-success/10 text-success px-3 py-1.5 rounded-lg font-semibold flex items-center gap-1">
+                  <CheckCircle className="w-4 h-4" />
+                  Careers & Founders
+                </span>
               </div>
             </div>
           </motion.div>
