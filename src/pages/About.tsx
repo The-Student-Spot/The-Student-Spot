@@ -2,20 +2,71 @@ import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Target, Eye, Heart, Award, ArrowRight, Quote, Linkedin, Instagram, Globe, BookOpen, Users, Shield, Lightbulb, Hammer } from "lucide-react";
+import {
+  Target,
+  Eye,
+  Heart,
+  Award,
+  ArrowRight,
+  Quote,
+  Linkedin,
+  Instagram,
+  Globe,
+  BookOpen,
+  Users,
+  Shield,
+  Lightbulb,
+  Hammer,
+} from "lucide-react";
 import founderImage from "@/assets/founder.png";
 
 const About = () => {
   const values = [
-    { icon: Target, title: " Results First", description: "We focus on real outcomes: careers, skills, and startups." },
-    { icon: Globe, title: " Access for All", description: "Opportunity should never depend on background or connections." },
-    { icon: Heart, title: " Community Power", description: "We grow together students, founders, mentors, and recruiters." },
-    { icon: BookOpen, title: " Continuous Learning", description: "Lifelong skill development and curiosity drive success." },
-    { icon: Users, title: " Collaboration", description: "Shared knowledge creates a bigger impact." },
-    { icon: Award, title: " Excellence", description: "We aim beyond average and build systems that scale." },
-    { icon: Shield, title: " Integrity", description: "Transparency, responsibility, and trust guide our work." },
-    { icon: Lightbulb, title: " Innovation", description: "We encourage new ideas, experimentation, and bold thinking." },
-    { icon: Hammer, title: " Builder Mindset", description: "Take ownership. Execute. Create opportunities." },
+    {
+      icon: Target,
+      title: "Results First",
+      description: "We measure success through real outcomes, careers, skills, and startups.",
+    },
+    {
+      icon: Globe,
+      title: "Access for All",
+      description: "Opportunity should never depend on background or connections.",
+    },
+    {
+      icon: Heart,
+      title: "Community Power",
+      description: "We grow together, students, founders, mentors, and recruiters.",
+    },
+    {
+      icon: BookOpen,
+      title: "Continuous Learning",
+      description: "Lifelong learning and curiosity drive long-term success.",
+    },
+    {
+      icon: Users,
+      title: "Collaboration",
+      description: "Shared knowledge creates greater impact.",
+    },
+    {
+      icon: Award,
+      title: "Excellence",
+      description: "We do not settle for average. We build systems that scale.",
+    },
+    {
+      icon: Shield,
+      title: "Integrity",
+      description: "Transparency, responsibility, and trust guide everything we do.",
+    },
+    {
+      icon: Lightbulb,
+      title: "Innovation",
+      description: "We encourage bold thinking, experimentation, and new ideas.",
+    },
+    {
+      icon: Hammer,
+      title: "Builder Mindset",
+      description: "Take ownership. Execute. Create opportunities.",
+    },
   ];
 
   const founderLinks = [
@@ -43,7 +94,7 @@ const About = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="font-heading text-4xl lg:text-5xl font-bold text-foreground mb-6"
             >
-              Building India’s Largest <span className="text-gradient">Student-to-Founder Ecosystem</span>
+              From Students To <span className="text-gradient">Founder</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -51,9 +102,14 @@ const About = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg text-muted-foreground max-w-3xl mx-auto"
             >
-              The Student Spot is a Pan-India Student-to-Founder Ecosystem built to solve one clear problem:<br /><br />
-              Students don’t fail because they lack talent. <br />
-              They fail because they lack clarity, access, and structured direction.<br /><br />
+              The Student Spot is a Pan-India Students to Founders Ecosystem built to solve one clear problem:
+              <br />
+              <br />
+              Students do not fail because they lack talent.
+              <br />
+              They fail because they lack clarity, access, and structured direction.
+              <br />
+              <br />
               <span className="text-foreground font-semibold">We are building the missing bridge between campuses and real-world outcomes.</span>
             </motion.p>
           </div>
@@ -83,20 +139,74 @@ const About = () => {
                 The Student Spot connects:
               </p>
               <div className="flex flex-wrap justify-center gap-3 mb-8">
-                {['Students', 'Colleges', 'Companies', 'Startups', 'Recruiters', 'Incubators', 'Mentors & Speakers'].map((item) => (
+                {[
+                  "Students",
+                  "Colleges",
+                  "Companies",
+                  "Startups",
+                  "Recruiters",
+                  "Incubators",
+                  "Mentors & Speakers",
+                  "CSR, Non-Profit & Skill Centers",
+                ].map((item) => (
                   <span key={item} className="px-5 py-2.5 rounded-full bg-primary/10 text-primary font-medium">
                     {item}
                   </span>
                 ))}
               </div>
               <p className="text-xl font-medium text-foreground mb-4">
-                Into one structured ecosystem focused on execution not just engagement.
+                Into one structured ecosystem focused on execution, not just engagement.
               </p>
               <div className="space-y-2 text-muted-foreground text-lg">
                 <p>We don’t just host events.</p>
                 <p>We don’t just share opportunities.</p>
                 <p className="font-bold text-primary mt-4">We build pathways.</p>
               </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* What We Do */}
+      <section className="py-16 lg:py-24">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-8 text-center"
+            >
+              What We Do
+            </motion.h2>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-card rounded-2xl p-8 border border-border shadow-sm"
+            >
+              <p className="text-lg text-foreground mb-6">We help students:</p>
+              <ul className="space-y-3 text-muted-foreground">
+                {[
+                  "Gain clarity about their career path",
+                  "Build real-world skills",
+                  "Access internships, jobs, and freelance opportunities",
+                  "Work on live projects",
+                  "Connect with mentors and industry professionals",
+                  "Build startups and find co-founders",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-primary mt-2"></div>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="text-lg font-semibold text-primary mt-8 text-center">
+                From learning to execution to outcomes.
+              </p>
             </motion.div>
           </div>
         </div>
@@ -124,6 +234,7 @@ const About = () => {
                 <div className="pt-4 mt-6 border-t border-border">
                   <p className="font-medium text-foreground text-lg">We don’t just motivate.</p>
                   <p className="font-bold text-primary text-xl mt-1">We enable action.</p>
+                  <p className="font-medium text-foreground text-lg mt-1">We help students turn potential into opportunity.</p>
                 </div>
               </div>
             </motion.div>
@@ -162,6 +273,9 @@ const About = () => {
                       Every founder gets ecosystem support
                     </li>
                   </ul>
+                  <p className="mt-4">
+                    We are building a system where opportunity is structured, accessible, and scalable.
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -225,17 +339,17 @@ const About = () => {
                 <div className="lg:col-span-2 relative z-10">
                   <p className="text-lg text-foreground leading-relaxed mb-6">
                     The Student Spot was founded by <strong>Rajkamal Panthagani</strong>, an MBA graduate who
-                    personally experienced job rejections, introversion, and the absence of structured
-                    guidance during his student journey.
+                    personally experienced job rejections, lack of guidance, limited exposure,
+                    introversion, and self-doubt.
                   </p>
                   <p className="text-lg text-foreground leading-relaxed mb-6">
-                    Instead of waiting for change, he built what he wished existed during his college days: a
-                    platform where students don’t struggle alone, don’t guess their path, and don’t miss
-                    opportunities due to lack of access.
+                    Instead of waiting for change, he built what he wished existed during his college days:
+                    a platform where students do not struggle alone, do not guess their path, and do not
+                    miss opportunities due to a lack of access.
                   </p>
                   <p className="text-lg text-muted-foreground leading-relaxed italic">
-                    Today, The Student Spot empowers thousands of students across India with real
-                    exposure, structured growth, and outcome-driven opportunities.
+                    Today, The Student Spot empowers thousands of students across India with real exposure,
+                    structured growth, and outcome-driven opportunities.
                   </p>
                 </div>
               </div>
@@ -282,6 +396,40 @@ const About = () => {
         </div>
       </section>
 
+      {/* Why We Exist */}
+      <section className="py-16 lg:py-24 bg-accent/50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-8"
+            >
+              Why The Student Spot Exists
+            </motion.h2>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-card rounded-2xl p-8 border border-border shadow-sm"
+            >
+              <div className="space-y-2 text-lg text-foreground">
+                <p>Because talent is everywhere.</p>
+                <p>But access is not.</p>
+                <p>Because students are capable.</p>
+                <p>But direction is missing.</p>
+                <p>Because opportunities exist.</p>
+                <p>But they are not connected.</p>
+              </div>
+              <p className="mt-6 text-xl font-bold text-primary">We exist to fix that.</p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-16 lg:py-24 bg-background border-t border-border mt-8">
         <div className="container mx-auto px-4 text-center">
@@ -301,7 +449,7 @@ const About = () => {
             className="mb-10"
           >
             <p className="text-muted-foreground text-xl mb-6">
-              Join India’s fast-growing student-to-founder movement.
+              Join India’s fast-growing Students to Founders movement.
             </p>
             <div className="flex flex-wrap justify-center gap-3 md:gap-6 text-lg font-semibold text-foreground">
               <span className="flex items-center gap-2"><ArrowRight className="w-5 h-5 text-primary" /> Build skills.</span>
@@ -319,11 +467,11 @@ const About = () => {
           >
             <Button variant="secondary" size="lg" asChild className="text-lg px-8 py-6 h-auto">
               <a href="https://forms.gle/HJn2GQDYa64gmvnYA" target="_blank" rel="noopener noreferrer">
-                Join Now <ArrowRight className="ml-2 w-5 h-5" />
+                Join Now - Student Signup/Login <ArrowRight className="ml-2 w-5 h-5" />
               </a>
             </Button>
             <Button variant="outline" size="lg" asChild className="text-lg px-8 py-6 h-auto">
-              <Link to="/contact">Contact Us</Link>
+              <Link to="/contact">Contact Us - Contact Us Page</Link>
             </Button>
           </motion.div>
         </div>
