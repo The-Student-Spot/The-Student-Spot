@@ -2,61 +2,38 @@
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import {
-  Bell, Bookmark, Briefcase, Building, Code, Compass, FileText, GraduationCap, Home, LifeBuoy, Lightbulb,
-  MessageSquare, Mic, Rocket, School, Settings, Star, Users, LogOut, ChevronRight, Calendar
+  Bell, Bookmark, Briefcase, Building, Code, Compass, FileText, GraduationCap, Home, LifeBuoy, Lightbulb, 
+  MessageSquare, Mic, Rocket, School, Settings, Star, Users, Video, LogOut, ChevronRight, Calendar
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const dashboardItems = {
-  home: [
-    { icon: <Home />, title: "Home Overview", description: "Shows all dashboard sections in one place." },
-    { icon: <Mic />, title: "Gemini AI Assistant", description: "Use AI help for guidance, planning, and prep." },
-  ],
-  opportunities: [
-    { icon: <Briefcase />, title: "Jobs, Internships & Govt. Jobs", description: "Browse all opportunities in one feed." },
-    { icon: <Bookmark />, title: "Role Title", description: "Filter opportunities by role title." },
-    { icon: <Building />, title: "Company", description: "Filter opportunities by company." },
-    { icon: <Compass />, title: "Location", description: "Filter opportunities by location." },
-    { icon: <Star />, title: "Package", description: "Filter opportunities by salary package." },
-    { icon: <FileText />, title: "Apply Link", description: "Apply directly using the posted link." },
-  ],
-  freelance: [
-    { icon: <Code />, title: "Available Projects", description: "Find freelance and volunteering projects." },
-    { icon: <Bookmark />, title: "My Applications", description: "Track all freelance applications." },
-    { icon: <Users />, title: "Active Work", description: "Manage projects currently in progress." },
-    { icon: <Calendar />, title: "Completed", description: "Review your completed work history." },
-  ],
   learning: [
-    { icon: <Compass />, title: "Skill Roadmaps", description: "Follow structured learning paths." },
-    { icon: <LifeBuoy />, title: "Free Resources", description: "Access free study materials and trials." },
-    { icon: <FileText />, title: "Notes & Books", description: "Read curated notes and books." },
-    { icon: <Star />, title: "Challenges", description: "Practice with coding and aptitude challenges." },
+    { icon: <Code />, title: "Coding Practice", description: "Sharpen your skills with challenges." },
+    { icon: <Mic />, title: "AI Mock Interviews", description: "Practice interviews with AI feedback." },
+    { icon: <FileText />, title: "Notes & Books", description: "Access a library of resources." },
+    { icon: <Compass />, title: "Exam Prep", description: "Prepare for your exams effectively." },
+    { icon: <Star />, title: "Skill Courses", description: "Upskill with expert-led courses." },
   ],
-  startupHub: [
-    { icon: <Lightbulb />, title: "Submit Idea", description: "Pitch your startup idea to begin." },
-    { icon: <Users />, title: "Find Co-founder", description: "Match with potential co-founders." },
-    { icon: <Rocket />, title: "Startup Resources", description: "Use guides for building your startup." },
-    { icon: <FileText />, title: "Templates", description: "Get pitch deck and BMC templates." },
-    { icon: <School />, title: "Incubators List", description: "Discover incubators for support and funding." },
+  jobs: [
+    { icon: <Briefcase />, title: "Private Jobs", description: "Find jobs in top companies." },
+    { icon: <Building />, title: "Government Jobs", description: "Explore public sector careers." },
+    { icon: <Rocket />, title: "Startup Jobs", description: "Join innovative startups." },
+    { icon: <Bookmark />, title: "Application Tracker", description: "Manage your job applications." },
   ],
-  mentorship: [
-    { icon: <Users />, title: "Mentor List", description: "Explore available mentors by domain." },
-    { icon: <Settings />, title: "Domain Filters", description: "Filter mentors by skill or industry." },
-    { icon: <MessageSquare />, title: "Request Session", description: "Send mentorship session requests." },
-    { icon: <GraduationCap />, title: "Career Guides", description: "Access resume, career, and skill guidance." },
+  entrepreneurship: [
+    { icon: <Rocket />, title: "Startup Launchpad", description: "Tools to launch your venture." },
+    { icon: <Lightbulb />, title: "Founder Stories", description: "Learn from successful founders." },
+    { icon: <FileText />, title: "Tools & Templates", description: "Get resources for your startup." },
   ],
-  events: [
-    { icon: <Calendar />, title: "Upcoming Events", description: "See upcoming hackathons and workshops." },
-    { icon: <Bookmark />, title: "Register", description: "Register for events and competitions." },
-    { icon: <Calendar />, title: "Past Events", description: "Review past event archives." },
-    { icon: <FileText />, title: "Certificates", description: "Download earned participation certificates." },
-  ],
-  profile: [
-    { icon: <Users />, title: "Name & Contact Details", description: "Manage your identity and contact info." },
-    { icon: <GraduationCap />, title: "Education Details", description: "Update your education and academic profile." },
-    { icon: <MessageSquare />, title: "Social Media Links", description: "Add and manage social profile links." },
-  ],
+  community: [
+    { icon: <Calendar />, title: "Events & Webinars", description: "Join events and webinars." },
+    { icon: <Users />, title: "Mentorship Zone", description: "Connect with experienced mentors." },
+    { icon: <Settings />, title: "Resources & Tools", description: "Find helpful resources and tools." },
+    { icon: <MessageSquare />, title: "Community", description: "Engage with fellow students." },
+    { icon: <LifeBuoy />, title: "Support", description: "Get help and support." },
+  ]
 };
 
 
@@ -98,20 +75,16 @@ const StudentDashboard = () => {
             </NavLink>
           </div>
           <nav className="flex-1 overflow-auto py-4 px-4 text-sm font-medium space-y-1">
-            <NavLink to="#" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-yellow-600 hover:bg-yellow-50"><Home className="h-4 w-4" />Home</NavLink>
+            <NavLink to="#" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-yellow-600 hover:bg-yellow-50"><Home className="h-4 w-4" />Personalized Path</NavLink>
             
-            <h3 className="px-3 pt-4 pb-2 text-xs font-semibold text-muted-foreground/80 uppercase tracking-wider">Opportunities</h3>
-            <NavLink to="#" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-yellow-600 hover:bg-yellow-50"><Briefcase className="h-4 w-4" />Opportunities</NavLink>
-            <NavLink to="#" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-yellow-600 hover:bg-yellow-50"><Code className="h-4 w-4" />Freelance</NavLink>
+            <h3 className="px-3 pt-4 pb-2 text-xs font-semibold text-muted-foreground/80 uppercase tracking-wider">Jobs & Internships</h3>
+            <NavLink to="#" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-yellow-600 hover:bg-yellow-50"><Briefcase className="h-4 w-4" />Jobs</NavLink>
             
             <h3 className="px-3 pt-4 pb-2 text-xs font-semibold text-muted-foreground/80 uppercase tracking-wider">Learning</h3>
-            <NavLink to="#" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-yellow-600 hover:bg-yellow-50"><Compass className="h-4 w-4" />Learning</NavLink>
+            <NavLink to="#" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-yellow-600 hover:bg-yellow-50"><Code className="h-4 w-4" />Development</NavLink>
             
             <h3 className="px-3 pt-4 pb-2 text-xs font-semibold text-muted-foreground/80 uppercase tracking-wider">Entrepreneurship</h3>
             <NavLink to="#" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-yellow-600 hover:bg-yellow-50"><Rocket className="h-4 w-4" />Startup Hub</NavLink>
-            <NavLink to="#" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-yellow-600 hover:bg-yellow-50"><Users className="h-4 w-4" />Mentorship</NavLink>
-            <NavLink to="#" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-yellow-600 hover:bg-yellow-50"><Calendar className="h-4 w-4" />Events</NavLink>
-            <NavLink to="#" className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-yellow-600 hover:bg-yellow-50"><Settings className="h-4 w-4" />Profile</NavLink>
           </nav>
           <div className="mt-auto p-4 border-t">
             {user ? (
@@ -140,51 +113,27 @@ const StudentDashboard = () => {
         </header>
         <div className="flex-1 space-y-10">
             <div>
-            <h2 className="text-lg font-semibold mb-4 text-slate-700">Home</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-              {dashboardItems.home.map(item => <DashboardCard key={item.title} {...item} />)}
-            </div>
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold mb-4 text-slate-700">Opportunities</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
-              {dashboardItems.opportunities.map(item => <DashboardCard key={item.title} {...item} />)}
-            </div>
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold mb-4 text-slate-700">Freelance</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-              {dashboardItems.freelance.map(item => <DashboardCard key={item.title} {...item} />)}
-            </div>
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold mb-4 text-slate-700">Learning</h2>
+                <h2 className="text-lg font-semibold mb-4 text-slate-700">Learning & Development</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
                     {dashboardItems.learning.map(item => <DashboardCard key={item.title} {...item} />)}
                 </div>
             </div>
             <div>
-            <h2 className="text-lg font-semibold mb-4 text-slate-700">Startup Hub</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
-              {dashboardItems.startupHub.map(item => <DashboardCard key={item.title} {...item} />)}
+                <h2 className="text-lg font-semibold mb-4 text-slate-700">Jobs & Internships</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                    {dashboardItems.jobs.map(item => <DashboardCard key={item.title} {...item} />)}
+                </div>
+            </div>
+             <div>
+                <h2 className="text-lg font-semibold mb-4 text-slate-700">Entrepreneurship Hub</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+                    {dashboardItems.entrepreneurship.map(item => <DashboardCard key={item.title} {...item} />)}
                 </div>
             </div>
             <div>
-            <h2 className="text-lg font-semibold mb-4 text-slate-700">Mentorship</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-              {dashboardItems.mentorship.map(item => <DashboardCard key={item.title} {...item} />)}
-            </div>
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold mb-4 text-slate-700">Events</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-              {dashboardItems.events.map(item => <DashboardCard key={item.title} {...item} />)}
-            </div>
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold mb-4 text-slate-700">Profile</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-              {dashboardItems.profile.map(item => <DashboardCard key={item.title} {...item} />)}
+                <h2 className="text-lg font-semibold mb-4 text-slate-700">Community & Support</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+                    {dashboardItems.community.map(item => <DashboardCard key={item.title} {...item} />)}
                 </div>
             </div>
         </div>

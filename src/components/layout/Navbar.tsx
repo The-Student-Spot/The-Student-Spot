@@ -1,22 +1,32 @@
 
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import tssLogo from "@/assets/tss-logo.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
-  { name: "For Students", path: "/students" },
-  { name: "Ecosystem Partnerships", path: "/ecosystem-partnerships" },
+  {
+    name: "For You",
+    children: [
+      { name: "For Students", path: "/students" },
+      { name: "For Colleges", path: "/colleges" },
+      { name: "For Companies", path: "/companies" },
+      { name: "For Startups", path: "/startups" },
+      { name: "For Coaching Institutes", path: "/coaching-partners" },
+      { name: "For Incubators", path: "/incubators" },
+    ]
+  },
   { name: "Get Involved", path: "/get-involved" },
   { name: "Contact", path: "/contact" },
-  { name: "Signup/Login (Google Auth)", path: "/auth" },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
@@ -36,17 +46,62 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={`px-4 py-2 text-sm font-medium transition-colors ${isActive(link.path)
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
-                  }`}
-              >
-                {link.name}
-              </Link>
+              <div key={link.name} className="relative">
+                {link.children ? (
+                  <div
+                    className="relative"
+                    onMouseEnter={() => setOpenDropdown(link.name)}
+                    onMouseLeave={() => setOpenDropdown(null)}
+                  >
+                    <button className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                      {link.name}
+                      <ChevronDown className="w-4 h-4" />
+                    </button>
+                    <AnimatePresence>
+                      {openDropdown === link.name && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          className="absolute top-full left-0 mt-1 w-48 bg-card rounded-xl shadow-card border border-border overflow-hidden"
+                        >
+                          {link.children.map((child) => (
+                            <Link
+                              key={child.path}
+                              to={child.path}
+                              className={`block px-4 py-3 text-sm hover:bg-accent transition-colors ${isActive(child.path) ? "text-primary bg-accent" : "text-foreground"
+                                }`}
+                            >
+                              {child.name}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <Link
+                    to={link.path}
+                    className={`px-4 py-2 text-sm font-medium transition-colors ${isActive(link.path)
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                      }`}
+                  >
+                    {link.name}
+                  </Link>
+                )}
+              </div>
             ))}
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/auth">Login / Signup</Link>
+            </Button>
+            <Button asChild className="bg-yellow-400 text-foreground font-bold hover:bg-yellow-500">
+              <Link to="/contact">Partner With Us</Link>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -70,16 +125,44 @@ const Navbar = () => {
           >
             <div className="container mx-auto px-4 py-4">
               {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className={`block py-3 text-sm font-medium ${isActive(link.path) ? "text-primary" : "text-foreground"
-                    }`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.name}
-                </Link>
+                <div key={link.name}>
+                  {link.children ? (
+                    <div className="py-2">
+                      <span className="text-sm font-medium text-muted-foreground">{link.name}</span>
+                      <div className="ml-4 mt-2 space-y-2">
+                        {link.children.map((child) => (
+                          <Link
+                            key={child.path}
+                            to={child.path}
+                            className={`block py-2 text-sm ${isActive(child.path) ? "text-primary" : "text-foreground"
+                              }`}
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {child.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      to={link.path}
+                      className={`block py-3 text-sm font-medium ${isActive(link.path) ? "text-primary" : "text-foreground"
+                        }`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                  )}
+                </div>
               ))}
+              <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-border">
+                <Button variant="outline" asChild>
+                  <Link to="/auth" onClick={() => setIsOpen(false)}>Login / Signup</Link>
+                </Button>
+                <Button asChild className="bg-yellow-400 text-foreground font-bold hover:bg-yellow-500">
+                  <Link to="/contact" onClick={() => setIsOpen(false)}>Partner With Us</Link>
+                </Button>
+              </div>
             </div>
           </motion.div>
         )}
