@@ -76,7 +76,7 @@ const CTASection = () => {
                 asChild
               >
                 <Link to="/auth">
-                  Join Now
+                  Join as a Student
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </Button>

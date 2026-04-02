@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, Target, Zap, Globe, Play } from "lucide-react";
-import tssLogo from "@/assets/tss-logo.png";
 
 const HeroSection = () => {
   return (
@@ -42,7 +41,7 @@ const HeroSection = () => {
             >
               <Sparkles className="w-4 h-4" />
 
-              India’s Growing Student Ecosystem
+              India&apos;s #1 Students to Founders Ecosystem
 
             </motion.div>
 
@@ -96,14 +95,14 @@ const HeroSection = () => {
             >
               <Button variant="hero" size="xl" className="group min-w-[200px]" asChild>
                 <Link to="/auth">
-                  Join Now
+                  Student Signup/Login
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
 
               <Button variant="outline" size="xl" className="min-w-[200px]" asChild>
                 <Link to="/contact">
-                  Partner With Us
+                  Ecosystem Partnerships
                 </Link>
 
               </Button>

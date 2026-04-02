@@ -4,87 +4,143 @@ import { Quote } from "lucide-react";
 const testimonials = [
   {
     quote:
-      "TSS helped me land my first internship when I had zero industry connections. The mentorship and exposure changed everything.",
-    name: "Charan",
-    role: "Software Developer",
-    company: "Tech Startup",
+      "I had no industry exposure and no confidence. Through TSS workshops and live projects, I built my portfolio. Within 6 months, I secured two internships and a full-time offer.",
+    name: "Prathima",
+    role: "Outcome",
+    company: "+300% skill growth | First corporate role secured",
   },
   {
     quote:
-      "Partnering with TSS improved our placement outcomes and exposed students to startup opportunities we couldn’t provide alone.",
-    name: "Varshitha",
-    role: "Placement Director",
-    company: "Engineering College",
+      "TSS helped me understand what skills the industry actually wants. Once I focused on proof of work, interviews became easier.",
+    name: "Vinay",
+    role: "Outcome",
+    company: "Structured roadmap -> Career clarity -> Placement",
   },
   {
     quote:
-      "We hired highly motivated interns through TSS. The difference in quality and readiness was clear.",
-    name: "Harish",
-    role: "HR Manager",
-    company: "Startup",
+      "Networking inside TSS changed everything. I met my hiring manager at a workshop.",
+    name: "Ramesh",
+    role: "Outcome",
+    company: "Network-driven opportunity",
   },
   {
     quote:
-      "The networking events organized by TSS introduced me to my co-founder. We went from an idea to a funded startup in six months.",
-    name: "Rahul",
-    role: "Startup Founder",
-    company: "FinTech Pro",
+      "Instead of just learning, I started building. That changed how recruiters saw me.",
+    name: "Prudhvi",
+    role: "Outcome",
+    company: "Portfolio -> Internship in 90 days",
   },
   {
     quote:
-      "I was struggling to find the right direction. The mentorship program connected me with an industry veteran whose guidance helped me secure a top-tier tech job.",
-    name: "Ananya",
-    role: "Frontend Engineer",
-    company: "Global Innovations",
+      "Through TSS, I started freelance marketing projects. I now support my own expenses.",
+    name: "Rajireddy",
+    role: "Outcome",
+    company: "INR 0 -> INR 25K/month side income",
   },
   {
     quote:
-      "TSS provided us with a steady pipeline of project-ready talent. It significantly reduced our hiring time and onboarding costs.",
-    name: "Vikram",
-    role: "CEO",
-    company: "NextGen Solutions",
+      "Leadership roles in TSS gave me confidence I never had before.",
+    name: "Sreeja",
+    role: "Outcome",
+    company: "Personality transformation",
   },
   {
     quote:
-      "Being a campus lead gave me hands-on leadership experience that no classroom could teach. It was the highlight of my resume.",
+      "After improving my resume and building proof, recruiters started responding.",
     name: "Priya",
-    role: "Product Manager",
-    company: "EduTech Core",
+    role: "Outcome",
+    company: "0 -> 3 interviews",
   },
   {
     quote:
-      "We hosted a successful hackathon in collaboration with TSS. The sheer talent and innovation from the participating students were mind-blowing.",
-    name: "Siddharth",
-    role: "Developer Advocate",
-    company: "Cloud Systems",
+      "TSS helped me validate my idea and find a co-founder.",
+    name: "Vaishnavi",
+    role: "Outcome",
+    company: "Idea -> MVP in 120 days",
   },
   {
     quote:
-      "Thanks to the freelance network at TSS, I started taking up real-world branding projects while still in my second year of college.",
-    name: "Neha",
-    role: "UI/UX Designer",
-    company: "Freelance",
+      "TSS workshops and hiring partnerships improved our outcomes significantly.",
+    name: "Greeshma",
+    role: "Placement Head",
+    company: "72% placement rate (+17% growth)",
   },
   {
     quote:
-      "As a speaker, I love the energy and curiosity of the students here. TSS is building a truly impactful community.",
-    name: "Arjun",
-    role: "Industry Expert",
-    company: "Consulting Firm",
+      "Our campus became more innovation-driven after partnering with TSS.",
+    name: "Laxmi",
+    role: "Training & Placement Coordinator",
+    company: "3 student startups incubated",
   },
   {
     quote:
-      "Our incubator partnered with TSS to discover promising student startups, and we've already incubated three amazing teams from their ecosystem.",
-    name: "Kavya",
-    role: "Incubator Director",
-    company: "Venture Hub",
+      "Students gained exposure we couldn't provide earlier.",
+    name: "Akshay",
+    role: "College Administrator",
+    company: "8 corporate workshops conducted",
   },
   {
     quote:
-      "The practical workshops bridged the gap between academic knowledge and industry expectations. I felt completely prepared for my first job.",
-    name: "Rohit",
-    role: "Data Analyst",
-    company: "Quantico Data",
+      "TSS candidates were pre-screened and project-ready.",
+    name: "Harish",
+    role: "HR Manager, Startup",
+    company: "15-day hiring cycle (50% faster)",
+  },
+  {
+    quote:
+      "The quality and execution mindset stood out.",
+    name: "Charan",
+    role: "Founder, SaaS Startup",
+    company: "5 interns hired | 2 converted full-time",
+  },
+  {
+    quote:
+      "We received relevant, skilled candidates.",
+    name: "Harshitha",
+    role: "Recruitment Lead",
+    company: "90% interview-to-selection ratio",
+  },
+  {
+    quote:
+      "TSS brought targeted students who were serious about learning.",
+    name: "Naveen",
+    role: "Co-Founder, Hashinclude",
+    company: "85 monthly enrollments (+112%)",
+  },
+  {
+    quote:
+      "Campus ambassador campaigns increased our conversions.",
+    name: "Sandeep",
+    role: "UI/UX Trainer, HashInclude",
+    company: "Pan-India visibility",
+  },
+  {
+    quote:
+      "TSS brought us better-prepared founders.",
+    name: "Akshara",
+    role: "Incubation Manager",
+    company: "28 validated applications (+180%)",
+  },
+  {
+    quote:
+      "Student startups came with traction, not just ideas.",
+    name: "Deepak",
+    role: "Innovation Lead",
+    company: "4 corporate pilot projects launched",
+  },
+  {
+    quote:
+      "The ecosystem allowed me to guide serious builders.",
+    name: "Sandesh",
+    role: "Startup Mentor",
+    company: "1,500+ students impacted",
+  },
+  {
+    quote:
+      "TSS helped me build visibility across campuses.",
+    name: "Lavanya",
+    role: "Industry Speaker",
+    company: "6 campus masterclasses",
   },
 ];
 

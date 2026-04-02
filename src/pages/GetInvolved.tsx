@@ -2,7 +2,7 @@ import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
-  Users, Award, BookOpen, ArrowRight,
+  Users, BookOpen, ArrowRight,
   CheckCircle, Mic, GraduationCap, Target, Heart, Lightbulb, TrendingUp, Handshake, MessageSquare, Briefcase
 } from "lucide-react";
 import tssLogo from "@/assets/tss-logo.png";
@@ -10,12 +10,12 @@ import tssLogo from "@/assets/tss-logo.png";
 const GetInvolved = () => {
   const whyGetInvolved = [
     "Build real leadership & execution experience",
-    "Access a nationwide student & professional network",
+    "Access a 20,000+ national community",
     "Improve career visibility & industry exposure",
-    "Mentor and guide future talent",
-    "Speak at colleges & national events",
-    "Strengthen your personal brand",
+    "Speak, mentor, and guide future talent",
+    "Strengthen your personal & professional brand",
     "Gain certificates, LORs & recognition",
+    "Access internships, jobs & startup opportunities",
     "Contribute to India’s Student-to-Founder ecosystem"
   ];
 
@@ -23,40 +23,47 @@ const GetInvolved = () => {
     {
       id: "campus-team",
       icon: Users,
-      title: "1. Campus Team (College Chapters)",
-      subtitle: "Lead and grow The Student Spot chapter in your college.",
+      title: "1. TSS Campus Network",
+      subtitle: "Lead and grow The Student Spot in your college.",
       sections: [
         {
           heading: "Who Can Apply",
           items: [
             "Undergraduate & postgraduate students",
             "Passionate about leadership & community building",
-            "Ready to take ownership and work in a structured team"
+            "Ready to take ownership and execute"
           ]
         },
         {
-          heading: "Campus Roles",
-          tags: ["Campus Lead", "Co-Lead", "Social Media Manager", "Content Creator", "Event Coordinator", "Creative & Design", "PR & Community", "Outreach & Operations"]
+          heading: "Roles",
+          tags: ["Campus Operations Lead", "Marketing & Engagement Lead"]
         },
         {
           heading: "What You Gain",
           items: [
             "Leadership Certificate & LOR",
-            "Hands-on event & project experience",
+            "Real event & project execution experience",
             "Priority access to internships & jobs",
+            "Exposure to mentors, founders & recruiters",
             "Growth to District, State & National roles"
           ]
         }
       ],
       link: "https://forms.gle/GGGKNDZYFXBgqsqw8",
-      linkText: "Apply for Campus Team"
+      linkText: "Apply"
     },
     {
       id: "core-team",
       icon: Target,
-      title: "2. TSS Core Team",
-      subtitle: "Build. Lead. Scale. Drive national strategy, partnerships, and ecosystem expansion.",
+      title: "2. TSS Core Network",
+      subtitle: "Build. Lead. Scale the ecosystem nationally.",
       sections: [
+        {
+          heading: "About",
+          items: [
+            "The Core Network drives strategy, partnerships, branding, and expansion."
+          ]
+        },
         {
           heading: "Who Can Apply",
           items: [
@@ -71,7 +78,8 @@ const GetInvolved = () => {
             "Lead national initiatives",
             "Build corporate & startup partnerships",
             "Manage state & campus growth",
-            "Create scalable systems"
+            "Create scalable systems",
+            "Represent TSS in strategic collaborations"
           ]
         },
         {
@@ -79,22 +87,22 @@ const GetInvolved = () => {
           items: [
             "National leadership exposure",
             "Direct access to founders & corporates",
-            "Strong LOR & credibility",
+            "Strong LOR & ecosystem credibility",
             "Fast-track growth opportunities"
           ]
         }
       ],
       link: "https://forms.gle/DyfMSzGJdQMVBbqRA",
-      linkText: "Apply for Core Team"
+      linkText: "Apply"
     },
     {
-      id: "mentors",
+      id: "speaker-network",
       icon: BookOpen,
-      title: "3. Mentors & Industry Experts",
-      subtitle: "Guide students with real-world insights and experience.",
+      title: "3. Speaker Network",
+      subtitle: "Mentors • Industry Experts • Speakers • Trainers",
       sections: [
         {
-          heading: "Who Can Apply",
+          heading: "Who Can Join",
           items: [
             "Working professionals (2+ years preferred)",
             "Startup founders & entrepreneurs",
@@ -102,114 +110,172 @@ const GetInvolved = () => {
           ]
         },
         {
-          heading: "Responsibilities",
-          items: [
-            "Conduct webinars/workshops",
-            "Guide student leaders & interns",
-            "Share career journeys",
-            "Support placement readiness"
-          ]
-        },
-        {
-          heading: "Benefits",
-          items: [
-            "Nationwide visibility",
-            "Personal brand building",
-            "Recognition & certificates",
-            "Access to high-potential talent"
-          ]
-        }
-      ],
-      link: "https://forms.gle/buTfbTq9pE1mAGTo9",
-      linkText: "Apply as a Mentor"
-    },
-    {
-      id: "speakers",
-      icon: Mic,
-      title: "4. Speakers & Trainers",
-      subtitle: "Inspire and educate students through impactful sessions.",
-      sections: [
-        {
           heading: "Opportunities",
           items: [
-            "College workshops",
-            "Career talks",
-            "Skill masterclasses",
-            "Panel discussions",
-            "State & national-level events"
-          ]
-        },
-        {
-          heading: "Benefits",
-          items: [
-            "Speaking opportunities across India",
-            "Brand visibility with campuses",
-            "Professional recognition",
-            "Paid & unpaid options depending on event type"
-          ]
-        }
-      ],
-      link: "https://forms.gle/buTfbTq9pE1mAGTo9",
-      linkText: "Apply as a Speaker"
-    },
-    {
-      id: "volunteers",
-      icon: Heart,
-      title: "5. Event Volunteers",
-      subtitle: "Support on-ground & virtual events, workshops, and large-scale initiatives.",
-      sections: [
-        {
-          heading: "Who Can Apply",
-          items: [
-            "Students interested in event management",
-            "Individuals who want exposure to real execution",
-            "Beginners looking for hands-on experience"
+            "College workshops & career talks",
+            "Skill masterclasses & webinars",
+            "Founder panels & national events",
+            "Mentorship sessions & startup guidance"
           ]
         },
         {
           heading: "What You Gain",
           items: [
-            "Event experience",
-            "Certificates",
-            "Networking access",
-            "Leadership growth opportunities"
+            "Speaking opportunities across India",
+            "Personal brand growth & visibility",
+            "Verified speaking profile & event history",
+            "Access to high-potential student talent",
+            "Paid & unpaid opportunities"
+          ]
+        }
+      ],
+      link: "https://forms.gle/buTfbTq9pE1mAGTo9",
+      linkText: "Join Speaker Network"
+    },
+    {
+      id: "sponsor-network",
+      icon: Mic,
+      title: "4. Sponsor Network",
+      subtitle: "Sponsor Student & Developer Events",
+      sections: [
+        {
+          heading: "Why Sponsor",
+          items: [
+            "Reach ICP-qualified students & developers",
+            "Brand visibility across campuses & events",
+            "Targeted exposure based on audience fit",
+            "Access to a hiring-ready talent pool"
+          ]
+        },
+        {
+          heading: "What You Get",
+          items: [
+            "Event branding & promotions",
+            "Direct engagement with attendees",
+            "Talent pipeline access",
+            "Post-event insights (attendance, engagement, leads)"
+          ]
+        },
+        {
+          heading: "Impact Metrics",
+          items: [
+            "20,000+ student community",
+            "Pan-India campus reach",
+            "High engagement & participation rates"
+          ]
+        }
+      ],
+      link: "https://forms.gle/zxGKtSdqRWqa8r4H7",
+      linkText: "Apply as Sponsor"
+    },
+    {
+      id: "venue-network",
+      icon: Handshake,
+      title: "5. Venue Network",
+      subtitle: "Host Events. Fill Your Space. Build visibility.",
+      sections: [
+        {
+          heading: "Who Can Join",
+          items: [
+            "Event venues & auditoriums",
+            "Cafes & community spaces",
+            "Co-working spaces & offices",
+            "Pubs, clubs & creative venues",
+            "Company campuses & workplaces"
+          ]
+        },
+        {
+          heading: "Why Join",
+          items: [
+            "Get repeat bookings from verified organizers",
+            "Increase space utilization & revenue",
+            "Showcase your venue to a national audience",
+            "Build brand visibility across events"
+          ]
+        },
+        {
+          heading: "What You Get",
+          items: [
+            "Event hosting opportunities",
+            "Featured listings across event pages",
+            "Direct access to organizers",
+            "Community-driven footfall"
+          ]
+        }
+      ],
+      link: "https://forms.gle/zMmnjvjgexpAAh4x6",
+      linkText: "List Your Venue"
+    },
+    {
+      id: "volunteers",
+      icon: Heart,
+      title: "6. Volunteer Network",
+      subtitle: "Learn by doing. Grow by executing.",
+      sections: [
+        {
+          heading: "Who Can Apply",
+          items: [
+            "Students interested in events & operations",
+            "Beginners looking for real exposure",
+            "Individuals ready to learn and execute"
+          ]
+        },
+        {
+          heading: "What You Gain",
+          items: [
+            "Real event experience (online & offline)",
+            "Certificates & recognition",
+            "Networking opportunities",
+            "Fast-track to Campus & Core roles"
           ]
         }
       ],
       link: "https://forms.gle/BQThbSQ9NGzLHJ9i8",
-      linkText: "Register as a Volunteer"
+      linkText: "Register"
     },
     {
-      id: "collaborations",
-      icon: Handshake,
-      title: "6. Collaborations & Promotions",
-      subtitle: "Colleges, companies, startups, incubators, and institutes can collaborate for:",
+      id: "work-with-us",
+      icon: Briefcase,
+      title: "7. Work With Us",
+      subtitle: "Collaborate. Partner. Build Together.",
       sections: [
         {
-          heading: "Opportunities",
+          heading: "Collaboration Opportunities",
           items: [
-            "Workshops & campus events",
-            "Hiring drives",
-            "Startup programs",
-            "Promotions & campaigns",
-            "Co-branded initiatives"
+            "Campus activations & workshops",
+            "Hiring drives & internship programs",
+            "Startup & innovation programs",
+            "Hackathons & challenges",
+            "Co-branded campaigns",
+            "Community-driven promotions"
+          ]
+        },
+        {
+          heading: "Partnership Models",
+          items: [
+            "Brand Alliances",
+            "Strategic Collaborations",
+            "Co-branded Campaigns",
+            "Influencer & Ambassador Programs",
+            "Giveaways & Engagement Campaigns"
           ]
         }
       ],
       link: "https://forms.gle/ZjNXgeujjKk46D72A",
-      linkText: "Collaboration Form"
+      linkText: "Collaborate With Us"
     },
     {
       id: "feedback",
       icon: MessageSquare,
-      title: "7. Community Feedback & Suggestions",
+      title: "8. Community Feedback & Suggestions",
       subtitle: "Help us improve and build better opportunities for everyone in The Student Spot ecosystem.",
       sections: [
         {
-          heading: "Why Feedback Matters",
+          heading: "How You Can Help",
           items: [
-            "Your suggestions, ideas, and honest feedback help us grow stronger and serve you better.",
-            "Takes just 2 minutes."
+            "Share ideas & suggestions",
+            "Improve community experience",
+            "Help shape future initiatives"
           ]
         }
       ],
@@ -244,6 +310,7 @@ const GetInvolved = () => {
     { icon: Mic, text: "Speakers who want real student impact" },
     { icon: Lightbulb, text: "Mentors shaping future founders" },
     { icon: Heart, text: "Volunteers who want hands-on exposure" },
+    { icon: Handshake, text: "Founders & brands looking to collaborate" },
   ];
 
   return (
@@ -281,7 +348,7 @@ const GetInvolved = () => {
                 transition={{ delay: 0.2 }}
                 className="text-2xl md:text-3xl font-bold text-foreground mb-6"
               >
-                Build. Lead. Mentor. Speak. Volunteer. Grow.
+                Build. Lead. Mentor. Speak. Partner. Grow.
               </motion.p>
 
               <motion.div
@@ -291,13 +358,13 @@ const GetInvolved = () => {
                 className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto xl:mx-0 space-y-4"
               >
                 <p>
-                  The Student Spot is one of India’s fastest-growing student-led ecosystems connecting
-                  students, professionals, startups, colleges, incubators, and organizations nationwide.
+                  The Student Spot is one of India’s fastest-growing Student-to-Founder ecosystems, connecting
+                  students, professionals, startups, colleges, incubators, recruiters, and organizations nationwide.
                 </p>
                 <p className="font-semibold text-foreground">
-                  Whether you are a student leader, mentor, speaker, volunteer, or industry professional,
-                  there is a place for you to create real impact.
+                  Whether you want to lead, mentor, speak, sponsor, host, or collaborate, there is a place for you to create real impact.
                 </p>
+                <p>This is not just participation. This is ecosystem building.</p>
               </motion.div>
 
               <motion.div
@@ -383,6 +450,9 @@ const GetInvolved = () => {
             <h2 className="font-heading text-4xl lg:text-5xl font-bold text-foreground mb-4">
               Opportunities to <span className="text-gradient">Get Involved</span>
             </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Eight structured pathways to lead, collaborate, and create measurable impact across the ecosystem.
+            </p>
           </motion.div>
 
           <div className="grid gap-10 max-w-5xl mx-auto">
@@ -539,7 +609,7 @@ const GetInvolved = () => {
               </h2>
 
               <div className="flex flex-wrap justify-center gap-4 mb-10">
-                {["Build leadership.", "Mentor talent.", "Inspire students.", "Create opportunities."].map((text, i) => (
+                {["Build leadership.", "Mentor talent.", "Inspire students.", "Create opportunities.", "Shape future founders."].map((text, i) => (
                   <div key={i} className="bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-full text-white font-medium text-lg">
                     {text}
                   </div>
