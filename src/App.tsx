@@ -26,7 +26,9 @@ import StudentDashboard from "@/pages/StudentDashboard";
 import EntrepreneurDashboard from "@/pages/EntrepreneurDashboard";
 import CollegeDashboard from "@/pages/CollegeDashboard";
 import CompanyDashboard from "@/pages/CompanyDashboard";
+import IncubatorDashboard from "@/pages/IncubatorDashboard";
 import FloatingSocials from "./components/home/FloatingSocials";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 
 const queryClient = new QueryClient();
@@ -57,10 +59,16 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
-            <Route path="/student-dashboard" element={<StudentDashboard />} />
-            <Route path="/entrepreneur-dashboard" element={<EntrepreneurDashboard />} />
-            <Route path="/college-dashboard" element={<CollegeDashboard />} />
-            <Route path="/company-dashboard" element={<CompanyDashboard />} />
+            <Route path="/student-dashboard" element={<ProtectedRoute allowedRoles={["student"]}><StudentDashboard /></ProtectedRoute>} />
+            <Route path="/dashboard/:section" element={<ProtectedRoute allowedRoles={["student"]}><StudentDashboard /></ProtectedRoute>} />
+            <Route path="/dashboard" element={<ProtectedRoute allowedRoles={["student"]}><StudentDashboard /></ProtectedRoute>} />
+            <Route path="/entrepreneur-dashboard" element={<ProtectedRoute allowedRoles={["startup", "entrepreneur"]}><EntrepreneurDashboard /></ProtectedRoute>} />
+            <Route path="/entrepreneur-dashboard/:section" element={<ProtectedRoute allowedRoles={["startup", "entrepreneur"]}><EntrepreneurDashboard /></ProtectedRoute>} />
+            <Route path="/college-dashboard" element={<ProtectedRoute allowedRoles={["college"]}><CollegeDashboard /></ProtectedRoute>} />
+            <Route path="/college-dashboard/:section" element={<ProtectedRoute allowedRoles={["college"]}><CollegeDashboard /></ProtectedRoute>} />
+            <Route path="/incubator-dashboard" element={<ProtectedRoute allowedRoles={["incubator"]}><IncubatorDashboard /></ProtectedRoute>} />
+            <Route path="/incubator-dashboard/:section" element={<ProtectedRoute allowedRoles={["incubator"]}><IncubatorDashboard /></ProtectedRoute>} />
+            <Route path="/company-dashboard" element={<ProtectedRoute allowedRoles={["company"]}><CompanyDashboard /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

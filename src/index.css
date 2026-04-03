@@ -120,6 +120,26 @@
     font-family: 'Inter', sans-serif;
   }
 
+  .student-dashboard,
+  .student-dashboard * {
+    border-color: rgb(125 211 252 / 0.7) !important;
+  }
+
+  .college-dashboard,
+  .college-dashboard * {
+    border-color: rgb(251 191 36 / 0.62) !important;
+  }
+
+  .startup-dashboard,
+  .startup-dashboard * {
+    border-color: rgb(52 211 153 / 0.62) !important;
+  }
+
+  .incubator-dashboard,
+  .incubator-dashboard * {
+    border-color: rgb(168 85 247 / 0.62) !important;
+  }
+
   h1,
   h2,
   h3,

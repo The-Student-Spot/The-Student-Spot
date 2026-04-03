@@ -1,15 +1,24 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth } from "@/integrations/firebase/client";
+import { supabase } from "@/integrations/supabase/client";
 import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
 const LoginSuccess = () => {
   const navigate = useNavigate();
-  const user = auth.currentUser;
+  const [displayName, setDisplayName] = useState("User");
 
   useEffect(() => {
+    const loadUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      const user = data.user;
+      const name = user?.user_metadata?.full_name || user?.user_metadata?.name || user?.email?.split("@")[0] || "User";
+      setDisplayName(name);
+    };
+
+    loadUser();
+
     const timer = setTimeout(() => {
       navigate("/");
     }, 3000); // Redirect to home after 3 seconds
@@ -39,7 +48,7 @@ const LoginSuccess = () => {
         </h1>
 
         <p className="text-muted-foreground text-lg mb-4">
-          Welcome back, <span className="font-semibold text-primary">{user?.displayName || "User"}</span>!
+          Welcome back, <span className="font-semibold text-primary">{displayName}</span>!
         </p>
         
         <p className="text-muted-foreground">

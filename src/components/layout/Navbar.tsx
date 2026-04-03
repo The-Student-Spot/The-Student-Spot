@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import tssLogo from "@/assets/tss-logo.png";
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -12,7 +13,6 @@ const navLinks = [
   { name: "Ecosystem Partnerships", path: "/ecosystem-partnerships" },
   { name: "Get Involved", path: "/get-involved" },
   { name: "Contact", path: "/contact" },
-  { name: "Signup/Login (Google Auth)", path: "/auth" },
 ];
 
 const Navbar = () => {
@@ -47,6 +47,20 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+            {/* Signup/Login Button */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="ml-4"
+            >
+              <Button
+                asChild
+                variant="outline"
+                className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              >
+                <Link to="/auth">Signup/Login</Link>
+              </Button>
+            </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -80,6 +94,16 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
+              {/* Mobile Signup/Login Button */}
+              <Button
+                asChild
+                variant="outline"
+                className="w-full mt-4 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              >
+                <Link to="/auth" onClick={() => setIsOpen(false)}>
+                  Signup/Login
+                </Link>
+              </Button>
             </div>
           </motion.div>
         )}

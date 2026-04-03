@@ -1,10 +1,18 @@
 
 import { useEffect, useState, createContext, useContext, ReactNode } from "react";
-import { User, onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/integrations/firebase/client";
+import { User as SupabaseUser } from "@supabase/supabase-js";
+import { supabase } from "@/integrations/supabase/client";
+
+type AppUser = {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  photoURL: string | null;
+  userType?: string;
+};
 
 interface AuthContextType {
-  user: User | null;
+  user: AppUser | null;
   loading: boolean;
   logout: () => Promise<void>;
 }
@@ -12,20 +20,47 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<AppUser | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const mapUser = (authUser: SupabaseUser | null): AppUser | null => {
+    if (!authUser) return null;
+
+    const metadata = authUser.user_metadata ?? {};
+    return {
+      uid: authUser.id,
+      email: authUser.email ?? null,
+      displayName: metadata.full_name ?? metadata.name ?? authUser.email?.split("@")[0] ?? null,
+      photoURL: metadata.avatar_url ?? metadata.picture ?? null,
+      userType: metadata.userType ?? metadata.role,
+    };
+  };
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    let mounted = true;
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!mounted) return;
+      setUser(mapUser(session?.user ?? null));
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!mounted) return;
+      setUser(mapUser(session?.user ?? null));
+      setLoading(false);
+    });
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const logout = async () => {
-    await auth.signOut();
+    await supabase.auth.signOut();
   };
 
   return (
