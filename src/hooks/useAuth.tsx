@@ -1,6 +1,6 @@
 
 import { useEffect, useState, createContext, useContext, ReactNode } from "react";
-import { User, onAuthStateChanged } from "firebase/auth";
+import { User, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "@/integrations/firebase/client";
 
 interface AuthContextType {
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const logout = async () => {
-    await auth.signOut();
+    await signOut(auth);
   };
 
   return (

@@ -23,6 +23,9 @@ import Privacy from "@/pages/Privacy";
 import Terms from "@/pages/Terms";
 import NotFound from "@/pages/NotFound";
 import StudentDashboard from "@/pages/StudentDashboard";
+import StudentProfilePage from "@/pages/StudentProfilePage";
+import ModulePage from "@/pages/ModulePage";
+import CsrImpactPage from "@/pages/CsrImpactPage";
 import EntrepreneurDashboard from "@/pages/EntrepreneurDashboard";
 import CollegeDashboard from "@/pages/CollegeDashboard";
 import CompanyDashboard from "@/pages/CompanyDashboard";
@@ -57,6 +60,10 @@ const App = () => (
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/student-dashboard" element={<StudentDashboard />} />
+            <Route path="/student-dashboard/:section" element={<StudentDashboard />} />
+            <Route path="/student-module/:moduleId" element={<ModulePage />} />
+            <Route path="/dashboard/csr" element={<CsrImpactPage />} />
+            <Route path="/student-profile" element={<StudentProfilePage />} />
             <Route path="/entrepreneur-dashboard" element={<EntrepreneurDashboard />} />
             <Route path="/college-dashboard" element={<CollegeDashboard />} />
             <Route path="/company-dashboard" element={<CompanyDashboard />} />

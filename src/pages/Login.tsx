@@ -11,6 +11,30 @@ import { motion } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+const getFirebaseErrorMessage = (error: any) => {
+  const code = error?.code as string | undefined;
+
+  switch (code) {
+    case "auth/operation-not-allowed":
+      return "Email/password sign-up is disabled in Firebase Authentication. Enable the Email/Password provider in your Firebase console.";
+    case "auth/invalid-email":
+      return "Enter a valid email address.";
+    case "auth/email-already-in-use":
+      return "That email is already registered. Try signing in instead.";
+    case "auth/weak-password":
+      return "Use a stronger password with at least 6 characters.";
+    case "auth/wrong-password":
+    case "auth/invalid-credential":
+      return "Incorrect email or password.";
+    case "auth/popup-blocked":
+      return "The Google sign-in popup was blocked by your browser.";
+    case "auth/popup-closed-by-user":
+      return "Google sign-in was closed before completing.";
+    default:
+      return error?.message || "Something went wrong while signing in.";
+  }
+};
+
 const Login = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -25,27 +49,33 @@ const Login = () => {
   const userType = searchParams.get("role") || "student";
 
   const handleLoginSuccess = async (user: User) => {
-    const userRef = doc(db, "users", user.uid);
-    const docSnap = await getDoc(userRef);
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(userRef);
 
-    // Always use the userType from the URL parameter as the source of truth
-    const userData = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName || user.email!.split('@')[0],
-      userType: userType, // This ensures the role is updated on every login
-      lastLoginAt: new Date().toISOString(),
-      createdAt: docSnap.exists() ? docSnap.data().createdAt : new Date().toISOString(),
-    };
+      const userData = {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName || user.email?.split("@")[0] || "User",
+        userType,
+        lastLoginAt: new Date().toISOString(),
+        createdAt: docSnap.exists() ? docSnap.data().createdAt : new Date().toISOString(),
+      };
 
-    // Create or update the user document in Firestore
-    await setDoc(userRef, userData, { merge: true });
+      await setDoc(userRef, userData, { merge: true });
+    } catch (profileError: any) {
+      console.error("Failed to sync user profile after sign-in:", profileError);
+      toast({
+        title: "Signed in",
+        description: "Your account is connected, but profile sync failed. You can still continue.",
+      });
+    }
 
-    // Redirect based on the selected role
     switch (userType) {
       case "student":
         navigate("/student-dashboard");
         break;
+      case "startup":
       case "entrepreneur":
         navigate("/entrepreneur-dashboard");
         break;
@@ -67,7 +97,7 @@ const Login = () => {
       const result = await signInWithPopup(auth, provider);
       await handleLoginSuccess(result.user);
     } catch (error: any) {
-      toast({ title: "Login Failed", description: error.message, variant: "destructive" });
+      toast({ title: "Login Failed", description: getFirebaseErrorMessage(error), variant: "destructive" });
     } finally {
       setLoading(false);
     }
@@ -86,7 +116,7 @@ const Login = () => {
       }
       await handleLoginSuccess(userCredential.user);
     } catch (error: any) {
-      toast({ title: isSignUp ? "Sign Up Failed" : "Sign In Failed", description: error.message, variant: "destructive" });
+      toast({ title: isSignUp ? "Sign Up Failed" : "Sign In Failed", description: getFirebaseErrorMessage(error), variant: "destructive" });
     } finally {
       setLoading(false);
     }
