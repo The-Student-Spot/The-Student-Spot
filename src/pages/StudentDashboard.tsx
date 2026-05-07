@@ -38,6 +38,7 @@ import {
   BadgeIndianRupee,
   Video,
   ArrowLeft,
+  Edit2,
 } from "lucide-react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -271,7 +272,7 @@ const StudentDashboard = () => {
         </div>
       </aside>
       <main className="flex flex-col flex-1 gap-0 p-4 lg:p-8 scroll-smooth">
-        <header className="sticky top-0 -mx-4 lg:-mx-8 px-4 lg:px-8 py-4 bg-slate-50 border-b border-slate-200 z-30 flex items-center justify-between gap-3">
+        <header className="relative mb-6 rounded-xl border border-slate-200 bg-card px-4 lg:px-6 py-4 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
             {isSingleSection && (
               <Button
@@ -485,6 +486,13 @@ const StudentDashboard = () => {
                         <p><span className="font-medium text-slate-700">Email:</span> {user?.email}</p>
                         <p><span className="font-medium text-slate-700">Role:</span> Student</p>
                       </div>
+                      <Button
+                        onClick={() => navigate("/student-profile")}
+                        className="w-full mt-4 bg-yellow-500 hover:bg-yellow-600 text-black"
+                      >
+                        <Edit2 className="h-4 w-4 mr-2" />
+                        Edit Profile
+                      </Button>
                     </div>
 
                     <div className="bg-card rounded-xl p-5 border border-slate-200">
