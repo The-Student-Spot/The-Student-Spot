@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   Sheet,
   SheetContent,
@@ -452,8 +453,9 @@ const StudentDashboard = () => {
                           "Certificates & Achievements",
                           "Impact Work",
                         ].map((section) => (
-                          <div key={section} className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700">
-                            {section}
+                          <div key={section} className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-slate-700 hover:shadow-sm transition-shadow flex items-center justify-between">
+                            <span>{section}</span>
+                            <Badge className="bg-transparent text-yellow-600">•</Badge>
                           </div>
                         ))}
                       </div>
@@ -479,7 +481,19 @@ const StudentDashboard = () => {
                   </div>
 
                   <div className="space-y-5">
-                    <div className="bg-card rounded-xl p-5 border border-slate-200">
+                    <div className="bg-card rounded-xl p-5 border border-slate-200 micro-fade-up">
+                      <div className="flex items-center gap-4">
+                        <div className="w-16 h-16 profile-avatar bg-yellow-50 flex items-center justify-center text-yellow-600 font-bold text-xl">
+                          {user?.displayName?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase()}
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-lg font-semibold text-slate-800 truncate">{user?.displayName || "Student"}</div>
+                          <div className="text-sm text-muted-foreground">Your public profile & completion</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-card rounded-xl p-5 border border-slate-200 micro-fade-up">
                       <h3 className="font-semibold text-slate-800 mb-3">Basic Info</h3>
                       <div className="space-y-2 text-sm text-slate-600">
                         <p><span className="font-medium text-slate-700">Name:</span> {user?.displayName || "Student"}</p>

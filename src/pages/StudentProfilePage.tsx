@@ -10,23 +10,12 @@ import { Progress } from "@/components/ui/progress";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { Switch } from "@/components/ui/switch";
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetClose,
-} from "@/components/ui/sheet";
-import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
 import {
-  ArrowLeft,
-  Bell,
-  Menu,
-  X,
   Upload,
   Link as LinkIcon,
   Trash2,
@@ -36,13 +25,13 @@ import {
   MapPin,
   Briefcase,
   GraduationCap,
-  LogOut,
   FileText,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "@/integrations/firebase/client";
+import StudentDashboardNavLayout from "@/components/layout/StudentDashboardNavLayout";
 
 interface ProfileData {
   basicInfo: {
@@ -97,7 +86,6 @@ interface ProfileData {
 const StudentProfilePage = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
   const [editingSection, setEditingSection] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [photoEditOpen, setPhotoEditOpen] = useState(false);
@@ -170,11 +158,6 @@ const StudentProfilePage = () => {
       portfolio: "",
     },
   });
-
-  const handleLogout = async () => {
-    await logout();
-    navigate("/");
-  };
 
   const getSectionCompletion = (filled: boolean[]) =>
     Math.round((filled.filter(Boolean).length / filled.length) * 100);
@@ -560,119 +543,9 @@ const StudentProfilePage = () => {
   };
 
   return (
-    <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr] bg-slate-50">
-      {/* Sidebar */}
-      <aside className="hidden border-r bg-card lg:block sticky top-0 h-screen">
-        <div className="flex h-full max-h-screen flex-col">
-          <div className="flex h-20 items-center border-b px-6">
-            <div className="flex items-center gap-2 font-bold text-lg text-yellow-500">
-              <GraduationCap className="h-6 w-6" />
-              <div className="flex flex-col leading-tight">
-                <span>The Student Spot</span>
-                <span className="text-[11px] font-medium text-muted-foreground">Student Dashboard</span>
-              </div>
-            </div>
-          </div>
-          <nav className="flex-1 overflow-auto py-4 px-4 text-sm font-medium space-y-1">
-            <button
-              onClick={() => navigate("/student-dashboard")}
-              className="w-full flex items-center gap-3 rounded-lg px-3 py-2.5 text-muted-foreground transition-all hover:text-yellow-600 hover:bg-yellow-50 text-left"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Dashboard
-            </button>
-          </nav>
-          <div className="mt-auto p-4 border-t">
-            {user ? (
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-yellow-500">
-                  {user.email?.[0].toUpperCase()}
-                </div>
-                <div className="flex-1 overflow-hidden">
-                  <p className="text-sm font-semibold truncate">{user.displayName || user.email}</p>
-                  <p className="text-xs text-muted-foreground truncate">{user.email}</p>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={handleLogout}
-                  className="text-slate-500 hover:text-yellow-500 flex-shrink-0"
-                >
-                  <LogOut className="h-5 w-5" />
-                </Button>
-              </div>
-            ) : (
-              <Button onClick={() => navigate("/auth")} className="w-full bg-yellow-400 hover:bg-yellow-500 text-black">
-                Login
-              </Button>
-            )}
-          </div>
-        </div>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex flex-col flex-1 gap-0 p-4 lg:p-8 scroll-smooth">
-        {/* Header */}
-        <header className="sticky top-0 -mx-4 lg:-mx-8 px-4 lg:px-8 py-4 bg-slate-50 border-b border-slate-200 z-30 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3 min-w-0">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => navigate("/student-dashboard")}
-              className="text-slate-600 hover:bg-slate-100 flex-shrink-0"
-            >
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-            <div className="hidden lg:flex items-center gap-2">
-              <GraduationCap className="h-6 w-6 text-yellow-500" />
-              <div className="flex flex-col leading-tight">
-                <span className="font-bold text-slate-800">My Profile</span>
-                <span className="text-xs text-muted-foreground">Complete your profile</span>
-              </div>
-            </div>
-
-            <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
-              <SheetContent side="left" className="w-[320px] p-0 bg-card">
-                <SheetHeader className="border-b px-6 py-5 text-left">
-                  <SheetTitle className="flex items-center gap-2 text-lg">
-                    <GraduationCap className="h-5 w-5 text-yellow-500" />
-                    My Profile
-                  </SheetTitle>
-                </SheetHeader>
-                <div className="px-4 py-4 space-y-2 overflow-y-auto h-full">
-                  <SheetClose asChild>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start gap-3 text-left"
-                      onClick={() => navigate("/student-dashboard")}
-                    >
-                      <ArrowLeft className="h-4 w-4" />
-                      Back to Dashboard
-                    </Button>
-                  </SheetClose>
-                </div>
-              </SheetContent>
-            </Sheet>
-
-            <Button
-              variant="outline"
-              size="icon"
-              className="lg:hidden rounded-full border-slate-200 bg-white"
-              onClick={() => setMenuOpen((open) => !open)}
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={menuOpen}
-            >
-              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
-            <h1 className="text-2xl font-bold text-slate-800 truncate">My Profile</h1>
-          </div>
-          <Button variant="outline" className="rounded-full w-10 h-10 p-0 border-slate-200 hover:bg-slate-100 shrink-0">
-            <Bell className="h-5 w-5 text-slate-500" />
-          </Button>
-        </header>
-
-        {/* Profile Content */}
-        <div className="flex-1 space-y-6 pt-4">
+    <StudentDashboardNavLayout activeSection="profile" headerTitle="My Profile">
+      {/* Profile Content */}
+      <div className="flex-1 space-y-6 pt-4">
           {/* Profile Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -1705,26 +1578,47 @@ const StudentProfilePage = () => {
                       />
                     )}
                     <div className="space-y-2">
-                      <Label htmlFor={`projectImage-${idx}`}>Project screenshot (optional)</Label>
-                      <Input
-                        id={`projectImage-${idx}`}
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (!file) return;
+                      <Label>Project screenshot (optional)</Label>
+                      <div className="flex items-center gap-4">
+                        <div className="w-28 h-20 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center border border-slate-200">
+                          {project.imageUrl ? (
+                            <img src={project.imageUrl} alt={project.title || "Project screenshot"} className="object-cover w-full h-full" />
+                          ) : (
+                            <div className="text-xs text-muted-foreground">No image</div>
+                          )}
+                        </div>
 
-                          const reader = new FileReader();
-                          reader.onloadend = () => {
-                            const newProjects = [...profileData.proofOfWork.projects];
-                            newProjects[idx].imageUrl = reader.result as string;
-                            setProofOfWorkError("");
-                            setProfileData({ ...profileData, proofOfWork: { projects: newProjects } });
-                          };
-                          reader.readAsDataURL(file);
-                          e.target.value = "";
-                        }}
-                      />
+                        <div className="flex-1">
+                          <input
+                            id={`projectImage-${idx}`}
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (!file) return;
+
+                              const reader = new FileReader();
+                              reader.onloadend = () => {
+                                const newProjects = [...profileData.proofOfWork.projects];
+                                newProjects[idx].imageUrl = reader.result as string;
+                                setProofOfWorkError("");
+                                setProfileData({ ...profileData, proofOfWork: { projects: newProjects } });
+                              };
+                              reader.readAsDataURL(file);
+                              e.target.value = "";
+                            }}
+                          />
+
+                          <div className="flex items-center gap-2">
+                            <label htmlFor={`projectImage-${idx}`} className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-slate-50 border border-slate-200 text-sm cursor-pointer hover:shadow-sm">
+                              <Upload className="h-4 w-4 text-yellow-600" />
+                              <span className="text-sm">Choose image</span>
+                            </label>
+                            <span className="text-xs text-muted-foreground">PNG / JPEG · recommended 16:9 · up to 5MB</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <Input
                       placeholder="Project title"
@@ -2011,16 +1905,26 @@ const StudentProfilePage = () => {
                       }}
                       rows={3}
                     />
-                    <Input
-                      placeholder="Hours contributed"
-                      type="number"
-                      value={initiative.hours}
-                      onChange={(e) => {
-                        const newInitiatives = [...profileData.impactWork.initiatives];
-                        newInitiatives[idx].hours = parseInt(e.target.value) || 0;
-                        setProfileData({ ...profileData, impactWork: { initiatives: newInitiatives } });
-                      }}
-                    />
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <Input
+                          placeholder="Hours contributed"
+                          type="number"
+                          min={0}
+                          step={1}
+                          inputMode="numeric"
+                          value={initiative.hours}
+                          onChange={(e) => {
+                            const newInitiatives = [...profileData.impactWork.initiatives];
+                            newInitiatives[idx].hours = parseInt(e.target.value) || 0;
+                            setProfileData({ ...profileData, impactWork: { initiatives: newInitiatives } });
+                          }}
+                          className="flex-1"
+                        />
+                        <span className="text-sm text-muted-foreground">hrs</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground">Enter total hours (e.g., 10)</p>
+                    </div>
                     <Button
                       variant="outline"
                       size="sm"
@@ -2077,9 +1981,8 @@ const StudentProfilePage = () => {
             )}
           </motion.div>
         </div>
-      </main>
-    </div>
-  );
+      </StudentDashboardNavLayout>
+    );
 };
 
 export default StudentProfilePage;
