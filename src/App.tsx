@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/hooks/useAuth";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "@/pages/Index";
@@ -26,6 +26,7 @@ import StudentDashboard from "@/pages/StudentDashboard";
 import StudentProfilePage from "@/pages/StudentProfilePage";
 import ModulePage from "@/pages/ModulePage";
 import CsrImpactPage from "@/pages/CsrImpactPage";
+import NetworksPage from "@/pages/NetworksPage";
 import EntrepreneurDashboard from "@/pages/EntrepreneurDashboard";
 import CollegeDashboard from "@/pages/CollegeDashboard";
 import CompanyDashboard from "@/pages/CompanyDashboard";
@@ -61,8 +62,11 @@ const App = () => (
             <Route path="/terms" element={<Terms />} />
             <Route path="/student-dashboard" element={<StudentDashboard />} />
             <Route path="/student-dashboard/:section" element={<StudentDashboard />} />
+            <Route path="/student-module/csrImpact" element={<Navigate to="/dashboard/csr-impact" replace />} />
             <Route path="/student-module/:moduleId" element={<ModulePage />} />
-            <Route path="/dashboard/csr" element={<CsrImpactPage />} />
+            <Route path="/dashboard/csr" element={<Navigate to="/dashboard/csr-impact" replace />} />
+            <Route path="/dashboard/csr-impact" element={<CsrImpactPage />} />
+            <Route path="/dashboard/networks" element={<NetworksPage />} />
             <Route path="/student-profile" element={<StudentProfilePage />} />
             <Route path="/entrepreneur-dashboard" element={<EntrepreneurDashboard />} />
             <Route path="/college-dashboard" element={<CollegeDashboard />} />

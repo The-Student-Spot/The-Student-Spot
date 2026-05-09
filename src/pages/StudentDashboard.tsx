@@ -241,7 +241,7 @@ const StudentDashboard = () => {
                   if (item.id === "profile") {
                     navigate("/student-profile");
                   } else if (item.id === "csrImpact") {
-                    navigate("/dashboard/csr");
+                    navigate("/dashboard/csr-impact");
                   } else {
                     navigate(`/student-module/${item.id}`);
                   }
@@ -311,7 +311,7 @@ const StudentDashboard = () => {
                           if (item.id === "profile") {
                             navigate("/student-profile");
                           } else if (item.id === "csrImpact") {
-                            navigate("/dashboard/csr");
+                            navigate("/dashboard/csr-impact");
                           } else {
                             navigate(`/student-module/${item.id}`);
                           }

@@ -545,7 +545,15 @@ const StudentProfilePage = () => {
   return (
     <StudentDashboardNavLayout activeSection="profile" headerTitle="My Profile">
       {/* Profile Content */}
-      <div className="flex-1 space-y-6 pt-4">
+      <div className="flex-1 space-y-6">
+        <div className="space-y-1">
+          <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-yellow-600">Student Profile</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-slate-800">Build a profile that stands out</h1>
+          <p className="max-w-2xl text-sm sm:text-base text-slate-600">
+            Keep your information, experience, and achievements organized so mentors, colleges, and companies can understand your story quickly.
+          </p>
+        </div>
+
           {/* Profile Hero Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
