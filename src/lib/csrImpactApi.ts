@@ -466,11 +466,19 @@ export const shareCsrImpactItem = async (title: string, description: string) => 
   const shareText = `${title} - ${description}`;
 
   if (navigator.share) {
-    await navigator.share({ title, text: description });
-    return true;
+    try {
+      await navigator.share({ title, text: description });
+      return true; // Successfully used native share
+    } catch {
+      // User cancelled or native share failed, fallback to clipboard
+    }
   }
 
-  await navigator.clipboard.writeText(shareText);
+  try {
+    await navigator.clipboard.writeText(shareText);
+  } catch {
+    // Clipboard API might fail if not focused or permitted
+  }
   return false;
 };
 

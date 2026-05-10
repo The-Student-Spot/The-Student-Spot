@@ -58,6 +58,7 @@ import {
 } from "@/lib/csrImpactApi";
 import { loadCsrBookmarkIds, persistCsrBookmark } from "@/lib/csrBookmarks";
 import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
 
 const programCategories = ["All", "Community", "Gender", "Education"];
 const opportunityCategories = ["All", "Volunteer Work", "NGO Internships", "Impact Projects"];
@@ -107,6 +108,7 @@ const pulseVariants = {
 
 const CsrImpactPage = () => {
   const { user } = useAuth();
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [programCategory, setProgramCategory] = useState("All");
@@ -204,6 +206,10 @@ const CsrImpactPage = () => {
     setSavedItems((current) => ({ ...current, [id]: nextState }));
     const meta = getItemMeta(itemType, id);
     void persistCsrBookmark(itemType, id, nextState, meta);
+    toast({
+      title: nextState ? "Saved" : "Removed",
+      description: nextState ? "Item saved for later." : "Item removed from saved list.",
+    });
   };
 
   const markJoined = (
@@ -213,14 +219,26 @@ const CsrImpactPage = () => {
   ) => {
     setter((current) => ({ ...current, [id]: true }));
     void joinCsrImpactItem(itemType, id);
+    toast({
+      title: "Application Submitted",
+      description: "You have successfully joined this initiative.",
+    });
   };
 
   const shareItem = async (title: string, description: string) => {
     const usedNativeShare = await shareCsrImpactItem(title, description);
     if (!usedNativeShare) {
+      toast({
+        title: "Link Copied",
+        description: "Share link copied to your clipboard.",
+      });
       setShareNotice("Link copied to clipboard");
       window.setTimeout(() => setShareNotice(""), 1800);
     }
+  };
+
+  const scrollToImpact = () => {
+    document.getElementById("impact-content")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const renderLoadingCards = (count: number) => (
@@ -286,7 +304,7 @@ const CsrImpactPage = () => {
               <p className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
                 Contribute to meaningful causes, lead community initiatives, empower underserved populations, and create measurable social change. Transform your passion into action.
               </p>
-              <Button className="mt-4 bg-yellow-400 hover:bg-yellow-300 text-orange-900 font-semibold px-6 py-3 h-auto rounded-full text-base shadow-lg hover:shadow-xl transition-all">
+              <Button onClick={scrollToImpact} className="mt-4 bg-yellow-400 hover:bg-yellow-300 text-orange-900 font-semibold px-6 py-3 h-auto rounded-full text-base shadow-lg hover:shadow-xl transition-all">
                 Explore Impact <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
@@ -314,7 +332,7 @@ const CsrImpactPage = () => {
         </motion.section>
 
         {/* Search & Filter Card */}
-        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+        <motion.div id="impact-content" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
           <Card className="rounded-2xl border-slate-200 p-6 lg:p-7 shadow-sm hover:shadow-md transition-shadow">
             <div className="grid gap-5 lg:grid-cols-[1.2fr_1fr] lg:items-end">
               <div className="space-y-3">
