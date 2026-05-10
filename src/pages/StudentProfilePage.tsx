@@ -24,8 +24,24 @@ import {
   Check,
   MapPin,
   Briefcase,
+  Building2,
   GraduationCap,
   FileText,
+  Award,
+  Code,
+  Github,
+  Linkedin,
+  ExternalLink,
+  Zap,
+  Target,
+  Heart,
+  TrendingUp,
+  CheckCircle,
+  Circle,
+  Share2,
+  Download,
+  Code2,
+  Lightbulb,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -542,93 +558,151 @@ const StudentProfilePage = () => {
     }),
   };
 
+  const profileCompletion = Math.min(100, Math.round(
+    (profileData.basicInfo.firstName && profileData.basicInfo.lastName ? 20 : 0) +
+    (profileData.basicInfo.headline ? 10 : 0) +
+    (profileData.skills.length > 0 ? 15 : 0) +
+    (profileData.certificates.certs.length > 0 ? 15 : 0) +
+    (profileData.proofOfWork.projects.length > 0 ? 15 : 0) +
+    (profileData.education.length > 0 ? 10 : 0) +
+    (profileData.impactWork.initiatives.length > 0 ? 15 : 0)
+  ));
+
   return (
     <StudentDashboardNavLayout activeSection="profile" headerTitle="My Profile">
       {/* Profile Content */}
-      <div className="flex-1 space-y-6">
-        <div className="space-y-1">
-          <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-yellow-600">Student Profile</p>
-          <h1 className="text-3xl sm:text-4xl font-bold text-slate-800">Build a profile that stands out</h1>
-          <p className="max-w-2xl text-sm sm:text-base text-slate-600">
-            Keep your information, experience, and achievements organized so mentors, colleges, and companies can understand your story quickly.
-          </p>
-        </div>
+      <div className="flex-1 space-y-8 pb-12">
+        {/* Premium Hero Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-600 via-orange-500 to-red-600 p-8 lg:p-10 shadow-2xl border border-orange-400/20"
+        >
+          {/* Decorative background */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute -right-32 -top-32 h-64 w-64 rounded-full bg-orange-400 opacity-20 blur-3xl" />
+            <div className="absolute -left-32 -bottom-32 h-64 w-64 rounded-full bg-red-400 opacity-20 blur-3xl" />
+          </div>
 
-          {/* Profile Hero Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl p-6 border border-yellow-200"
-          >
-            <div className="flex flex-col md:flex-row gap-6 items-start md:items-center">
-              <div className="relative w-fit">
-                <img
-                  src={profileData.basicInfo.profilePhoto || getAvatarUrl(profileData.basicInfo.gender, user?.email || "default")}
-                  alt="Profile"
-                  className="w-20 h-20 rounded-full border-4 border-white shadow-lg object-cover"
-                />
-                <button
-                  onClick={() => setPhotoEditOpen(true)}
-                  className="absolute bottom-0 right-0 bg-yellow-500 hover:bg-yellow-600 text-black rounded-full p-2 shadow-lg transition-colors border-2 border-white"
-                  title="Edit profile photo"
-                >
-                  <Edit2 className="h-4 w-4" />
-                </button>
-              </div>
-              <div className="flex-1">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                  <div>
-                    <h2 className="text-3xl font-bold text-slate-800">
+          <div className="relative z-10">
+            <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center">
+              {/* Left: Avatar & Basic Info */}
+              <div className="flex flex-col items-center lg:items-start gap-4 lg:flex-shrink-0">
+                <div className="relative w-fit">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 blur-lg opacity-50" />
+                  <img
+                    src={profileData.basicInfo.profilePhoto || getAvatarUrl(profileData.basicInfo.gender, user?.email || "default")}
+                    alt="Profile"
+                    className="relative w-32 h-32 rounded-full border-4 border-white shadow-xl object-cover"
+                  />
+                  <button
+                    onClick={() => setPhotoEditOpen(true)}
+                    className="absolute bottom-2 right-2 bg-gradient-to-br from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white rounded-full p-3 shadow-lg transition-all border-2 border-white"
+                    title="Edit profile photo"
+                  >
+                    <Edit2 className="h-5 w-5" />
+                  </button>
+                </div>
+
+                <div className="text-center lg:text-left text-white">
+                  <div className="flex items-center justify-center lg:justify-start gap-2 mb-2">
+                    <h2 className="text-3xl lg:text-4xl font-black">
                       {profileData.basicInfo.firstName} {profileData.basicInfo.lastName}
                     </h2>
-                    <p className="text-lg text-slate-600">{profileData.basicInfo.headline}</p>
-                    <div className="flex flex-wrap gap-3 mt-2 text-sm text-slate-600">
-                      <div className="flex items-center gap-1">
+                    <Badge className="bg-yellow-400 text-yellow-900 font-semibold px-3 py-1">
+                      ✓ Verified
+                    </Badge>
+                  </div>
+                  <p className="text-lg text-orange-50 font-semibold mb-3">{profileData.basicInfo.headline}</p>
+                  <div className="flex flex-col gap-2 text-sm text-orange-100">
+                    {profileData.basicInfo.college && (
+                      <div className="flex items-center justify-center lg:justify-start gap-2">
                         <GraduationCap className="h-4 w-4" />
                         {profileData.basicInfo.college}
                       </div>
-                      <div className="flex items-center gap-1">
+                    )}
+                    {profileData.basicInfo.location && (
+                      <div className="flex items-center justify-center lg:justify-start gap-2">
                         <MapPin className="h-4 w-4" />
                         {profileData.basicInfo.location}
                       </div>
-                    </div>
+                    )}
                   </div>
-                  <Button
-                    onClick={() => {
-                      setEditingSection("basicInfo");
-                      setTimeout(() => {
-                        document.querySelector('[data-section="basicInfo"]')?.scrollIntoView({ behavior: "smooth", block: "start" });
-                      }, 0);
-                    }}
-                    className="bg-yellow-500 hover:bg-yellow-600 text-black"
-                  >
-                    <Edit2 className="h-4 w-4 mr-2" />
-                    Edit Profile
-                  </Button>
                 </div>
               </div>
+
+              {/* Center: Stats */}
+              <div className="flex-1 grid grid-cols-2 lg:grid-cols-2 gap-3 w-full lg:w-auto">
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1 }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
+                  <p className="text-xs font-semibold text-orange-100 uppercase">Profile</p>
+                  <p className="text-2xl font-black mt-1">{profileCompletion}%</p>
+                  <p className="text-xs text-orange-100 mt-1">Complete</p>
+                </motion.div>
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.15 }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
+                  <p className="text-xs font-semibold text-orange-100 uppercase">Skills</p>
+                  <p className="text-2xl font-black mt-1">{profileData.skills.length}</p>
+                  <p className="text-xs text-orange-100 mt-1">Added</p>
+                </motion.div>
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2 }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
+                  <p className="text-xs font-semibold text-orange-100 uppercase">Certificates</p>
+                  <p className="text-2xl font-black mt-1">{profileData.certificates.certs.length}</p>
+                  <p className="text-xs text-orange-100 mt-1">Earned</p>
+                </motion.div>
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.25 }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
+                  <p className="text-xs font-semibold text-orange-100 uppercase">Projects</p>
+                  <p className="text-2xl font-black mt-1">{profileData.proofOfWork.projects.length}</p>
+                  <p className="text-xs text-orange-100 mt-1">Showcased</p>
+                </motion.div>
+              </div>
+
+              {/* Right: CTAs */}
+              <div className="flex flex-col gap-3 w-full lg:w-auto lg:flex-shrink-0">
+                <Button
+                  onClick={() => {
+                    setEditingSection("basicInfo");
+                    setTimeout(() => {
+                      document.querySelector('[data-section="basicInfo"]')?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }, 0);
+                  }}
+                  className="bg-gradient-to-r from-yellow-400 to-orange-400 hover:from-yellow-500 hover:to-orange-500 text-orange-900 font-bold rounded-xl px-6 py-3 w-full lg:w-auto shadow-lg hover:shadow-xl transition-all"
+                >
+                  <Edit2 className="h-4 w-4 mr-2" />
+                  Edit Profile
+                </Button>
+                <Button
+                  variant="outline"
+                  className="bg-white/10 border-white/30 text-white hover:bg-white/20 font-semibold rounded-xl px-6 py-3 w-full lg:w-auto backdrop-blur-sm"
+                >
+                  <Share2 className="h-4 w-4 mr-2" />
+                  Share Profile
+                </Button>
+              </div>
             </div>
-          </motion.div>
+          </div>
+        </motion.div>
 
           {/* Photo Edit Modal */}
           <Dialog open={photoEditOpen} onOpenChange={setPhotoEditOpen}>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-md rounded-2xl">
                 <DialogHeader className="flex items-center justify-between pr-0">
-                  <DialogTitle>Edit Profile Photo</DialogTitle>
+                  <DialogTitle className="text-2xl font-bold">Edit Profile Photo</DialogTitle>
                 </DialogHeader>
 
               <div className="space-y-6">
                 {/* Photo Preview and Upload */}
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div className="flex justify-center">
-                    <img
-                      src={profileData.basicInfo.profilePhoto || getAvatarUrl(profileData.basicInfo.gender, user?.email || "default")}
-                      alt="Profile Preview"
-                      className="w-32 h-32 rounded-full border-4 border-yellow-200 object-cover"
-                    />
+                    <div className="relative">
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-orange-400 to-red-400 blur-lg opacity-50" />
+                      <img
+                        src={profileData.basicInfo.profilePhoto || getAvatarUrl(profileData.basicInfo.gender, user?.email || "default")}
+                        alt="Profile Preview"
+                        className="relative w-40 h-40 rounded-full border-4 border-orange-200 object-cover"
+                      />
+                    </div>
                   </div>
                   <div>
-                    <Label htmlFor="photoUpload" className="text-base font-semibold">Upload Photo</Label>
+                    <Label htmlFor="photoUpload" className="text-base font-bold text-slate-900">Upload New Photo</Label>
                     <input
                       ref={photoInputRef}
                       id="photoUpload"
@@ -649,20 +723,20 @@ const StudentProfilePage = () => {
                         }
                       }}
                     />
-                    <div className="mt-2 flex items-center gap-3">
+                    <div className="mt-3 flex items-center gap-3">
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => photoInputRef.current?.click()}
-                        className="flex items-center gap-2"
+                        className="flex items-center gap-2 rounded-lg"
                       >
                         <Upload className="h-4 w-4" />
                         Choose file
                       </Button>
                       {profileData.basicInfo.profilePhoto ? (
-                        <span className="text-sm text-muted-foreground">Preview available</span>
+                        <span className="text-sm text-green-600 font-medium">✓ Photo selected</span>
                       ) : (
-                        <span className="text-sm text-muted-foreground">No file selected</span>
+                        <span className="text-sm text-slate-500">No file selected</span>
                       )}
                     </div>
                   </div>
@@ -677,7 +751,7 @@ const StudentProfilePage = () => {
                           basicInfo: { ...profileData.basicInfo, profilePhoto: "" },
                         })
                       }
-                      className="w-full text-red-600 hover:text-red-700 hover:bg-red-50"
+                      className="w-full text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg"
                     >
                       <Trash2 className="h-4 w-4 mr-2" />
                       Remove Photo
@@ -686,8 +760,8 @@ const StudentProfilePage = () => {
                 </div>
 
                 {/* Gender Selection */}
-                <div className="space-y-3">
-                  <Label className="text-base font-semibold">Select Gender</Label>
+                <div className="space-y-3 border-t border-slate-200 pt-4">
+                  <Label className="text-base font-bold text-slate-900">Select Gender</Label>
                   <div className="flex gap-3 w-full">
                     <Button
                       type="button"
@@ -698,7 +772,7 @@ const StudentProfilePage = () => {
                           basicInfo: { ...profileData.basicInfo, gender: "male" },
                         })
                       }
-                      className={`flex-1 ${profileData.basicInfo.gender === "male" ? "bg-yellow-500 hover:bg-yellow-600 text-black" : ""}`}
+                      className={`flex-1 rounded-lg ${profileData.basicInfo.gender === "male" ? "bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white" : ""}`}
                     >
                       Male
                     </Button>
@@ -711,7 +785,7 @@ const StudentProfilePage = () => {
                           basicInfo: { ...profileData.basicInfo, gender: "female" },
                         })
                       }
-                      className={`flex-1 ${profileData.basicInfo.gender === "female" ? "bg-yellow-500 hover:bg-yellow-600 text-black" : ""}`}
+                      className={`flex-1 rounded-lg ${profileData.basicInfo.gender === "female" ? "bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white" : ""}`}
                     >
                       Female
                     </Button>
@@ -724,7 +798,7 @@ const StudentProfilePage = () => {
                           basicInfo: { ...profileData.basicInfo, gender: "other" },
                         })
                       }
-                      className={`flex-1 ${profileData.basicInfo.gender === "other" ? "bg-yellow-500 hover:bg-yellow-600 text-black" : ""}`}
+                      className={`flex-1 rounded-lg ${profileData.basicInfo.gender === "other" ? "bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-700 hover:to-red-700 text-white" : ""}`}
                     >
                       Other
                     </Button>
@@ -734,7 +808,7 @@ const StudentProfilePage = () => {
                 {/* Save Button */}
                 <Button
                   onClick={() => setPhotoEditOpen(false)}
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-black"
+                  className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-bold rounded-lg mt-6"
                 >
                   <Check className="h-4 w-4 mr-2" />
                   Save Changes
@@ -742,62 +816,134 @@ const StudentProfilePage = () => {
               </div>
             </DialogContent>
           </Dialog>
-          <motion.div
-            custom={0}
-            variants={sectionVariants}
-            initial="hidden"
-            animate="visible"
-            className="bg-card rounded-xl p-6 border border-slate-200"
-          >
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-slate-800">Profile Completion</h3>
 
+          {/* Profile Completion Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
+              {/* Circular Progress */}
+              <div className="flex flex-col items-center gap-4 flex-shrink-0">
+                <div className="relative w-40 h-40">
+                  <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                    {/* Background circle */}
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#e2e8f0" strokeWidth="3" />
+                    {/* Progress circle */}
+                    <motion.circle
+                      cx="50"
+                      cy="50"
+                      r="45"
+                      fill="none"
+                      stroke="url(#gradient)"
+                      strokeWidth="3"
+                      strokeDasharray={`${2 * Math.PI * 45}`}
+                      initial={{ strokeDashoffset: 2 * Math.PI * 45 }}
+                      animate={{ strokeDashoffset: 2 * Math.PI * 45 * (1 - profileCompletion / 100) }}
+                      transition={{ duration: 1, delay: 0.3 }}
+                      strokeLinecap="round"
+                    />
+                    <defs>
+                      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#f97316" />
+                        <stop offset="100%" stopColor="#fb7185" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <motion.p initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4 }} className="text-4xl font-black text-slate-900">
+                      {profileCompletion}%
+                    </motion.p>
+                    <p className="text-sm font-semibold text-slate-600">Complete</p>
+                  </div>
+                </div>
               </div>
-              <div className="space-y-3">
-                {profileCompletionDetails.map((item) => {
-                  const missing = getIncompleteFields(item.label);
-                  const tooltipTitle = `${item.label} ${item.value}% complete`;
-                  const tooltipDescription = missing.length
-                    ? "These are the items still needed in this section:"
-                    : "Nothing is missing here. This section is complete.";
-                  return (
-                    <div key={item.label}>
-                      <div className="flex justify-between text-sm mb-1">
-                        <span className="text-slate-700 font-medium">{item.label}</span>
-                        <span className="text-slate-600">{item.value}%</span>
-                      </div>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <div
-                            className="cursor-help"
-                            title={`${item.label}: ${missing.length ? missing.join("; ") : "Complete"}`}
-                            aria-label={`${item.label} completion details: ${missing.length ? missing.join("; ") : "Complete"}`}
-                          >
-                            <Progress value={item.value} className="h-2" />
-                          </div>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <div className="max-w-xs whitespace-normal text-xs space-y-1">
-                            <p className="font-semibold text-popover-foreground">{tooltipTitle}</p>
-                            <p className="text-popover-foreground/80">{tooltipDescription}</p>
-                            {missing.length > 0 && (
-                              <ul className="list-disc pl-4 space-y-1 text-popover-foreground/90">
-                                {missing.map((field) => (
-                                  <li key={field}>{field}</li>
-                                ))}
-                              </ul>
-                            )}
-                          </div>
-                        </TooltipContent>
-                      </Tooltip>
+
+              {/* Completion Checklist */}
+              <div className="flex-1 space-y-3">
+                <h3 className="text-lg font-bold text-slate-900 mb-4">Profile Checklist</h3>
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-slate-700 font-medium">Basic Information</span>
+                      <span className="text-slate-600 font-semibold">{profileData.basicInfo.firstName && profileData.basicInfo.lastName ? "100" : "0"}%</span>
                     </div>
-                  );
-                })}
+                    <div className="h-2 rounded-full bg-slate-200 overflow-hidden hover:shadow-md transition-shadow cursor-pointer group">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: profileData.basicInfo.firstName && profileData.basicInfo.lastName ? "100%" : "0%" }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        className="h-full bg-gradient-to-r from-orange-500 to-orange-600 group-hover:from-orange-600 group-hover:to-orange-700 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-slate-700 font-medium">Career Track</span>
+                      <span className="text-slate-600 font-semibold">{profileData.careerInterest.preferredRole ? "100" : "0"}%</span>
+                    </div>
+                    <div className="h-2 rounded-full bg-slate-200 overflow-hidden hover:shadow-md transition-shadow cursor-pointer group">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: profileData.careerInterest.preferredRole ? "100%" : "0%" }}
+                        transition={{ duration: 0.6, delay: 0.15 }}
+                        className="h-full bg-gradient-to-r from-red-500 to-red-600 group-hover:from-red-600 group-hover:to-red-700 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-slate-700 font-medium">Education</span>
+                      <span className="text-slate-600 font-semibold">{profileData.education.length > 0 ? "100" : "0"}%</span>
+                    </div>
+                    <div className="h-2 rounded-full bg-slate-200 overflow-hidden hover:shadow-md transition-shadow cursor-pointer group">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: profileData.education.length > 0 ? "100%" : "0%" }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="h-full bg-gradient-to-r from-emerald-500 to-emerald-600 group-hover:from-emerald-600 group-hover:to-emerald-700 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-slate-700 font-medium">Skills & Expertise</span>
+                      <span className="text-slate-600 font-semibold">{profileData.skills.length > 0 ? "100" : "0"}%</span>
+                    </div>
+                    <div className="h-2 rounded-full bg-slate-200 overflow-hidden hover:shadow-md transition-shadow cursor-pointer group">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: profileData.skills.length > 0 ? "100%" : "0%" }}
+                        transition={{ duration: 0.6, delay: 0.25 }}
+                        className="h-full bg-gradient-to-r from-amber-500 to-amber-600 group-hover:from-amber-600 group-hover:to-amber-700 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-slate-700 font-medium">Work & Portfolio</span>
+                      <span className="text-slate-600 font-semibold">{profileData.proofOfWork.projects.length > 0 || profileData.portfolio.links.length > 0 ? "100" : "0"}%</span>
+                    </div>
+                    <div className="h-2 rounded-full bg-slate-200 overflow-hidden hover:shadow-md transition-shadow cursor-pointer group">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: profileData.proofOfWork.projects.length > 0 || profileData.portfolio.links.length > 0 ? "100%" : "0%" }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="h-full bg-gradient-to-r from-red-500 to-red-600 group-hover:from-red-600 group-hover:to-red-700 transition-all"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6 p-4 rounded-xl bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200">
+                  <p className="text-sm font-semibold text-slate-900">💡 Tip: Complete your profile to unlock better opportunities and visibility from mentors and recruiters.</p>
+                </div>
               </div>
-              <p className="text-sm font-medium text-red-600 bg-red-50 border border-red-100 rounded-lg px-4 py-3">
-                {completionRemark}
-              </p>
             </div>
           </motion.div>
 
@@ -807,24 +953,30 @@ const StudentProfilePage = () => {
             variants={sectionVariants}
             initial="hidden"
             animate="visible"
-            className="bg-card rounded-xl p-6 border border-slate-200"
+            className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 lg:p-7 shadow-sm hover:shadow-md transition-shadow"
             data-section="basicInfo"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-slate-800">Basic Information</h3>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 text-white">
+                  <Briefcase className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900">Basic Information</h3>
+              </div>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setEditingSection(editingSection === "basicInfo" ? null : "basicInfo")}
+                className="rounded-lg hover:bg-slate-100"
               >
-                {editingSection === "basicInfo" ? <Check className="h-4 w-4" /> : <Edit2 className="h-4 w-4" />}
+                {editingSection === "basicInfo" ? <Check className="h-4 w-4 text-green-600" /> : <Edit2 className="h-4 w-4" />}
               </Button>
             </div>
             {editingSection === "basicInfo" ? (
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="firstName">First Name</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName" className="font-semibold text-slate-700">First Name</Label>
                     <Input
                       id="firstName"
                       value={profileData.basicInfo.firstName}
@@ -834,11 +986,12 @@ const StudentProfilePage = () => {
                           basicInfo: { ...profileData.basicInfo, firstName: e.target.value },
                         })
                       }
-                      className="mt-1"
+                      className="rounded-lg border-slate-200 focus:border-orange-500 focus:ring-orange-500"
+                      placeholder="Your first name"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="lastName">Last Name</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName" className="font-semibold text-slate-700">Last Name</Label>
                     <Input
                       id="lastName"
                       value={profileData.basicInfo.lastName}
@@ -848,12 +1001,13 @@ const StudentProfilePage = () => {
                           basicInfo: { ...profileData.basicInfo, lastName: e.target.value },
                         })
                       }
-                      className="mt-1"
+                      className="rounded-lg border-slate-200 focus:border-orange-500 focus:ring-orange-500"
+                      placeholder="Your last name"
                     />
                   </div>
                 </div>
-                <div>
-                  <Label htmlFor="headline">Headline</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="headline" className="font-semibold text-slate-700">Headline / Title</Label>
                   <Input
                     id="headline"
                     value={profileData.basicInfo.headline}
@@ -863,12 +1017,13 @@ const StudentProfilePage = () => {
                         basicInfo: { ...profileData.basicInfo, headline: e.target.value },
                       })
                     }
-                    className="mt-1"
+                    className="rounded-lg border-slate-200 focus:border-orange-500 focus:ring-orange-500"
+                    placeholder="e.g., CS Student @ Stanford | AI Enthusiast"
                   />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="college">College</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="college" className="font-semibold text-slate-700">College / University</Label>
                     <Input
                       id="college"
                       value={profileData.basicInfo.college}
@@ -878,11 +1033,12 @@ const StudentProfilePage = () => {
                           basicInfo: { ...profileData.basicInfo, college: e.target.value },
                         })
                       }
-                      className="mt-1"
+                      className="rounded-lg border-slate-200 focus:border-orange-500 focus:ring-orange-500"
+                      placeholder="Your college"
                     />
                   </div>
-                  <div>
-                    <Label htmlFor="location">Location</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="location" className="font-semibold text-slate-700">Location</Label>
                     <Input
                       id="location"
                       value={profileData.basicInfo.location}
@@ -892,56 +1048,67 @@ const StudentProfilePage = () => {
                           basicInfo: { ...profileData.basicInfo, location: e.target.value },
                         })
                       }
-                      className="mt-1"
+                      className="rounded-lg border-slate-200 focus:border-orange-500 focus:ring-orange-500"
+                      placeholder="City, Country"
                     />
                   </div>
                 </div>
-                <div className="flex items-center justify-between p-4 bg-slate-50 rounded-lg border border-slate-200">
-                  <div>
-                    <p className="font-medium text-slate-800">Interested in Startup</p>
-                    <p className="text-sm text-muted-foreground">Toggle if you're interested in launching a startup</p>
+                <div className="rounded-2xl bg-gradient-to-r from-orange-50 to-orange-100 p-4 border border-orange-200 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-semibold text-slate-900">🚀 Interested in Startups?</p>
+                      <p className="text-sm text-slate-600">Let recruiters know you're open to startup opportunities</p>
+                    </div>
+                    <Switch
+                      checked={profileData.startupInterest}
+                      onCheckedChange={(checked) =>
+                        setProfileData({ ...profileData, startupInterest: checked })
+                      }
+                    />
                   </div>
-                  <Switch
-                    checked={profileData.startupInterest}
-                    onCheckedChange={(checked) =>
-                      setProfileData({ ...profileData, startupInterest: checked })
-                    }
-                  />
                 </div>
                 <Button
                   onClick={() => setEditingSection(null)}
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-black"
+                  className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold rounded-lg mt-6"
                   disabled={isSaving}
                 >
-                  {isSaving ? "Saving..." : "Save Changes"}
+                  {isSaving ? "Saving..." : "✓ Save Changes"}
                 </Button>
               </div>
             ) : (
-              <div className="space-y-2 text-sm">
-                <p>
-                  <span className="font-medium text-slate-800">Name:</span> {profileData.basicInfo.firstName} {profileData.basicInfo.lastName}
-                </p>
-                <p>
-                  <span className="font-medium text-slate-800">Headline:</span> {profileData.basicInfo.headline}
-                </p>
-                <p>
-                  <span className="font-medium text-slate-800">College:</span> {profileData.basicInfo.college}
-                </p>
-                <p>
-                  <span className="font-medium text-slate-800">Location:</span> {profileData.basicInfo.location}
-                </p>
-                <p>
-                  <span className="font-medium text-slate-800">Gender:</span>{" "}
-                  <Badge className="ml-2 bg-blue-100 text-blue-800 capitalize">{profileData.basicInfo.gender}</Badge>
-                </p>
-                <p>
-                  <span className="font-medium text-slate-800">Startup Interest:</span>{" "}
-                  {profileData.startupInterest ? (
-                    <Badge className="ml-2 bg-green-100 text-green-800">Yes</Badge>
-                  ) : (
-                    <Badge className="ml-2 bg-slate-100 text-slate-800">No</Badge>
-                  )}
-                </p>
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="rounded-lg bg-slate-50 p-4 border border-slate-200">
+                    <p className="text-xs font-semibold text-slate-600 uppercase mb-1">Name</p>
+                    <p className="text-lg font-bold text-slate-900">{profileData.basicInfo.firstName} {profileData.basicInfo.lastName || "(incomplete)"}</p>
+                  </div>
+                  <div className="rounded-lg bg-slate-50 p-4 border border-slate-200">
+                    <p className="text-xs font-semibold text-slate-600 uppercase mb-1">Headline</p>
+                    <p className="text-lg font-semibold text-slate-800">{profileData.basicInfo.headline || "Add a headline"}</p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="rounded-lg bg-slate-50 p-4 border border-slate-200">
+                    <p className="text-xs font-semibold text-slate-600 uppercase mb-1 flex items-center gap-1"><GraduationCap className="h-3 w-3" /> College</p>
+                    <p className="text-base font-semibold text-slate-800">{profileData.basicInfo.college || "Add college"}</p>
+                  </div>
+                  <div className="rounded-lg bg-slate-50 p-4 border border-slate-200">
+                    <p className="text-xs font-semibold text-slate-600 uppercase mb-1 flex items-center gap-1"><MapPin className="h-3 w-3" /> Location</p>
+                    <p className="text-base font-semibold text-slate-800">{profileData.basicInfo.location || "Add location"}</p>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between rounded-lg bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 p-4">
+                  <div className="flex items-center gap-2">
+                    <Lightbulb className="h-5 w-5 text-yellow-500" />
+                    <div>
+                      <p className="font-semibold text-slate-900">Startup Interest</p>
+                      <p className="text-sm text-slate-600">Open to startup opportunities</p>
+                    </div>
+                  </div>
+                  <Badge className={profileData.startupInterest ? "bg-green-100 text-green-800 font-semibold px-3 py-1" : "bg-slate-100 text-slate-800 font-semibold px-3 py-1"}>
+                    {profileData.startupInterest ? "✓ Yes" : "No"}
+                  </Badge>
+                </div>
               </div>
             )}
           </motion.div>
@@ -952,23 +1119,32 @@ const StudentProfilePage = () => {
             variants={sectionVariants}
             initial="hidden"
             animate="visible"
-            className="bg-card rounded-xl p-6 border border-slate-200"
+            className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 lg:p-7 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-slate-800">Social Links</h3>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-rose-500 to-pink-500 text-white">
+                  <Share2 className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900">Social Profiles</h3>
+              </div>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setEditingSection(editingSection === "social" ? null : "social")}
+                className="rounded-lg hover:bg-slate-100"
               >
-                {editingSection === "social" ? <Check className="h-4 w-4" /> : <Edit2 className="h-4 w-4" />}
+                {editingSection === "social" ? <Check className="h-4 w-4 text-green-600" /> : <Edit2 className="h-4 w-4" />}
               </Button>
             </div>
             {editingSection === "social" ? (
               <div className="space-y-4">
                 {Object.entries(profileData.socialLinks).map(([key, value]) => (
-                  <div key={key}>
-                    <Label htmlFor={key} className="capitalize">
+                  <div key={key} className="space-y-2">
+                    <Label htmlFor={key} className="font-semibold text-slate-700 capitalize flex items-center gap-2">
+                      {key === "linkedin" && <Linkedin className="h-4 w-4" />}
+                      {key === "github" && <Github className="h-4 w-4" />}
+                      {key !== "linkedin" && key !== "github" && <ExternalLink className="h-4 w-4" />}
                       {key}
                     </Label>
                     <Input
@@ -981,30 +1157,45 @@ const StudentProfilePage = () => {
                         })
                       }
                       placeholder={`Your ${key} profile URL`}
-                      className="mt-1"
+                      className="rounded-lg border-slate-200 focus:border-rose-500 focus:ring-rose-500"
                     />
                   </div>
                 ))}
                 <Button
                   onClick={() => setEditingSection(null)}
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-black"
+                  className="w-full bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-semibold rounded-lg mt-6"
                 >
-                  Save Changes
+                  ✓ Save Changes
                 </Button>
               </div>
             ) : (
-              <div className="space-y-2 text-sm">
+              <div className="space-y-3">
                 {Object.entries(profileData.socialLinks).map(([key, value]) => (
-                  <p key={key}>
-                    <span className="font-medium text-slate-800 capitalize">{key}:</span>{" "}
+                  <div key={key}>
                     {value ? (
-                      <a href={value} target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:underline break-all">
-                        {value}
+                      <a
+                        href={normalizeUrl(value)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-slate-50 to-slate-100 border border-slate-200 hover:border-rose-300 hover:shadow-md transition-all group"
+                      >
+                        <div className="flex items-center gap-3">
+                          {key === "linkedin" && <Linkedin className="h-5 w-5 text-orange-600" />}
+                          {key === "github" && <Github className="h-5 w-5 text-slate-900" />}
+                          {key !== "linkedin" && key !== "github" && <ExternalLink className="h-5 w-5 text-rose-600" />}
+                          <div>
+                            <p className="font-semibold text-slate-900 capitalize">{key}</p>
+                            <p className="text-sm text-slate-600 group-hover:text-rose-600 transition-colors">Visit profile →</p>
+                          </div>
+                        </div>
+                        <ExternalLink className="h-4 w-4 text-slate-400 group-hover:text-rose-600 transition-colors" />
                       </a>
                     ) : (
-                      <span className="text-muted-foreground">Not added</span>
+                      <div className="p-4 rounded-xl bg-slate-50 border border-dashed border-slate-300 text-center">
+                        <p className="text-sm text-slate-600 capitalize font-medium">{key} - Not added</p>
+                      </div>
                     )}
-                  </p>
+                  </div>
                 ))}
               </div>
             )}
@@ -1016,40 +1207,50 @@ const StudentProfilePage = () => {
             variants={sectionVariants}
             initial="hidden"
             animate="visible"
-            className="bg-card rounded-xl p-6 border border-slate-200"
+            className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 lg:p-7 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-slate-800">Education</h3>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 text-white">
+                  <GraduationCap className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900">Education</h3>
+              </div>
               <div className="flex items-center gap-2">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={addEducationEntry}
+                  className="rounded-lg hover:bg-slate-100 text-emerald-600"
                 >
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add Education
+                  <Plus className="h-4 w-4 mr-1" />
+                  Add
                 </Button>
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setEditingSection(editingSection === "education" ? null : "education")}
+                  className="rounded-lg hover:bg-slate-100"
                 >
-                  {editingSection === "education" ? <Check className="h-4 w-4" /> : <Edit2 className="h-4 w-4" />}
+                  {editingSection === "education" ? <Check className="h-4 w-4 text-green-600" /> : <Edit2 className="h-4 w-4" />}
                 </Button>
               </div>
             </div>
             {editingSection === "education" ? (
               <div className="space-y-4">
                 {profileData.education.map((educationEntry, index) => (
-                  <div key={index} className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-4">
+                  <div key={index} className="rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-5 space-y-4 hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between gap-3">
-                      <p className="text-sm font-semibold text-slate-800">Education {index + 1}</p>
+                      <div className="flex items-center gap-2">
+                        <div className="h-2 w-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500" />
+                        <p className="font-bold text-slate-900">Education {index + 1}</p>
+                      </div>
                       {profileData.education.length > 1 && (
                         <Button
                           type="button"
                           variant="ghost"
                           size="sm"
-                          className="text-red-600 hover:text-red-700"
+                          className="text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg"
                           onClick={() =>
                             setProfileData({
                               ...profileData,
@@ -1057,13 +1258,13 @@ const StudentProfilePage = () => {
                             })
                           }
                         >
-                          <Trash2 className="h-4 w-4 mr-2" />
+                          <Trash2 className="h-4 w-4 mr-1" />
                           Remove
                         </Button>
                       )}
                     </div>
-                    <div>
-                      <Label htmlFor={`institution-${index}`}>Institution</Label>
+                    <div className="space-y-2">
+                      <Label htmlFor={`institution-${index}`} className="font-semibold text-slate-700">University / College</Label>
                       <Input
                         id={`institution-${index}`}
                         value={educationEntry.institution}
@@ -1075,12 +1276,13 @@ const StudentProfilePage = () => {
                             ),
                           })
                         }
-                        className="mt-1"
+                        className="rounded-lg border-emerald-200 focus:border-emerald-500 focus:ring-emerald-500"
+                        placeholder="e.g., Stanford University"
                       />
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor={`degree-${index}`}>Degree</Label>
+                      <div className="space-y-2">
+                        <Label htmlFor={`degree-${index}`} className="font-semibold text-slate-700">Degree</Label>
                         <Input
                           id={`degree-${index}`}
                           value={educationEntry.degree}
@@ -1092,11 +1294,12 @@ const StudentProfilePage = () => {
                               ),
                             })
                           }
-                          className="mt-1"
+                          className="rounded-lg border-emerald-200 focus:border-emerald-500 focus:ring-emerald-500"
+                          placeholder="e.g., Bachelor of Science"
                         />
                       </div>
-                      <div>
-                        <Label htmlFor={`field-${index}`}>Field of Study</Label>
+                      <div className="space-y-2">
+                        <Label htmlFor={`field-${index}`} className="font-semibold text-slate-700">Field of Study</Label>
                         <Input
                           id={`field-${index}`}
                           value={educationEntry.field}
@@ -1108,7 +1311,8 @@ const StudentProfilePage = () => {
                               ),
                             })
                           }
-                          className="mt-1"
+                          className="rounded-lg border-emerald-200 focus:border-emerald-500 focus:ring-emerald-500"
+                          placeholder="e.g., Computer Science"
                         />
                         {educationFieldErrors[index] && (
                           <p className="text-sm text-red-600 mt-1">{educationFieldErrors[index]}</p>
@@ -1116,8 +1320,8 @@ const StudentProfilePage = () => {
                       </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      <div>
-                        <Label htmlFor={`startYear-${index}`}>Start Year</Label>
+                      <div className="space-y-2">
+                        <Label htmlFor={`startYear-${index}`} className="font-semibold text-slate-700">Start Year</Label>
                         <Input
                           id={`startYear-${index}`}
                           type="number"
@@ -1130,11 +1334,12 @@ const StudentProfilePage = () => {
                               ),
                             })
                           }
-                          className="mt-1"
+                          className="rounded-lg border-emerald-200 focus:border-emerald-500 focus:ring-emerald-500"
+                          placeholder="2020"
                         />
                       </div>
-                      <div>
-                        <Label htmlFor={`endYear-${index}`}>End Year</Label>
+                      <div className="space-y-2">
+                        <Label htmlFor={`endYear-${index}`} className="font-semibold text-slate-700">End Year</Label>
                         <Input
                           id={`endYear-${index}`}
                           type="number"
@@ -1147,11 +1352,12 @@ const StudentProfilePage = () => {
                               ),
                             })
                           }
-                          className="mt-1"
+                          className="rounded-lg border-emerald-200 focus:border-emerald-500 focus:ring-emerald-500"
+                          placeholder="2024"
                         />
                       </div>
-                      <div>
-                        <Label htmlFor={`gpa-${index}`}>GPA</Label>
+                      <div className="space-y-2">
+                        <Label htmlFor={`gpa-${index}`} className="font-semibold text-slate-700">GPA</Label>
                         <Input
                           id={`gpa-${index}`}
                           value={educationEntry.gpa}
@@ -1163,7 +1369,8 @@ const StudentProfilePage = () => {
                               ),
                             })
                           }
-                          className="mt-1"
+                          className="rounded-lg border-emerald-200 focus:border-emerald-500 focus:ring-emerald-500"
+                          placeholder="3.8"
                         />
                       </div>
                     </div>
@@ -1171,39 +1378,47 @@ const StudentProfilePage = () => {
                 ))}
                 <Button
                   onClick={() => setEditingSection(null)}
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-black"
+                  className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold rounded-lg mt-6"
                 >
-                  Save Changes
+                  ✓ Save Changes
                 </Button>
               </div>
             ) : (
-              <div className="space-y-3 text-sm">
+              <div className="space-y-3">
                 {profileData.education.length > 0 ? (
                   profileData.education.map((educationEntry, index) => (
-                    <div
-                      key={index}
-                      className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3"
-                    >
-                      <div>
-                        <p className="font-semibold text-slate-800">
-                          {educationEntry.institution || `Education ${index + 1}`}
-                        </p>
-                        <p className="text-slate-600">
-                          {educationEntry.degree} {educationEntry.field ? `• ${educationEntry.field}` : ""}
-                        </p>
-                      </div>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <Badge className="bg-yellow-100 text-yellow-800">
-                          {educationEntry.startYear || "?"} - {educationEntry.endYear || "?"}
-                        </Badge>
-                        <Badge className="bg-slate-100 text-slate-800">
-                          GPA {educationEntry.gpa || "N/A"}
-                        </Badge>
+                    <div key={index} className="group rounded-xl border border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 p-5 hover:shadow-md hover:border-emerald-300 transition-all">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                        <div className="flex-1">
+                          <p className="font-bold text-lg text-slate-900 flex items-center gap-2">
+                            <GraduationCap className="h-5 w-5 text-emerald-600" />
+                            {educationEntry.institution || "(Incomplete)"}
+                          </p>
+                          <p className="text-sm text-slate-600 mt-1">
+                            {educationEntry.degree} {educationEntry.field ? `in ${educationEntry.field}` : ""}
+                          </p>
+                        </div>
+                        <div className="flex flex-wrap items-center gap-2">
+                          {(educationEntry.startYear || educationEntry.endYear) && (
+                            <Badge className="bg-emerald-100 text-emerald-800 font-semibold px-3 py-1">
+                              {educationEntry.startYear || "?"} - {educationEntry.endYear || "?"}
+                            </Badge>
+                          )}
+                          {educationEntry.gpa && (
+                            <Badge className="bg-amber-100 text-amber-800 font-semibold px-3 py-1">
+                              GPA {educationEntry.gpa}
+                            </Badge>
+                          )}
+                        </div>
                       </div>
                     </div>
                   ))
                 ) : (
-                  <p className="text-muted-foreground">No education added yet</p>
+                  <div className="rounded-xl border-2 border-dashed border-slate-300 bg-slate-50 p-8 text-center">
+                    <GraduationCap className="h-12 w-12 text-slate-300 mx-auto mb-3" />
+                    <p className="text-slate-600 font-medium">No education added yet</p>
+                    <p className="text-xs text-slate-500 mt-1">Add your educational background to strengthen your profile</p>
+                  </div>
                 )}
               </div>
             )}
@@ -1215,99 +1430,114 @@ const StudentProfilePage = () => {
             variants={sectionVariants}
             initial="hidden"
             animate="visible"
-            className="bg-card rounded-xl p-6 border border-slate-200"
+            className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 lg:p-7 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-slate-800">Skills</h3>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 text-white">
+                  <Zap className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900">Skills & Expertise</h3>
+              </div>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setEditingSection(editingSection === "skills" ? null : "skills")}
+                className="rounded-lg hover:bg-slate-100"
               >
-                {editingSection === "skills" ? <Check className="h-4 w-4" /> : <Edit2 className="h-4 w-4" />}
+                {editingSection === "skills" ? <Check className="h-4 w-4 text-green-600" /> : <Edit2 className="h-4 w-4" />}
               </Button>
             </div>
             {editingSection === "skills" ? (
-              <div className="space-y-4">
-                <div className="flex flex-wrap gap-2">
-                  {profileData.skills.map((skill, idx) => (
-                    <Badge key={idx} className="bg-yellow-100 text-yellow-800">
-                      {skill}
-                      <button
-                        type="button"
-                        onClick={() => removeSkill(idx)}
-                        className="ml-2 hover:opacity-70"
-                      >
-                        ×
-                      </button>
-                    </Badge>
-                  ))}
+              <div className="space-y-6">
+                <div className="space-y-3">
+                  <p className="font-semibold text-slate-800">Your Skills</p>
+                  <div className="flex flex-wrap gap-2">
+                    {profileData.skills.length > 0 ? (
+                      profileData.skills.map((skill, idx) => (
+                        <Badge key={idx} className="bg-gradient-to-r from-amber-100 to-orange-100 text-amber-900 font-semibold px-3 py-2 rounded-full hover:shadow-md transition-shadow cursor-pointer" onClick={() => removeSkill(idx)}>
+                          {skill}
+                          <button type="button" className="ml-2 text-lg hover:text-amber-950">×</button>
+                        </Badge>
+                      ))
+                    ) : (
+                      <p className="text-sm text-slate-500">No skills added yet</p>
+                    )}
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <Input
-                    placeholder="Add a skill"
-                    value={newSkillInput}
-                    onChange={(e) => {
-                      setNewSkillInput(e.target.value);
-                      if (skillInputError) setSkillInputError("");
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault();
+                <div className="space-y-3 border-t border-slate-200 pt-4">
+                  <p className="font-semibold text-slate-800">Add New Skill</p>
+                  <div className="flex gap-2">
+                    <Input
+                      placeholder="e.g., React, Python, Product Management"
+                      value={newSkillInput}
+                      onChange={(e) => {
+                        setNewSkillInput(e.target.value);
+                        if (skillInputError) setSkillInputError("");
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          addSkill(newSkillInput);
+                          setNewSkillInput("");
+                        }
+                      }}
+                      className="flex-1 rounded-lg border-amber-200 focus:border-amber-500 focus:ring-amber-500"
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
                         addSkill(newSkillInput);
                         setNewSkillInput("");
-                      }
-                    }}
-                    className="flex-1"
-                  />
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      addSkill(newSkillInput);
-                      setNewSkillInput("");
-                    }}
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
+                      }}
+                      className="rounded-lg border-amber-200 hover:bg-amber-50 text-amber-600"
+                    >
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  {skillInputError && <p className="text-sm text-red-600 font-medium">{skillInputError}</p>}
                 </div>
-                {skillInputError && <p className="text-sm text-red-600">{skillInputError}</p>}
-                <div className="space-y-2">
-                  <p className="text-sm font-medium text-slate-700">Suggested skills</p>
-                  <div className="flex flex-wrap gap-2">
-                    {skillSuggestions.length > 0 ? (
-                      skillSuggestions.map((skill) => (
+                {skillSuggestions.length > 0 && (
+                  <div className="space-y-3 border-t border-slate-200 pt-4 rounded-lg bg-gradient-to-r from-amber-50 to-orange-50 p-4">
+                    <p className="font-semibold text-slate-800">💡 Suggested Skills</p>
+                    <div className="flex flex-wrap gap-2">
+                      {skillSuggestions.map((skill) => (
                         <button
                           key={skill}
                           type="button"
                           onClick={() => addSkill(skill)}
-                          className="rounded-full border border-dashed border-yellow-300 bg-yellow-50 px-3 py-1 text-xs font-medium text-yellow-800 transition-colors hover:bg-yellow-100 hover:border-yellow-400"
+                          className="rounded-full border-2 border-dashed border-amber-300 bg-white px-3 py-1 text-sm font-semibold text-amber-700 transition-all hover:bg-amber-50 hover:border-amber-400 hover:shadow-sm"
                         >
                           + {skill}
                         </button>
-                      ))
-                    ) : (
-                      <p className="text-sm text-muted-foreground">You have added all suggested skills.</p>
-                    )}
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
                 <Button
                   onClick={() => setEditingSection(null)}
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-black"
+                  className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-semibold rounded-lg mt-6"
                 >
-                  Save Changes
+                  ✓ Save Changes
                 </Button>
               </div>
             ) : (
-              <div className="flex flex-wrap gap-2">
+              <div className="space-y-3">
                 {profileData.skills.length > 0 ? (
-                  profileData.skills.map((skill, idx) => (
-                    <Badge key={idx} className="bg-slate-100 text-slate-800">
-                      {skill}
-                    </Badge>
-                  ))
+                  <div className="flex flex-wrap gap-2">
+                    {profileData.skills.map((skill, idx) => (
+                      <Badge key={idx} className="bg-gradient-to-r from-amber-100 to-orange-100 text-amber-900 font-semibold px-4 py-2 rounded-full shadow-sm hover:shadow-md transition-shadow">
+                        ✓ {skill}
+                      </Badge>
+                    ))}
+                  </div>
                 ) : (
-                  <p className="text-muted-foreground">No skills added yet</p>
+                  <div className="rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 p-8 text-center">
+                    <Zap className="h-12 w-12 text-slate-300 mx-auto mb-3" />
+                    <p className="text-slate-600 font-medium">No skills added yet</p>
+                    <p className="text-xs text-slate-500 mt-1">Add your technical and soft skills to showcase your expertise</p>
+                  </div>
                 )}
               </div>
             )}
@@ -1319,22 +1549,28 @@ const StudentProfilePage = () => {
             variants={sectionVariants}
             initial="hidden"
             animate="visible"
-            className="bg-card rounded-xl p-6 border border-slate-200"
+            className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 lg:p-7 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-slate-800">Career Interest</h3>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-red-500 to-pink-500 text-white">
+                  <Target className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900">Career Interests</h3>
+              </div>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setEditingSection(editingSection === "careerInterest" ? null : "careerInterest")}
+                className="rounded-lg hover:bg-slate-100"
               >
-                {editingSection === "careerInterest" ? <Check className="h-4 w-4" /> : <Edit2 className="h-4 w-4" />}
+                {editingSection === "careerInterest" ? <Check className="h-4 w-4 text-green-600" /> : <Edit2 className="h-4 w-4" />}
               </Button>
             </div>
             {editingSection === "careerInterest" ? (
               <div className="space-y-4">
-                <div>
-                  <Label htmlFor="preferredRole">Preferred Role</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="preferredRole" className="font-semibold text-slate-700">Preferred Role</Label>
                   <Input
                     id="preferredRole"
                     value={profileData.careerInterest.preferredRole}
@@ -1344,11 +1580,12 @@ const StudentProfilePage = () => {
                         careerInterest: { ...profileData.careerInterest, preferredRole: e.target.value },
                       })
                     }
-                    className="mt-1"
+                    className="rounded-lg border-slate-200 focus:border-red-500 focus:ring-red-500"
+                    placeholder="e.g., Product Manager, Software Engineer"
                   />
                 </div>
-                <div>
-                  <Label htmlFor="industry">Industry</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="industry" className="font-semibold text-slate-700">Industry Interest</Label>
                   <Input
                     id="industry"
                     value={profileData.careerInterest.industry}
@@ -1358,11 +1595,12 @@ const StudentProfilePage = () => {
                         careerInterest: { ...profileData.careerInterest, industry: e.target.value },
                       })
                     }
-                    className="mt-1"
+                    className="rounded-lg border-slate-200 focus:border-red-500 focus:ring-red-500"
+                    placeholder="e.g., Fintech, Healthcare, SaaS"
                   />
                 </div>
-                <div>
-                  <Label htmlFor="goals">Career Goals</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="goals" className="font-semibold text-slate-700">Career Goals</Label>
                   <Textarea
                     id="goals"
                     value={profileData.careerInterest.goals}
@@ -1373,29 +1611,33 @@ const StudentProfilePage = () => {
                       })
                     }
                     rows={4}
-                    className="mt-1"
+                    className="rounded-lg border-slate-200 focus:border-red-500 focus:ring-red-500"
+                    placeholder="Share your career aspirations and what you're looking to achieve..."
                   />
                 </div>
                 <Button
                   onClick={() => setEditingSection(null)}
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-black"
+                  className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-semibold rounded-lg mt-6"
                 >
-                  Save Changes
+                  ✓ Save Changes
                 </Button>
               </div>
             ) : (
-              <div className="space-y-2 text-sm">
-                <p>
-                  <span className="font-medium text-slate-800">Preferred Role:</span> {profileData.careerInterest.preferredRole}
-                </p>
-                <p>
-                  <span className="font-medium text-slate-800">Industry:</span> {profileData.careerInterest.industry}
-                </p>
-                <p className="text-slate-700">
-                  <span className="font-medium">Goals:</span>
-                  <br />
-                  {profileData.careerInterest.goals}
-                </p>
+              <div className="space-y-4">
+                <div className="rounded-lg bg-gradient-to-r from-slate-50 to-slate-100 border border-slate-200 p-4">
+                  <p className="text-xs font-semibold text-slate-600 uppercase mb-1 flex items-center gap-2"><Briefcase className="h-4 w-4 text-red-600" /> Preferred Role</p>
+                  <p className="text-lg font-semibold text-slate-900">{profileData.careerInterest.preferredRole || "Not specified"}</p>
+                </div>
+                <div className="rounded-lg bg-gradient-to-r from-slate-50 to-slate-100 border border-slate-200 p-4">
+                  <p className="text-xs font-semibold text-slate-600 uppercase mb-1 flex items-center gap-2"><Building2 className="h-4 w-4 text-red-600" /> Industry</p>
+                  <p className="text-lg font-semibold text-slate-900">{profileData.careerInterest.industry || "Not specified"}</p>
+                </div>
+                {profileData.careerInterest.goals && (
+                  <div className="rounded-lg bg-gradient-to-r from-red-50 to-pink-50 border border-red-200 p-4">
+                    <p className="text-xs font-semibold text-red-700 uppercase mb-2 flex items-center gap-2"><Heart className="h-4 w-4" /> Career Goals</p>
+                    <p className="text-slate-800 leading-relaxed">{profileData.careerInterest.goals}</p>
+                  </div>
+                )}
               </div>
             )}
           </motion.div>
@@ -1406,13 +1648,15 @@ const StudentProfilePage = () => {
             variants={sectionVariants}
             initial="hidden"
             animate="visible"
-            className="bg-card rounded-xl p-6 border border-slate-200"
+            className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 lg:p-7 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-slate-800">Resume</h3>
-              <Button variant="ghost" size="sm" onClick={() => resumeInputRef.current?.click()}>
-                <Upload className="h-4 w-4" />
-              </Button>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-slate-600 to-slate-700 text-white">
+                  <Download className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900">Resume</h3>
+              </div>
             </div>
             <input
               ref={resumeInputRef}
@@ -1428,35 +1672,43 @@ const StudentProfilePage = () => {
               }}
             />
             {profileData.resume.fileName ? (
-              <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <FileText className="h-6 w-6 text-yellow-600" />
+              <div className="rounded-xl p-5 bg-gradient-to-r from-slate-50 to-slate-100 border-2 border-slate-200 hover:border-slate-300 hover:shadow-md transition-all flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="h-14 w-14 rounded-lg bg-gradient-to-br from-slate-600 to-slate-700 flex items-center justify-center text-white">
+                    <FileText className="h-8 w-8" />
+                  </div>
                   <div>
-                    <p className="font-medium text-slate-800">{profileData.resume.fileName}</p>
-                    <p className="text-xs text-muted-foreground">Uploaded {profileData.resume.uploadedAt}</p>
+                    <p className="font-bold text-slate-900">{profileData.resume.fileName}</p>
+                    <p className="text-xs text-slate-600">Uploaded {profileData.resume.uploadedAt}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   {profileData.resume.fileUrl && (
-                    <Button variant="outline" size="sm" asChild>
-                      <a href={profileData.resume.fileUrl} target="_blank" rel="noopener noreferrer">
-                        Open
+                    <Button variant="outline" size="sm" asChild className="rounded-lg border-slate-300 hover:bg-slate-100">
+                      <a href={profileData.resume.fileUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
+                        <ExternalLink className="h-4 w-4" />
+                        View
                       </a>
                     </Button>
                   )}
-                  <Button variant="outline" size="sm" onClick={() => resumeInputRef.current?.click()}>
-                  Change
+                  <Button variant="outline" size="sm" onClick={() => resumeInputRef.current?.click()} className="rounded-lg border-slate-300 hover:bg-slate-100">
+                    <Upload className="h-4 w-4 mr-1" />
+                    Change
                   </Button>
                 </div>
               </div>
             ) : (
-              <div className="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center">
-                <Upload className="h-12 w-12 mx-auto text-slate-400 mb-2" />
-                <p className="text-slate-600 font-medium">Upload your resume</p>
-                <p className="text-sm text-muted-foreground">PDF, DOC, or DOCX files</p>
-                <Button className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black">
+              <div className="border-3 border-dashed border-slate-300 rounded-2xl p-12 text-center hover:border-slate-400 hover:bg-slate-50 transition-all cursor-pointer" onClick={() => resumeInputRef.current?.click()}>
+                <div className="flex justify-center mb-4">
+                  <div className="h-16 w-16 rounded-full bg-slate-100 flex items-center justify-center">
+                    <Upload className="h-8 w-8 text-slate-500" />
+                  </div>
+                </div>
+                <p className="text-slate-900 font-bold text-lg">Upload Your Resume</p>
+                <p className="text-sm text-slate-600 mt-1">PDF, DOC, or DOCX formats supported</p>
+                <Button onClick={() => resumeInputRef.current?.click()} className="mt-6 bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white font-semibold rounded-lg">
                   <Upload className="h-4 w-4 mr-2" />
-                  Upload Resume
+                  Choose File
                 </Button>
               </div>
             )}
@@ -1468,25 +1720,31 @@ const StudentProfilePage = () => {
             variants={sectionVariants}
             initial="hidden"
             animate="visible"
-            className="bg-card rounded-xl p-6 border border-slate-200"
+            className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 lg:p-7 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-slate-800">Portfolio Links</h3>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-red-500 to-orange-500 text-white">
+                  <LinkIcon className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900">Portfolio Links</h3>
+              </div>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setEditingSection(editingSection === "portfolio" ? null : "portfolio")}
+                className="rounded-lg hover:bg-slate-100"
               >
-                {editingSection === "portfolio" ? <Check className="h-4 w-4" /> : <Edit2 className="h-4 w-4" />}
+                {editingSection === "portfolio" ? <Check className="h-4 w-4 text-green-600" /> : <Edit2 className="h-4 w-4" />}
               </Button>
             </div>
             {editingSection === "portfolio" ? (
               <div className="space-y-4">
                 {profileData.portfolio.links.map((link, idx) => (
-                  <div key={idx} className="space-y-2">
+                  <div key={idx} className="space-y-2 p-4 rounded-xl bg-gradient-to-br from-red-50 to-orange-50 border border-red-200">
                     <div className="flex gap-2">
                       <Input
-                        placeholder="Link title"
+                        placeholder="Link title (e.g., GitHub Portfolio)"
                         value={link.title}
                         onChange={(e) => {
                           const newLinks = [...profileData.portfolio.links];
@@ -1494,6 +1752,7 @@ const StudentProfilePage = () => {
                           setPortfolioLinkError("");
                           setProfileData({ ...profileData, portfolio: { links: newLinks } });
                         }}
+                        className="flex-1 rounded-lg border-red-200 focus:border-red-500 focus:ring-red-500"
                       />
                       <Button
                         variant="outline"
@@ -1502,12 +1761,13 @@ const StudentProfilePage = () => {
                           const newLinks = profileData.portfolio.links.filter((_, i) => i !== idx);
                           setProfileData({ ...profileData, portfolio: { links: newLinks } });
                         }}
+                        className="rounded-lg border-red-200 text-red-600 hover:bg-red-50"
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
                     </div>
                     <Input
-                      placeholder="https://example.com"
+                      placeholder="https://github.com/yourprofile"
                       value={link.url}
                       onChange={(e) => {
                         const newLinks = [...profileData.portfolio.links];
@@ -1515,27 +1775,28 @@ const StudentProfilePage = () => {
                         setPortfolioLinkError("");
                         setProfileData({ ...profileData, portfolio: { links: newLinks } });
                       }}
+                      className="rounded-lg border-red-200 focus:border-red-500 focus:ring-red-500"
                     />
                   </div>
                 ))}
                 <Button
                   variant="outline"
                   onClick={addPortfolioLink}
-                  className="w-full"
+                  className="w-full rounded-lg border-red-200 text-red-600 hover:bg-red-50"
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   Add Portfolio Link
                 </Button>
-                {portfolioLinkError && <p className="text-sm text-red-600">{portfolioLinkError}</p>}
+                {portfolioLinkError && <p className="text-sm text-red-600 font-medium">{portfolioLinkError}</p>}
                 <Button
                   onClick={() => setEditingSection(null)}
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-black"
+                  className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-semibold rounded-lg mt-6"
                 >
-                  Save Changes
+                  ✓ Save Changes
                 </Button>
               </div>
             ) : (
-              <div className="space-y-2">
+              <div className="space-y-3">
                 {profileData.portfolio.links.length > 0 ? (
                   profileData.portfolio.links.map((link, idx) => (
                     <a
@@ -1543,14 +1804,26 @@ const StudentProfilePage = () => {
                       href={normalizeUrl(link.url)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg hover:bg-slate-100 transition"
+                      className="group flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 hover:shadow-md hover:border-red-300 transition-all"
                     >
-                      <LinkIcon className="h-4 w-4 text-yellow-600" />
-                      <span className="text-blue-600 hover:underline">{link.title}</span>
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center text-white">
+                          <ExternalLink className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-slate-900 group-hover:text-red-600 transition-colors">{link.title}</p>
+                          <p className="text-xs text-slate-600">Visit →</p>
+                        </div>
+                      </div>
+                      <ExternalLink className="h-4 w-4 text-slate-400 group-hover:text-red-600 transition-colors" />
                     </a>
                   ))
                 ) : (
-                  <p className="text-muted-foreground">No portfolio links added yet</p>
+                  <div className="rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 p-8 text-center">
+                    <LinkIcon className="h-12 w-12 text-slate-300 mx-auto mb-3" />
+                    <p className="text-slate-600 font-medium">No portfolio links added yet</p>
+                    <p className="text-xs text-slate-500 mt-1">Share your projects, GitHub, personal website, or other portfolio links</p>
+                  </div>
                 )}
               </div>
             )}
@@ -1562,40 +1835,57 @@ const StudentProfilePage = () => {
             variants={sectionVariants}
             initial="hidden"
             animate="visible"
-            className="bg-card rounded-xl p-6 border border-slate-200"
+            className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 lg:p-7 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-slate-800">Proof of Work</h3>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 text-white">
+                  <Code className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900">Proof of Work</h3>
+              </div>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setEditingSection(editingSection === "proofOfWork" ? null : "proofOfWork")}
+                className="rounded-lg hover:bg-slate-100"
               >
-                {editingSection === "proofOfWork" ? <Check className="h-4 w-4" /> : <Edit2 className="h-4 w-4" />}
+                {editingSection === "proofOfWork" ? <Check className="h-4 w-4 text-green-600" /> : <Edit2 className="h-4 w-4" />}
               </Button>
             </div>
             {editingSection === "proofOfWork" ? (
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {profileData.proofOfWork.projects.map((project, idx) => (
-                  <div key={idx} className="space-y-2 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                    {project.imageUrl && (
-                      <img
-                        src={project.imageUrl}
-                        alt={project.title || "Project screenshot"}
-                        className="h-40 w-full rounded-lg object-cover border border-slate-200"
-                      />
-                    )}
-                    <div className="space-y-2">
-                      <Label>Project screenshot (optional)</Label>
+                  <div key={idx} className="rounded-xl border-2 border-green-200 bg-gradient-to-br from-green-50 to-emerald-50 p-5 space-y-4 hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="h-2 w-2 rounded-full bg-gradient-to-r from-green-500 to-emerald-500" />
+                      <p className="font-bold text-slate-900">Project {idx + 1}</p>
+                      {profileData.proofOfWork.projects.length > 1 && (
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          className="ml-auto text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg"
+                          onClick={() => {
+                            const newProjects = profileData.proofOfWork.projects.filter((_, i) => i !== idx);
+                            setProfileData({ ...profileData, proofOfWork: { projects: newProjects } });
+                          }}
+                        >
+                          <Trash2 className="h-4 w-4 mr-1" />
+                          Remove
+                        </Button>
+                      )}
+                    </div>
+                    <div className="space-y-3">
+                      <Label className="font-semibold text-slate-700">Project Screenshot</Label>
                       <div className="flex items-center gap-4">
-                        <div className="w-28 h-20 bg-slate-100 rounded-lg overflow-hidden flex items-center justify-center border border-slate-200">
+                        <div className="w-32 h-24 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg overflow-hidden flex items-center justify-center border-2 border-dashed border-green-300">
                           {project.imageUrl ? (
                             <img src={project.imageUrl} alt={project.title || "Project screenshot"} className="object-cover w-full h-full" />
                           ) : (
-                            <div className="text-xs text-muted-foreground">No image</div>
+                            <div className="text-xs text-slate-500 font-medium">No image</div>
                           )}
                         </div>
-
                         <div className="flex-1">
                           <input
                             id={`projectImage-${idx}`}
@@ -1605,7 +1895,6 @@ const StudentProfilePage = () => {
                             onChange={(e) => {
                               const file = e.target.files?.[0];
                               if (!file) return;
-
                               const reader = new FileReader();
                               reader.onloadend = () => {
                                 const newProjects = [...profileData.proofOfWork.projects];
@@ -1617,106 +1906,116 @@ const StudentProfilePage = () => {
                               e.target.value = "";
                             }}
                           />
-
-                          <div className="flex items-center gap-2">
-                            <label htmlFor={`projectImage-${idx}`} className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-slate-50 border border-slate-200 text-sm cursor-pointer hover:shadow-sm">
-                              <Upload className="h-4 w-4 text-yellow-600" />
-                              <span className="text-sm">Choose image</span>
-                            </label>
-                            <span className="text-xs text-muted-foreground">PNG / JPEG · recommended 16:9 · up to 5MB</span>
-                          </div>
+                          <label htmlFor={`projectImage-${idx}`} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-green-300 text-sm font-semibold text-green-700 cursor-pointer hover:bg-green-50 transition-colors">
+                            <Upload className="h-4 w-4" />
+                            Upload
+                          </label>
+                          <p className="text-xs text-slate-600 mt-2">PNG/JPEG · 16:9 · Up to 5MB</p>
                         </div>
                       </div>
                     </div>
-                    <Input
-                      placeholder="Project title"
-                      value={project.title}
-                      onChange={(e) => {
-                        const newProjects = [...profileData.proofOfWork.projects];
-                        newProjects[idx].title = e.target.value;
-                        setProofOfWorkError("");
-                        setProfileData({ ...profileData, proofOfWork: { projects: newProjects } });
-                      }}
-                    />
-                    <Textarea
-                      placeholder="Project description"
-                      value={project.description}
-                      onChange={(e) => {
-                        const newProjects = [...profileData.proofOfWork.projects];
-                        newProjects[idx].description = e.target.value;
-                        setProofOfWorkError("");
-                        setProfileData({ ...profileData, proofOfWork: { projects: newProjects } });
-                      }}
-                      rows={3}
-                    />
-                    <Input
-                      placeholder="Project link"
-                      value={project.link}
-                      onChange={(e) => {
-                        const newProjects = [...profileData.proofOfWork.projects];
-                        newProjects[idx].link = e.target.value;
-                        setProofOfWorkError("");
-                        setProfileData({ ...profileData, proofOfWork: { projects: newProjects } });
-                      }}
-                    />
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        const newProjects = profileData.proofOfWork.projects.filter((_, i) => i !== idx);
-                        setProfileData({ ...profileData, proofOfWork: { projects: newProjects } });
-                      }}
-                      className="w-full"
-                    >
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      Remove
-                    </Button>
+                    <div className="space-y-2">
+                      <Label htmlFor={`projectTitle-${idx}`} className="font-semibold text-slate-700">Project Title</Label>
+                      <Input
+                        id={`projectTitle-${idx}`}
+                        placeholder="e.g., E-commerce Platform"
+                        value={project.title}
+                        onChange={(e) => {
+                          const newProjects = [...profileData.proofOfWork.projects];
+                          newProjects[idx].title = e.target.value;
+                          setProofOfWorkError("");
+                          setProfileData({ ...profileData, proofOfWork: { projects: newProjects } });
+                        }}
+                        className="rounded-lg border-green-200 focus:border-green-500 focus:ring-green-500"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor={`projectDesc-${idx}`} className="font-semibold text-slate-700">Description</Label>
+                      <Textarea
+                        id={`projectDesc-${idx}`}
+                        placeholder="Describe what you built and what technologies you used..."
+                        value={project.description}
+                        onChange={(e) => {
+                          const newProjects = [...profileData.proofOfWork.projects];
+                          newProjects[idx].description = e.target.value;
+                          setProofOfWorkError("");
+                          setProfileData({ ...profileData, proofOfWork: { projects: newProjects } });
+                        }}
+                        rows={3}
+                        className="rounded-lg border-green-200 focus:border-green-500 focus:ring-green-500"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor={`projectLink-${idx}`} className="font-semibold text-slate-700">Project Link</Label>
+                      <Input
+                        id={`projectLink-${idx}`}
+                        placeholder="https://github.com/yourrepo or project URL"
+                        value={project.link}
+                        onChange={(e) => {
+                          const newProjects = [...profileData.proofOfWork.projects];
+                          newProjects[idx].link = e.target.value;
+                          setProofOfWorkError("");
+                          setProfileData({ ...profileData, proofOfWork: { projects: newProjects } });
+                        }}
+                        className="rounded-lg border-green-200 focus:border-green-500 focus:ring-green-500"
+                      />
+                    </div>
                   </div>
                 ))}
                 <Button
                   variant="outline"
                   onClick={addProofOfWorkProject}
-                  className="w-full"
+                  className="w-full rounded-lg border-green-200 text-green-600 hover:bg-green-50"
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   Add Project
                 </Button>
-                {proofOfWorkError && <p className="text-sm text-red-600">{proofOfWorkError}</p>}
+                {proofOfWorkError && <p className="text-sm text-red-600 font-medium">{proofOfWorkError}</p>}
                 <Button
                   onClick={() => setEditingSection(null)}
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-black"
+                  className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-lg mt-6"
                 >
-                  Save Changes
+                  ✓ Save Changes
                 </Button>
               </div>
             ) : (
               <div className="space-y-3">
                 {profileData.proofOfWork.projects.length > 0 ? (
                   profileData.proofOfWork.projects.map((project, idx) => (
-                    <Card key={idx} className="p-4">
+                    <div key={idx} className="group rounded-xl border border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 overflow-hidden hover:shadow-lg hover:border-green-300 transition-all">
                       {project.imageUrl && (
                         <img
                           src={project.imageUrl}
                           alt={project.title || "Project screenshot"}
-                          className="mb-3 h-40 w-full rounded-lg object-cover border border-slate-200"
+                          className="w-full h-48 object-cover"
                         />
                       )}
-                      <p className="font-medium text-slate-800">{project.title}</p>
-                      <p className="text-sm text-slate-600 mt-1">{project.description}</p>
-                      {project.link && (
-                        <a
-                          href={normalizeUrl(project.link)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-blue-600 hover:underline mt-2 inline-block"
-                        >
-                          View Project →
-                        </a>
-                      )}
-                    </Card>
+                      <div className="p-5">
+                        <p className="font-bold text-lg text-slate-900 flex items-center gap-2">
+                          <Code className="h-5 w-5 text-green-600" />
+                          {project.title || "(Untitled)"}
+                        </p>
+                        {project.description && <p className="text-slate-700 mt-2 text-sm leading-relaxed">{project.description}</p>}
+                        {project.link && (
+                          <a
+                            href={normalizeUrl(project.link)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm font-semibold text-green-600 hover:text-green-700 mt-3 inline-flex items-center gap-1 group-hover:gap-2 transition-all"
+                          >
+                            View Project
+                            <ExternalLink className="h-4 w-4" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
                   ))
                 ) : (
-                  <p className="text-muted-foreground">No projects added yet</p>
+                  <div className="rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 p-8 text-center">
+                    <Code className="h-12 w-12 text-slate-300 mx-auto mb-3" />
+                    <p className="text-slate-600 font-medium">No projects added yet</p>
+                    <p className="text-xs text-slate-500 mt-1">Showcase your best projects, open-source contributions, or side hustles</p>
+                  </div>
                 )}
               </div>
             )}
@@ -1728,145 +2027,189 @@ const StudentProfilePage = () => {
             variants={sectionVariants}
             initial="hidden"
             animate="visible"
-            className="bg-card rounded-xl p-6 border border-slate-200"
+            className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 lg:p-7 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-slate-800">Certificates & Achievements</h3>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 text-white">
+                  <Award className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900">Certificates & Achievements</h3>
+              </div>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setEditingSection(editingSection === "certificates" ? null : "certificates")}
+                className="rounded-lg hover:bg-slate-100"
               >
-                {editingSection === "certificates" ? <Check className="h-4 w-4" /> : <Edit2 className="h-4 w-4" />}
+                {editingSection === "certificates" ? <Check className="h-4 w-4 text-green-600" /> : <Edit2 className="h-4 w-4" />}
               </Button>
             </div>
             {editingSection === "certificates" ? (
               <div className="space-y-4">
                 {profileData.certificates.certs.map((cert, idx) => (
-                  <div key={idx} className="space-y-2 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                    <Input
-                      placeholder="Certificate name"
-                      value={cert.title}
-                      onChange={(e) => {
-                        const newCerts = [...profileData.certificates.certs];
-                        newCerts[idx].title = e.target.value;
-                        setCertificateError("");
-                        setProfileData({ ...profileData, certificates: { certs: newCerts } });
-                      }}
-                    />
-                    <Input
-                      placeholder="Issuer"
-                      value={cert.issuer}
-                      onChange={(e) => {
-                        const newCerts = [...profileData.certificates.certs];
-                        newCerts[idx].issuer = e.target.value;
-                        setCertificateError("");
-                        setProfileData({ ...profileData, certificates: { certs: newCerts } });
-                      }}
-                    />
-                    <Input
-                      placeholder="Date"
-                      type="date"
-                      value={cert.date}
-                      onChange={(e) => {
-                        const newCerts = [...profileData.certificates.certs];
-                        newCerts[idx].date = e.target.value;
-                        setCertificateError("");
-                        setProfileData({ ...profileData, certificates: { certs: newCerts } });
-                      }}
-                    />
-                    <Input
-                      placeholder="Credential URL (optional)"
-                      value={cert.credentialUrl || ""}
-                      onChange={(e) => {
-                        const newCerts = [...profileData.certificates.certs];
-                        newCerts[idx].credentialUrl = e.target.value;
-                        setProfileData({ ...profileData, certificates: { certs: newCerts } });
-                      }}
-                    />
-                    <input
-                      type="file"
-                      accept="image/*"
-                      id={`cert-photo-${idx}`}
-                      className="hidden"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) {
-                          const reader = new FileReader();
-                          reader.onloadend = () => {
-                            const newCerts = [...profileData.certificates.certs];
-                            newCerts[idx].photoUrl = reader.result as string;
+                  <div key={idx} className="rounded-xl border-2 border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50 p-5 space-y-3 hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="h-2 w-2 rounded-full bg-gradient-to-r from-amber-500 to-orange-500" />
+                      <p className="font-bold text-slate-900">Certificate {idx + 1}</p>
+                      {profileData.certificates.certs.length > 1 && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="ml-auto text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg"
+                          onClick={() => {
+                            const newCerts = profileData.certificates.certs.filter((_, i) => i !== idx);
                             setProfileData({ ...profileData, certificates: { certs: newCerts } });
-                          };
-                          reader.readAsDataURL(file);
-                        }
-                      }}
-                    />
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => document.getElementById(`cert-photo-${idx}`)?.click()}
-                        className="flex-1"
-                      >
-                        Upload Certificate Photo
-                      </Button>
-                      {cert.photoUrl && (
-                        <img src={cert.photoUrl} alt="cert" className="h-10 w-10 rounded-md object-cover" />
+                          }}
+                        >
+                          <Trash2 className="h-4 w-4 mr-1" />
+                          Remove
+                        </Button>
                       )}
                     </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        const newCerts = profileData.certificates.certs.filter((_, i) => i !== idx);
-                        setProfileData({ ...profileData, certificates: { certs: newCerts } });
-                      }}
-                      className="w-full"
-                    >
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      Remove
-                    </Button>
+                    <div className="space-y-2">
+                      <Label htmlFor={`certTitle-${idx}`} className="font-semibold text-slate-700">Certificate Name</Label>
+                      <Input
+                        id={`certTitle-${idx}`}
+                        placeholder="e.g., Google Cloud Certification"
+                        value={cert.title}
+                        onChange={(e) => {
+                          const newCerts = [...profileData.certificates.certs];
+                          newCerts[idx].title = e.target.value;
+                          setCertificateError("");
+                          setProfileData({ ...profileData, certificates: { certs: newCerts } });
+                        }}
+                        className="rounded-lg border-amber-200 focus:border-amber-500 focus:ring-amber-500"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor={`certIssuer-${idx}`} className="font-semibold text-slate-700">Issuing Organization</Label>
+                      <Input
+                        id={`certIssuer-${idx}`}
+                        placeholder="e.g., Google, Coursera, MIT"
+                        value={cert.issuer}
+                        onChange={(e) => {
+                          const newCerts = [...profileData.certificates.certs];
+                          newCerts[idx].issuer = e.target.value;
+                          setCertificateError("");
+                          setProfileData({ ...profileData, certificates: { certs: newCerts } });
+                        }}
+                        className="rounded-lg border-amber-200 focus:border-amber-500 focus:ring-amber-500"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor={`certDate-${idx}`} className="font-semibold text-slate-700">Issue Date</Label>
+                      <Input
+                        id={`certDate-${idx}`}
+                        type="date"
+                        value={cert.date}
+                        onChange={(e) => {
+                          const newCerts = [...profileData.certificates.certs];
+                          newCerts[idx].date = e.target.value;
+                          setCertificateError("");
+                          setProfileData({ ...profileData, certificates: { certs: newCerts } });
+                        }}
+                        className="rounded-lg border-amber-200 focus:border-amber-500 focus:ring-amber-500"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor={`certUrl-${idx}`} className="font-semibold text-slate-700">Credential URL (optional)</Label>
+                      <Input
+                        id={`certUrl-${idx}`}
+                        placeholder="https://credentials.example.com/..."
+                        value={cert.credentialUrl || ""}
+                        onChange={(e) => {
+                          const newCerts = [...profileData.certificates.certs];
+                          newCerts[idx].credentialUrl = e.target.value;
+                          setProfileData({ ...profileData, certificates: { certs: newCerts } });
+                        }}
+                        className="rounded-lg border-amber-200 focus:border-amber-500 focus:ring-amber-500"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="font-semibold text-slate-700">Certificate Image</Label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        id={`cert-photo-${idx}`}
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                              const newCerts = [...profileData.certificates.certs];
+                              newCerts[idx].photoUrl = reader.result as string;
+                              setProfileData({ ...profileData, certificates: { certs: newCerts } });
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                      <div className="flex items-center gap-3">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => document.getElementById(`cert-photo-${idx}`)?.click()}
+                          className="rounded-lg border-amber-200 text-amber-600 hover:bg-amber-50"
+                        >
+                          <Upload className="h-4 w-4 mr-2" />
+                          Upload Image
+                        </Button>
+                        {cert.photoUrl && (
+                          <img src={cert.photoUrl} alt="cert" className="h-16 w-20 rounded-lg object-cover border border-amber-200" />
+                        )}
+                      </div>
+                    </div>
                   </div>
                 ))}
                 <Button
                   variant="outline"
                   onClick={addCertificate}
-                  className="w-full"
+                  className="w-full rounded-lg border-amber-200 text-amber-600 hover:bg-amber-50"
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   Add Certificate
                 </Button>
-                {certificateError && <p className="text-sm text-red-600">{certificateError}</p>}
+                {certificateError && <p className="text-sm text-red-600 font-medium">{certificateError}</p>}
                 <Button
                   onClick={() => setEditingSection(null)}
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-black"
+                  className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-semibold rounded-lg mt-6"
                 >
-                  Save Changes
+                  ✓ Save Changes
                 </Button>
               </div>
             ) : (
               <div className="space-y-3">
                 {profileData.certificates.certs.length > 0 ? (
                   profileData.certificates.certs.map((cert, idx) => (
-                    <Card key={idx} className="p-4">
-                      <p className="font-medium text-slate-800">{cert.title}</p>
-                      <p className="text-sm text-slate-600">Issued by {cert.issuer}</p>
-                      <p className="text-xs text-muted-foreground mt-1">{cert.date}</p>
-                      {cert.credentialUrl && (
-                        <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:underline break-all mt-2 inline-block">
-                          {cert.credentialUrl}
-                        </a>
-                      )}
+                    <div key={idx} className="group rounded-xl border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 overflow-hidden hover:shadow-lg hover:border-amber-300 transition-all">
                       {cert.photoUrl && (
-                        <div className="mt-2">
-                          <img src={cert.photoUrl} alt={`${cert.title} photo`} className="h-20 w-32 object-cover rounded-md" />
-                        </div>
+                        <img src={cert.photoUrl} alt={cert.title} className="w-full h-32 object-cover" />
                       )}
-                    </Card>
+                      <div className="p-4">
+                        <p className="font-bold text-slate-900 flex items-center gap-2">
+                          <Award className="h-5 w-5 text-amber-600" />
+                          {cert.title}
+                        </p>
+                        <p className="text-sm text-slate-600 mt-1">Issued by <span className="font-semibold">{cert.issuer}</span></p>
+                        {cert.date && <p className="text-xs text-slate-500 mt-1">{cert.date}</p>}
+                        {cert.credentialUrl && (
+                          <a href={cert.credentialUrl} target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-amber-600 hover:text-amber-700 mt-3 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                            View Credential
+                            <ExternalLink className="h-3 w-3" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
                   ))
                 ) : (
-                  <p className="text-muted-foreground">No certificates added yet</p>
+                  <div className="rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 p-8 text-center">
+                    <Award className="h-12 w-12 text-slate-300 mx-auto mb-3" />
+                    <p className="text-slate-600 font-medium">No certificates added yet</p>
+                    <p className="text-xs text-slate-500 mt-1">Add certifications, awards, and professional achievements</p>
+                  </div>
                 )}
               </div>
             )}
@@ -1878,45 +2221,81 @@ const StudentProfilePage = () => {
             variants={sectionVariants}
             initial="hidden"
             animate="visible"
-            className="bg-card rounded-xl p-6 border border-slate-200 pb-12"
+            className="rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 lg:p-7 shadow-sm hover:shadow-md transition-shadow pb-12"
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-slate-800">Impact Work (CSR / Volunteering)</h3>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-rose-500 to-orange-500 text-white">
+                  <Heart className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900">Impact Work & Volunteering</h3>
+              </div>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setEditingSection(editingSection === "impact" ? null : "impact")}
+                className="rounded-lg hover:bg-slate-100"
               >
-                {editingSection === "impact" ? <Check className="h-4 w-4" /> : <Edit2 className="h-4 w-4" />}
+                {editingSection === "impact" ? <Check className="h-4 w-4 text-green-600" /> : <Edit2 className="h-4 w-4" />}
               </Button>
             </div>
             {editingSection === "impact" ? (
               <div className="space-y-4">
                 {profileData.impactWork.initiatives.map((initiative, idx) => (
-                  <div key={idx} className="space-y-2 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                    <Input
-                      placeholder="Initiative name"
-                      value={initiative.title}
-                      onChange={(e) => {
-                        const newInitiatives = [...profileData.impactWork.initiatives];
-                        newInitiatives[idx].title = e.target.value;
-                        setProfileData({ ...profileData, impactWork: { initiatives: newInitiatives } });
-                      }}
-                    />
-                    <Textarea
-                      placeholder="Description"
-                      value={initiative.description}
-                      onChange={(e) => {
-                        const newInitiatives = [...profileData.impactWork.initiatives];
-                        newInitiatives[idx].description = e.target.value;
-                        setProfileData({ ...profileData, impactWork: { initiatives: newInitiatives } });
-                      }}
-                      rows={3}
-                    />
-                    <div className="space-y-1">
+                  <div key={idx} className="rounded-xl border-2 border-rose-200 bg-gradient-to-br from-rose-50 to-orange-50 p-5 space-y-3 hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="h-2 w-2 rounded-full bg-gradient-to-r from-rose-500 to-orange-500" />
+                      <p className="font-bold text-slate-900">Initiative {idx + 1}</p>
+                      {profileData.impactWork.initiatives.length > 1 && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="ml-auto text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg"
+                          onClick={() => {
+                            const newInitiatives = profileData.impactWork.initiatives.filter((_, i) => i !== idx);
+                            setProfileData({ ...profileData, impactWork: { initiatives: newInitiatives } });
+                          }}
+                        >
+                          <Trash2 className="h-4 w-4 mr-1" />
+                          Remove
+                        </Button>
+                      )}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor={`initTitle-${idx}`} className="font-semibold text-slate-700">Initiative Name</Label>
+                      <Input
+                        id={`initTitle-${idx}`}
+                        placeholder="e.g., Food Bank Volunteer"
+                        value={initiative.title}
+                        onChange={(e) => {
+                          const newInitiatives = [...profileData.impactWork.initiatives];
+                          newInitiatives[idx].title = e.target.value;
+                          setProfileData({ ...profileData, impactWork: { initiatives: newInitiatives } });
+                        }}
+                        className="rounded-lg border-rose-200 focus:border-rose-500 focus:ring-rose-500"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor={`initDesc-${idx}`} className="font-semibold text-slate-700">Description</Label>
+                      <Textarea
+                        id={`initDesc-${idx}`}
+                        placeholder="What did you contribute? What impact did you make?"
+                        value={initiative.description}
+                        onChange={(e) => {
+                          const newInitiatives = [...profileData.impactWork.initiatives];
+                          newInitiatives[idx].description = e.target.value;
+                          setProfileData({ ...profileData, impactWork: { initiatives: newInitiatives } });
+                        }}
+                        rows={3}
+                        className="rounded-lg border-rose-200 focus:border-rose-500 focus:ring-rose-500"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor={`initHours-${idx}`} className="font-semibold text-slate-700">Volunteer Hours</Label>
                       <div className="flex items-center gap-2">
                         <Input
-                          placeholder="Hours contributed"
+                          id={`initHours-${idx}`}
+                          placeholder="Hours"
                           type="number"
                           min={0}
                           step={1}
@@ -1927,24 +2306,11 @@ const StudentProfilePage = () => {
                             newInitiatives[idx].hours = parseInt(e.target.value) || 0;
                             setProfileData({ ...profileData, impactWork: { initiatives: newInitiatives } });
                           }}
-                          className="flex-1"
+                          className="flex-1 rounded-lg border-rose-200 focus:border-rose-500 focus:ring-rose-500"
                         />
-                        <span className="text-sm text-muted-foreground">hrs</span>
+                        <span className="font-semibold text-slate-700">hours</span>
                       </div>
-                      <p className="text-xs text-muted-foreground">Enter total hours (e.g., 10)</p>
                     </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        const newInitiatives = profileData.impactWork.initiatives.filter((_, i) => i !== idx);
-                        setProfileData({ ...profileData, impactWork: { initiatives: newInitiatives } });
-                      }}
-                      className="w-full"
-                    >
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      Remove
-                    </Button>
                   </div>
                 ))}
                 <Button
@@ -1960,30 +2326,46 @@ const StudentProfilePage = () => {
                       },
                     });
                   }}
-                  className="w-full"
+                  className="w-full rounded-lg border-rose-200 text-rose-600 hover:bg-rose-50"
                 >
                   <Plus className="h-4 w-4 mr-2" />
                   Add Initiative
                 </Button>
                 <Button
                   onClick={() => setEditingSection(null)}
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-black"
+                  className="w-full bg-gradient-to-r from-rose-600 to-orange-600 hover:from-rose-700 hover:to-orange-700 text-white font-semibold rounded-lg mt-6"
                 >
-                  Save Changes
+                  ✓ Save Changes
                 </Button>
               </div>
             ) : (
               <div className="space-y-3">
                 {profileData.impactWork.initiatives.length > 0 ? (
                   profileData.impactWork.initiatives.map((initiative, idx) => (
-                    <Card key={idx} className="p-4">
-                      <p className="font-medium text-slate-800">{initiative.title}</p>
-                      <p className="text-sm text-slate-600 mt-1">{initiative.description}</p>
-                      <p className="text-xs text-muted-foreground mt-2">Hours: {initiative.hours}</p>
-                    </Card>
+                    <div key={idx} className="group rounded-xl border border-rose-200 bg-gradient-to-r from-rose-50 to-orange-50 p-5 hover:shadow-lg hover:border-rose-300 transition-all">
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1">
+                          <p className="font-bold text-lg text-slate-900 flex items-center gap-2">
+                            <Heart className="h-5 w-5 text-rose-600" />
+                            {initiative.title || "(Untitled)"}
+                          </p>
+                          {initiative.description && <p className="text-slate-700 mt-2 text-sm leading-relaxed">{initiative.description}</p>}
+                          {initiative.hours > 0 && (
+                            <div className="mt-3 flex items-center gap-2 text-sm font-semibold text-rose-600">
+                              <TrendingUp className="h-4 w-4" />
+                              {initiative.hours} hours contributed
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   ))
                 ) : (
-                  <p className="text-muted-foreground">No impact work added yet</p>
+                  <div className="rounded-lg border-2 border-dashed border-slate-300 bg-slate-50 p-8 text-center">
+                    <Heart className="h-12 w-12 text-slate-300 mx-auto mb-3" />
+                    <p className="text-slate-600 font-medium">No impact work added yet</p>
+                    <p className="text-xs text-slate-500 mt-1">Share your volunteering, CSR, and community service contributions</p>
+                  </div>
                 )}
               </div>
             )}
