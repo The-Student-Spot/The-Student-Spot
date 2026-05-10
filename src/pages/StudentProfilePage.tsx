@@ -48,6 +48,7 @@ import { motion } from "framer-motion";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "@/integrations/firebase/client";
 import StudentDashboardNavLayout from "@/components/layout/StudentDashboardNavLayout";
+import { useToast } from "@/hooks/use-toast";
 
 interface ProfileData {
   basicInfo: {
@@ -102,6 +103,7 @@ interface ProfileData {
 const StudentProfilePage = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [editingSection, setEditingSection] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [photoEditOpen, setPhotoEditOpen] = useState(false);
@@ -127,8 +129,27 @@ const StudentProfilePage = () => {
   };
 
   const getAvatarUrl = (gender: "male" | "female" | "other", seed: string) => {
-    // male uses avataaars, female uses a long-hair style, and other uses the older adventurer-neutral style
-    const style = gender === "female" ? "lorelei" : gender === "other" ? "adventurer-neutral" : "avataaars";
+    if (gender === "female") {
+      const femaleAvatarSvg = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 280" role="img" aria-label="Female student avatar">
+          <rect width="264" height="280" rx="132" fill="#fff7ed"/>
+          <path d="M72 254c5-43 27-68 60-68s55 25 60 68" fill="#f97316"/>
+          <path d="M98 196c6 17 18 28 34 28s28-11 34-28v-23H98v23Z" fill="#edb98a"/>
+          <path d="M66 119c0-47 26-78 66-78s66 31 66 78v35c0 37-28 66-66 66s-66-29-66-66v-35Z" fill="#ffdbb4"/>
+          <path d="M57 128c0-57 30-94 78-94 39 0 72 29 72 80 0 23-7 41-18 54 1-29-6-54-21-72-18 20-49 31-87 31-3 16-4 31-3 45-13-13-21-28-21-44Z" fill="#4a312c"/>
+          <path d="M75 126c37-2 70-14 93-38 15 17 22 42 20 75 12-15 18-33 18-54 0-52-33-81-72-81-49 0-79 38-79 96 0 19 8 36 23 50-3-16-4-32-3-48Z" fill="#2c1b18"/>
+          <circle cx="95" cy="143" r="5" fill="#2c1b18"/>
+          <circle cx="169" cy="143" r="5" fill="#2c1b18"/>
+          <path d="M113 176c13 10 26 10 39 0" fill="none" stroke="#b45309" stroke-width="7" stroke-linecap="round"/>
+          <path d="M83 132c9-8 21-8 30-1" fill="none" stroke="#2c1b18" stroke-width="5" stroke-linecap="round"/>
+          <path d="M151 131c9-7 21-7 30 1" fill="none" stroke="#2c1b18" stroke-width="5" stroke-linecap="round"/>
+          <path d="M104 254c5-16 15-26 28-26s23 10 28 26" fill="#fff7ed" opacity=".9"/>
+        </svg>
+      `;
+      return `data:image/svg+xml,${encodeURIComponent(femaleAvatarSvg)}`;
+    }
+
+    const style = gender === "other" ? "adventurer-neutral" : "avataaars";
     return `https://api.dicebear.com/7.x/${style}/svg?seed=${encodeURIComponent(seed)}`;
   };
 
@@ -568,6 +589,42 @@ const StudentProfilePage = () => {
     (profileData.impactWork.initiatives.length > 0 ? 15 : 0)
   ));
 
+  const handleShareProfile = async () => {
+    const fullName = [profileData.basicInfo.firstName, profileData.basicInfo.lastName].filter(Boolean).join(" ");
+    const profileName = fullName || user?.displayName || "Student";
+    const shareUrl = `${window.location.origin}/student-profile`;
+    const shareData = {
+      title: `${profileName}'s Student Spot Profile`,
+      text: `${profileName} - ${profileData.basicInfo.headline || "Student profile on The Student Spot"}`,
+      url: shareUrl,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        toast({
+          title: "Profile shared",
+          description: "Your profile share sheet opened successfully.",
+        });
+        return;
+      }
+
+      await navigator.clipboard.writeText(shareUrl);
+      toast({
+        title: "Profile link copied",
+        description: "You can now paste and share your profile link.",
+      });
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") return;
+
+      toast({
+        title: "Unable to share profile",
+        description: "Please try again in a moment.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <StudentDashboardNavLayout activeSection="profile" headerTitle="My Profile">
       {/* Profile Content */}
@@ -576,13 +633,10 @@ const StudentProfilePage = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-600 via-orange-500 to-red-600 p-8 lg:p-10 shadow-2xl border border-orange-400/20"
+          className="relative overflow-hidden rounded-2xl border border-orange-200 bg-gradient-to-br from-white via-orange-50/45 to-white p-8 lg:p-10 shadow-sm"
         >
           {/* Decorative background */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute -right-32 -top-32 h-64 w-64 rounded-full bg-orange-400 opacity-20 blur-3xl" />
-            <div className="absolute -left-32 -bottom-32 h-64 w-64 rounded-full bg-red-400 opacity-20 blur-3xl" />
-          </div>
+          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-orange-500 via-yellow-400 to-red-500" />
 
           <div className="relative z-10">
             <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center">
@@ -604,7 +658,7 @@ const StudentProfilePage = () => {
                   </button>
                 </div>
 
-                <div className="text-center lg:text-left text-white">
+                <div className="text-center lg:text-left text-slate-900">
                   <div className="flex items-center justify-center lg:justify-start gap-2 mb-2">
                     <h2 className="text-3xl lg:text-4xl font-black">
                       {profileData.basicInfo.firstName} {profileData.basicInfo.lastName}
@@ -613,8 +667,8 @@ const StudentProfilePage = () => {
                       ✓ Verified
                     </Badge>
                   </div>
-                  <p className="text-lg text-orange-50 font-semibold mb-3">{profileData.basicInfo.headline}</p>
-                  <div className="flex flex-col gap-2 text-sm text-orange-100">
+                  <p className="text-lg text-slate-600 font-semibold mb-3">{profileData.basicInfo.headline}</p>
+                  <div className="flex flex-col gap-2 text-sm text-slate-500">
                     {profileData.basicInfo.college && (
                       <div className="flex items-center justify-center lg:justify-start gap-2">
                         <GraduationCap className="h-4 w-4" />
@@ -633,25 +687,25 @@ const StudentProfilePage = () => {
 
               {/* Center: Stats */}
               <div className="flex-1 grid grid-cols-2 lg:grid-cols-2 gap-3 w-full lg:w-auto">
-                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1 }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
-                  <p className="text-xs font-semibold text-orange-100 uppercase">Profile</p>
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1 }} className="rounded-2xl border border-orange-200 bg-white p-4 text-slate-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
+                  <p className="text-xs font-semibold text-slate-500 uppercase">Profile</p>
                   <p className="text-2xl font-black mt-1">{profileCompletion}%</p>
-                  <p className="text-xs text-orange-100 mt-1">Complete</p>
+                  <p className="text-xs text-slate-500 mt-1">Complete</p>
                 </motion.div>
-                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.15 }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
-                  <p className="text-xs font-semibold text-orange-100 uppercase">Skills</p>
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.15 }} className="rounded-2xl border border-orange-200 bg-white p-4 text-slate-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
+                  <p className="text-xs font-semibold text-slate-500 uppercase">Skills</p>
                   <p className="text-2xl font-black mt-1">{profileData.skills.length}</p>
-                  <p className="text-xs text-orange-100 mt-1">Added</p>
+                  <p className="text-xs text-slate-500 mt-1">Added</p>
                 </motion.div>
-                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2 }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
-                  <p className="text-xs font-semibold text-orange-100 uppercase">Certificates</p>
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2 }} className="rounded-2xl border border-orange-200 bg-white p-4 text-slate-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
+                  <p className="text-xs font-semibold text-slate-500 uppercase">Certificates</p>
                   <p className="text-2xl font-black mt-1">{profileData.certificates.certs.length}</p>
-                  <p className="text-xs text-orange-100 mt-1">Earned</p>
+                  <p className="text-xs text-slate-500 mt-1">Earned</p>
                 </motion.div>
-                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.25 }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
-                  <p className="text-xs font-semibold text-orange-100 uppercase">Projects</p>
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.25 }} className="rounded-2xl border border-orange-200 bg-white p-4 text-slate-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
+                  <p className="text-xs font-semibold text-slate-500 uppercase">Projects</p>
                   <p className="text-2xl font-black mt-1">{profileData.proofOfWork.projects.length}</p>
-                  <p className="text-xs text-orange-100 mt-1">Showcased</p>
+                  <p className="text-xs text-slate-500 mt-1">Showcased</p>
                 </motion.div>
               </div>
 
@@ -671,7 +725,8 @@ const StudentProfilePage = () => {
                 </Button>
                 <Button
                   variant="outline"
-                  className="bg-white/10 border-white/30 text-white hover:bg-white/20 font-semibold rounded-xl px-6 py-3 w-full lg:w-auto backdrop-blur-sm"
+                  onClick={handleShareProfile}
+                  className="border-slate-300 text-slate-700 hover:bg-slate-50 font-semibold rounded-xl px-6 py-3 w-full lg:w-auto"
                 >
                   <Share2 className="h-4 w-4 mr-2" />
                   Share Profile
@@ -822,26 +877,26 @@ const StudentProfilePage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-6 lg:p-8 shadow-sm hover:shadow-md transition-shadow"
+            className="rounded-2xl border border-slate-200 bg-white p-5 lg:p-6 shadow-sm hover:shadow-md transition-shadow"
           >
-            <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
+            <div className="grid gap-5 lg:grid-cols-[240px_1fr] lg:items-stretch">
               {/* Circular Progress */}
-              <div className="flex flex-col items-center gap-4 flex-shrink-0">
-                <div className="relative w-40 h-40">
+              <div className="rounded-2xl border border-orange-100 bg-gradient-to-br from-orange-50 to-red-50 p-5 flex flex-col items-center justify-between gap-4">
+                <div className="relative w-36 h-36">
                   <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                     {/* Background circle */}
-                    <circle cx="50" cy="50" r="45" fill="none" stroke="#e2e8f0" strokeWidth="3" />
+                    <circle cx="50" cy="50" r="43" fill="none" stroke="#fed7aa" strokeWidth="5" />
                     {/* Progress circle */}
                     <motion.circle
                       cx="50"
                       cy="50"
-                      r="45"
+                      r="43"
                       fill="none"
                       stroke="url(#gradient)"
-                      strokeWidth="3"
-                      strokeDasharray={`${2 * Math.PI * 45}`}
-                      initial={{ strokeDashoffset: 2 * Math.PI * 45 }}
-                      animate={{ strokeDashoffset: 2 * Math.PI * 45 * (1 - profileCompletion / 100) }}
+                      strokeWidth="5"
+                      strokeDasharray={`${2 * Math.PI * 43}`}
+                      initial={{ strokeDashoffset: 2 * Math.PI * 43 }}
+                      animate={{ strokeDashoffset: 2 * Math.PI * 43 * (1 - profileCompletion / 100) }}
                       transition={{ duration: 1, delay: 0.3 }}
                       strokeLinecap="round"
                     />
@@ -853,20 +908,40 @@ const StudentProfilePage = () => {
                     </defs>
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <motion.p initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4 }} className="text-4xl font-black text-slate-900">
+                    <motion.p initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4 }} className="text-3xl font-black text-slate-900">
                       {profileCompletion}%
                     </motion.p>
-                    <p className="text-sm font-semibold text-slate-600">Complete</p>
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">Complete</p>
+                  </div>
+                </div>
+                <div className="w-full space-y-2">
+                  <div className="flex items-center justify-between rounded-xl bg-white/80 px-3 py-2 text-sm">
+                    <span className="font-semibold text-slate-700">Skills</span>
+                    <span className="font-bold text-orange-600">{profileData.skills.length}</span>
+                  </div>
+                  <div className="flex items-center justify-between rounded-xl bg-white/80 px-3 py-2 text-sm">
+                    <span className="font-semibold text-slate-700">Projects</span>
+                    <span className="font-bold text-red-600">{profileData.proofOfWork.projects.length}</span>
+                  </div>
+                  <div className="flex items-center justify-between rounded-xl bg-white/80 px-3 py-2 text-sm">
+                    <span className="font-semibold text-slate-700">Certificates</span>
+                    <span className="font-bold text-amber-600">{profileData.certificates.certs.length}</span>
                   </div>
                 </div>
               </div>
 
               {/* Completion Checklist */}
-              <div className="flex-1 space-y-3">
-                <h3 className="text-lg font-bold text-slate-900 mb-4">Profile Checklist</h3>
-                <div className="space-y-4">
+              <div className="min-w-0 rounded-2xl border border-slate-100 bg-slate-50/70 p-5">
+                <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
                   <div>
-                    <div className="flex justify-between text-sm mb-2">
+                    <h3 className="text-lg font-bold text-slate-900">Profile Checklist</h3>
+                    <p className="text-sm text-slate-600">Complete the important sections for better visibility.</p>
+                  </div>
+                  <Badge className="w-fit bg-orange-100 text-orange-700">{incompleteSections.length} left</Badge>
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <div className="flex justify-between text-sm mb-1.5">
                       <span className="text-slate-700 font-medium">Basic Information</span>
                       <span className="text-slate-600 font-semibold">{profileData.basicInfo.firstName && profileData.basicInfo.lastName ? "100" : "0"}%</span>
                     </div>
@@ -881,7 +956,7 @@ const StudentProfilePage = () => {
                   </div>
 
                   <div>
-                    <div className="flex justify-between text-sm mb-2">
+                    <div className="flex justify-between text-sm mb-1.5">
                       <span className="text-slate-700 font-medium">Career Track</span>
                       <span className="text-slate-600 font-semibold">{profileData.careerInterest.preferredRole ? "100" : "0"}%</span>
                     </div>
@@ -896,7 +971,7 @@ const StudentProfilePage = () => {
                   </div>
 
                   <div>
-                    <div className="flex justify-between text-sm mb-2">
+                    <div className="flex justify-between text-sm mb-1.5">
                       <span className="text-slate-700 font-medium">Education</span>
                       <span className="text-slate-600 font-semibold">{profileData.education.length > 0 ? "100" : "0"}%</span>
                     </div>
@@ -911,7 +986,7 @@ const StudentProfilePage = () => {
                   </div>
 
                   <div>
-                    <div className="flex justify-between text-sm mb-2">
+                    <div className="flex justify-between text-sm mb-1.5">
                       <span className="text-slate-700 font-medium">Skills & Expertise</span>
                       <span className="text-slate-600 font-semibold">{profileData.skills.length > 0 ? "100" : "0"}%</span>
                     </div>
@@ -926,7 +1001,7 @@ const StudentProfilePage = () => {
                   </div>
 
                   <div>
-                    <div className="flex justify-between text-sm mb-2">
+                    <div className="flex justify-between text-sm mb-1.5">
                       <span className="text-slate-700 font-medium">Work & Portfolio</span>
                       <span className="text-slate-600 font-semibold">{profileData.proofOfWork.projects.length > 0 || profileData.portfolio.links.length > 0 ? "100" : "0"}%</span>
                     </div>
@@ -940,8 +1015,8 @@ const StudentProfilePage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="mt-6 p-4 rounded-xl bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200">
-                  <p className="text-sm font-semibold text-slate-900">💡 Tip: Complete your profile to unlock better opportunities and visibility from mentors and recruiters.</p>
+                <div className="mt-4 rounded-xl border border-orange-200 bg-orange-50 px-4 py-3">
+                  <p className="text-sm font-semibold text-slate-900">Tip: Complete your profile to unlock better opportunities and visibility from mentors and recruiters.</p>
                 </div>
               </div>
             </div>

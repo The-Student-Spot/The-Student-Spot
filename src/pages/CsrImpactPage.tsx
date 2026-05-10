@@ -239,25 +239,21 @@ const CsrImpactPage = () => {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-600 via-orange-500 to-rose-600 px-6 py-12 lg:px-10 lg:py-16 shadow-2xl"
+          className="relative overflow-hidden rounded-2xl border border-orange-200 bg-gradient-to-br from-white via-orange-50/45 to-white px-6 py-8 lg:px-10 lg:py-10 shadow-sm"
         >
-          {/* Decorative background elements */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute -right-32 -top-32 h-64 w-64 rounded-full bg-orange-400 opacity-20 blur-3xl" />
-            <div className="absolute -left-32 -bottom-32 h-64 w-64 rounded-full bg-rose-400 opacity-20 blur-3xl" />
-          </div>
+          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-orange-500 via-yellow-400 to-rose-500" />
 
           {/* Content */}
           <div className="relative z-10 flex flex-col gap-8 xl:flex-row xl:items-end xl:justify-between">
             <div className="space-y-4 max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 backdrop-blur-sm border border-white/20">
-                <Sparkles className="h-4 w-4 text-yellow-300" />
-                <span className="text-xs font-semibold text-white uppercase tracking-wider">Make Impact Now</span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-4 py-2">
+                <Sparkles className="h-4 w-4 text-orange-600" />
+                <span className="text-xs font-semibold text-orange-700 uppercase tracking-wider">Make Impact Now</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                Drive Impact <span className="text-yellow-300">Beyond Careers</span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight">
+                Drive Impact <span className="text-orange-600">Beyond Careers</span>
               </h1>
-              <p className="text-base sm:text-lg text-orange-50 max-w-2xl leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
                 Contribute to meaningful causes, lead community initiatives, empower underserved populations, and create measurable social change. Transform your passion into action.
               </p>
               <Button className="mt-4 bg-yellow-400 hover:bg-yellow-300 text-orange-900 font-semibold px-6 py-3 h-auto rounded-full text-base shadow-lg hover:shadow-xl transition-all">
@@ -267,20 +263,20 @@ const CsrImpactPage = () => {
 
             {/* Floating Metric Chips */}
             <div className="grid grid-cols-2 gap-3 lg:flex lg:flex-col lg:gap-4 xl:gap-3">
-              <motion.div variants={floatingVariants} animate="animate" className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
-                <p className="text-xs font-semibold text-orange-100">Total Students</p>
+              <motion.div variants={floatingVariants} animate="animate" className="rounded-2xl border border-orange-200 bg-white p-4 text-slate-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
+                <p className="text-xs font-semibold text-slate-500">Total Students</p>
                 <p className="text-2xl font-bold mt-1">10K+</p>
               </motion.div>
-              <motion.div variants={floatingVariants} animate="animate" style={{ animationDelay: "0.2s" }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
-                <p className="text-xs font-semibold text-orange-100">Programs</p>
+              <motion.div variants={floatingVariants} animate="animate" style={{ animationDelay: "0.2s" }} className="rounded-2xl border border-orange-200 bg-white p-4 text-slate-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
+                <p className="text-xs font-semibold text-slate-500">Programs</p>
                 <p className="text-2xl font-bold mt-1">{programs.length}00+</p>
               </motion.div>
-              <motion.div variants={floatingVariants} animate="animate" style={{ animationDelay: "0.4s" }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
-                <p className="text-xs font-semibold text-orange-100">NGO Partners</p>
+              <motion.div variants={floatingVariants} animate="animate" style={{ animationDelay: "0.4s" }} className="rounded-2xl border border-orange-200 bg-white p-4 text-slate-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
+                <p className="text-xs font-semibold text-slate-500">NGO Partners</p>
                 <p className="text-2xl font-bold mt-1">100+</p>
               </motion.div>
-              <motion.div variants={floatingVariants} animate="animate" style={{ animationDelay: "0.6s" }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
-                <p className="text-xs font-semibold text-orange-100">Certificates</p>
+              <motion.div variants={floatingVariants} animate="animate" style={{ animationDelay: "0.6s" }} className="rounded-2xl border border-orange-200 bg-white p-4 text-slate-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
+                <p className="text-xs font-semibold text-slate-500">Certificates</p>
                 <p className="text-2xl font-bold mt-1">5K+</p>
               </motion.div>
             </div>

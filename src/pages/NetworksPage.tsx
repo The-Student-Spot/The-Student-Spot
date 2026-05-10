@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import StudentDashboardNavLayout from "@/components/layout/StudentDashboardNavLayout";
 import { Card } from "@/components/ui/card";
@@ -8,102 +8,180 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Bookmark, BookmarkCheck, Search, MapPin, Users, Briefcase, Globe, Megaphone, Star, Calendar, Zap, Heart, Building2, Lightbulb, ArrowRight, ExternalLink } from "lucide-react";
+import {
+  connectNetworkItem,
+  loadNetworksDashboard,
+  networksFallbackData,
+  toggleNetworkBookmark,
+} from "@/lib/networksApi";
+import { useToast } from "@/hooks/use-toast";
 
 const NetworksPage = () => {
+  const { toast } = useToast();
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [bookmarks, setBookmarks] = useState<Record<string, boolean>>({});
   const [loading, setLoading] = useState(false);
   const [applyOpen, setApplyOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const [networkData, setNetworkData] = useState(networksFallbackData);
 
-  // Featured section data
-  const featured = useMemo(() => ({
-    title: "Featured Networks & Partners",
-    description: "Curated networks and partners recommended for you.",
-  }), []);
+  const {
+    studentNetwork,
+    startupNetwork,
+    speakerNetwork,
+    sponsorNetwork,
+    venueNetwork,
+    corporateNetwork,
+    servicePartners,
+  } = networkData;
 
-  // STUDENT NETWORK
-  const studentNetwork = useMemo(() => ({
-    title: "Student Network",
-    items: [
-      { id: "campus-leader-1", label: "TSS Campus Leaders", members: 12, featured: true },
-      { id: "peer-collab", label: "Peer collaboration", members: 84 },
-    ],
-  }), []);
+  useEffect(() => {
+    let active = true;
 
-  // STARTUP NETWORK
-  const startupNetwork = useMemo(() => ({
-    title: "Startup Network",
-    items: [
-      { id: "startup-1", name: "SeedSpark", tagline: "AI for social impact", hiring: ["internship","product"], featured: true },
-      { id: "startup-2", name: "GreenLoop", tagline: "Circular economy", hiring: ["design"] },
-    ],
-  }), []);
+    const loadDashboard = async () => {
+      setLoading(true);
+      const data = await loadNetworksDashboard({ searchQuery: query, category });
+      if (!active) return;
+      setNetworkData(data);
+      setLoading(false);
+    };
 
-  // SPEAKER NETWORK
-  const speakerNetwork = useMemo(() => ({
-    title: "Speaker Network",
-    items: [
-      { id: "speaker-1", name: "Dr. A. Expert", topic: "Product Management", sessions: ["PM 101"], upcoming: true },
-      { id: "speaker-2", name: "Ms. Mentor", topic: "Design Thinking", sessions: ["Design Sprint"], upcoming: false },
-    ],
-  }), []);
+    void loadDashboard();
 
-  // SPONSOR NETWORK
-  const sponsorNetwork = useMemo(() => ({
-    title: "Sponsor Network",
-    items: [
-      { id: "brand-1", name: "Acme Corp", opportunities: ["Internships","Hiring"], featured: true },
-      { id: "brand-2", name: "BrightCo", opportunities: ["Partnerships"] },
-    ],
-  }), []);
+    return () => {
+      active = false;
+    };
+  }, [query, category]);
 
-  // VENUE NETWORK
-  const venueNetwork = useMemo(() => ({
-    title: "Venue Network",
-    items: [
-      { id: "venue-1", name: "Corner Cafe", type: "Cafe", location: "Central Campus", featured: true },
-      { id: "venue-2", name: "Maker Hub", type: "Co-working", location: "North Wing" },
-    ],
-  }), []);
-
-  // CORPORATE NETWORK
-  const corporateNetwork = useMemo(() => ({
-    title: "Corporate Network",
-    items: [
-      { id: "corp-1", name: "GlobalTech", openings: ["Software Engineer","Data Analyst"], featured: true },
-      { id: "corp-2", name: "FinServe", openings: ["Business Analyst"] },
-    ],
-  }), []);
-
-  // SERVICE PARTNERS
-  const servicePartners = useMemo(() => ({
-    title: "Service Partners",
-    items: [
-      { id: "svc-legal-1", category: "Legal", name: "LawAssist", services: ["Contract review","Startup compliance"] },
-      { id: "svc-fin-1", category: "Finance", name: "LedgerPro", services: ["Tax advisory","Bookkeeping"] },
-      { id: "svc-design-1", category: "Design", name: "PixelCraft", services: ["Brand design","UI/UX"] },
-      { id: "svc-marketing-1", category: "Marketing", name: "MarketMinds", services: ["Growth strategy","Ads"] },
-    ],
-  }), []);
-
-  const toggleBookmark = (id: string) => setBookmarks((s) => ({ ...s, [id]: !s[id] }));
+  const toggleBookmark = (id: string) => {
+    const nextState = !bookmarks[id];
+    setBookmarks((current) => ({ ...current, [id]: nextState }));
+    void toggleNetworkBookmark(id, nextState);
+    toast({
+      title: nextState ? "Saved" : "Removed",
+      description: nextState ? "Network saved for later." : "Network removed from saved items.",
+    });
+  };
 
   const openApply = (id: string) => {
     setSelectedItem(id);
     setApplyOpen(true);
   };
 
-  const filtered = (items: Record<string, unknown>[]) => {
-    if (!query && category === "all") return items;
-    return items.filter((it) => {
-      const text = JSON.stringify(it).toLowerCase();
-      const matchesQuery = query ? text.includes(query.toLowerCase()) : true;
-      const matchesCat = category === "all" ? true : (it.type || it.category || "").toString().toLowerCase() === category.toLowerCase();
-      return matchesQuery && matchesCat;
-    });
+  const confirmConnection = () => {
+    if (selectedItem) {
+      void connectNetworkItem(selectedItem);
+      toast({
+        title: "Connection requested",
+        description: "Your profile will be shared with this network.",
+      });
+    }
+    setApplyOpen(false);
   };
+
+  const featuredStudent = studentNetwork.items[0] ?? networksFallbackData.studentNetwork.items[0];
+  const featuredStartup = startupNetwork.items[0] ?? networksFallbackData.startupNetwork.items[0];
+  const featuredSpeaker = speakerNetwork.items[0] ?? networksFallbackData.speakerNetwork.items[0];
+  const showFeatured = category === "all";
+  const showStudents = category === "all" || category === "students";
+  const showStartups = category === "all" || category === "startups";
+  const showSpeakers = category === "all" || category === "speakers";
+  const showSponsors = category === "all" || category === "sponsors";
+  const showVenues = category === "all" || category === "venues";
+  const showCorporate = category === "all" || category === "corporate";
+  const showServices = category === "all" || category === "services";
+  const showSaved = category === "saved";
+  const savedItems = [
+    ...studentNetwork.items.map((item) => ({ id: item.id, title: item.label, subtitle: `${item.members} members`, type: "Student Network" })),
+    ...startupNetwork.items.map((item) => ({ id: item.id, title: item.name, subtitle: item.tagline, type: "Startup Network" })),
+    ...speakerNetwork.items.map((item) => ({ id: item.id, title: item.name, subtitle: item.topic, type: "Speaker Network" })),
+    ...sponsorNetwork.items.map((item) => ({ id: item.id, title: item.name, subtitle: item.opportunities.join(", "), type: "Sponsor Network" })),
+    ...venueNetwork.items.map((item) => ({ id: item.id, title: item.name, subtitle: `${item.type} • ${item.location}`, type: "Venue Network" })),
+    ...corporateNetwork.items.map((item) => ({ id: item.id, title: item.name, subtitle: item.openings.join(", "), type: "Corporate Network" })),
+    ...servicePartners.items.map((item) => ({ id: item.id, title: item.name, subtitle: item.services.join(", "), type: item.category })),
+  ].filter((item) => bookmarks[item.id]);
+  const visibleItemCount =
+    category === "saved"
+      ? savedItems.length
+      : studentNetwork.items.length +
+        startupNetwork.items.length +
+        speakerNetwork.items.length +
+        sponsorNetwork.items.length +
+        venueNetwork.items.length +
+        corporateNetwork.items.length +
+        servicePartners.items.length;
+
+  const scrollToNetworks = () => {
+    document.getElementById("networks-content")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const EmptyState = () => (
+    <Card className="rounded-2xl border-dashed border-slate-300 bg-slate-50 p-8 text-center">
+      <Search className="mx-auto mb-3 h-8 w-8 text-slate-400" />
+      <h3 className="text-base font-bold text-slate-900">No networks found</h3>
+      <p className="mx-auto mt-2 max-w-md text-sm text-slate-600">Try another search term or switch back to Featured to see all network categories.</p>
+      <Button
+        variant="outline"
+        className="mt-4 rounded-lg border-orange-200 text-orange-700 hover:bg-orange-50"
+        onClick={() => {
+          setQuery("");
+          setCategory("all");
+        }}
+      >
+        Reset filters
+      </Button>
+    </Card>
+  );
+
+  const SavedNetworksSection = () => (
+    <section>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500 to-red-500 text-white">
+          <BookmarkCheck className="h-6 w-6" />
+        </div>
+        <div>
+          <h2 className="text-2xl font-black text-slate-900">Saved Networks</h2>
+          <p className="text-sm text-slate-600">Networks you bookmarked for later.</p>
+        </div>
+      </div>
+
+      {savedItems.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {savedItems.map((item, idx) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.06 }}
+              className="rounded-2xl border border-orange-200 bg-gradient-to-br from-orange-50 to-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
+            >
+              <Badge className="bg-orange-100 text-orange-700 font-semibold">{item.type}</Badge>
+              <h3 className="mt-4 text-lg font-bold text-slate-900">{item.title}</h3>
+              <p className="mt-2 text-sm text-slate-600 line-clamp-2">{item.subtitle || "Saved network"}</p>
+              <div className="mt-5 flex gap-2">
+                <Button onClick={() => openApply(item.id)} className="flex-1 rounded-lg bg-orange-600 text-white hover:bg-orange-700">
+                  Connect
+                </Button>
+                <Button variant="outline" onClick={() => toggleBookmark(item.id)} className="rounded-lg border-orange-300 text-orange-700 hover:bg-orange-50">
+                  <BookmarkCheck className="h-4 w-4" />
+                </Button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      ) : (
+        <Card className="rounded-2xl border-dashed border-orange-200 bg-orange-50 p-8 text-center">
+          <Bookmark className="mx-auto mb-3 h-8 w-8 text-orange-500" />
+          <h3 className="text-base font-bold text-slate-900">No saved networks yet</h3>
+          <p className="mx-auto mt-2 max-w-md text-sm text-slate-600">Use the Save button on any network card, then come back here to review it.</p>
+          <Button onClick={() => setCategory("all")} className="mt-4 rounded-lg bg-orange-600 text-white hover:bg-orange-700">
+            Browse Networks
+          </Button>
+        </Card>
+      )}
+    </section>
+  );
 
   return (
     <StudentDashboardNavLayout activeSection="networks" headerTitle="One Platform. Multiple Networks." headerDescription="A unified ecosystem where students connect with peers, startups, mentors, brands, venues, corporations, and professional service partners.">
@@ -112,20 +190,17 @@ const NetworksPage = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-orange-600 via-orange-500 to-red-600 p-8 lg:p-12 shadow-2xl border border-orange-400/20"
+          className="relative overflow-hidden rounded-2xl border border-orange-200 bg-gradient-to-br from-white via-orange-50/45 to-white p-8 lg:p-12 shadow-sm"
         >
           {/* Decorative blurs */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute -right-32 -top-32 h-64 w-64 rounded-full bg-orange-400 opacity-20 blur-3xl" />
-            <div className="absolute -left-32 -bottom-32 h-64 w-64 rounded-full bg-red-400 opacity-20 blur-3xl" />
-          </div>
+          <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-orange-500 via-yellow-400 to-red-500" />
 
           <div className="relative z-10">
             <div className="grid lg:grid-cols-2 gap-8 items-center">
               <div>
-                <h1 className="text-4xl lg:text-5xl font-black text-white mb-3">One Platform. Multiple Networks.</h1>
-                <p className="text-lg text-orange-50 font-semibold mb-8">Connect with peers, founders, experts, brands, venues, and professional partners in one powerful ecosystem.</p>
-                <Button className="bg-yellow-400 hover:bg-yellow-500 text-orange-900 font-bold rounded-xl px-8 py-3 shadow-lg hover:shadow-xl transition-all">
+                <h1 className="text-4xl lg:text-5xl font-black text-slate-900 mb-3">One Platform. Multiple Networks.</h1>
+                <p className="text-lg text-slate-600 font-semibold mb-8">Connect with peers, founders, experts, brands, venues, and professional partners in one powerful ecosystem.</p>
+                <Button onClick={scrollToNetworks} className="bg-yellow-400 hover:bg-yellow-500 text-orange-900 font-bold rounded-xl px-8 py-3 shadow-lg hover:shadow-xl transition-all">
                   <ArrowRight className="h-4 w-4 mr-2" />
                   Explore Networks
                 </Button>
@@ -133,25 +208,25 @@ const NetworksPage = () => {
 
               {/* Floating network chips */}
               <div className="grid grid-cols-2 gap-3">
-                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1 }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.1 }} className="rounded-2xl border border-orange-200 bg-white p-4 text-slate-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
                   <Users className="h-5 w-5 mb-2" />
                   <p className="text-sm font-semibold">Students</p>
-                  <p className="text-xs text-orange-100">10K+ Members</p>
+                  <p className="text-xs text-slate-500">10K+ Members</p>
                 </motion.div>
-                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.15 }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.15 }} className="rounded-2xl border border-orange-200 bg-white p-4 text-slate-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
                   <Lightbulb className="h-5 w-5 mb-2" />
                   <p className="text-sm font-semibold">Startups</p>
-                  <p className="text-xs text-orange-100">500+ Teams</p>
+                  <p className="text-xs text-slate-500">500+ Teams</p>
                 </motion.div>
-                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2 }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2 }} className="rounded-2xl border border-orange-200 bg-white p-4 text-slate-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
                   <Megaphone className="h-5 w-5 mb-2" />
                   <p className="text-sm font-semibold">Experts</p>
-                  <p className="text-xs text-orange-100">250+ Speakers</p>
+                  <p className="text-xs text-slate-500">250+ Speakers</p>
                 </motion.div>
-                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.25 }} className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 p-4 text-white hover:bg-white/15 transition-all">
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.25 }} className="rounded-2xl border border-orange-200 bg-white p-4 text-slate-900 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
                   <Building2 className="h-5 w-5 mb-2" />
                   <p className="text-sm font-semibold">Partners</p>
-                  <p className="text-xs text-orange-100">100+ Brands</p>
+                  <p className="text-xs text-slate-500">100+ Brands</p>
                 </motion.div>
               </div>
             </div>
@@ -179,7 +254,7 @@ const NetworksPage = () => {
         </div>
 
         {/* CATEGORY NAVIGATION - PREMIUM PILL TABS */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-wrap gap-3 items-center">
+        <motion.div id="networks-content" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="scroll-mt-28 flex flex-wrap gap-3 items-center">
           <button
             onClick={() => setCategory("all")}
             className={`px-6 py-2 rounded-full font-semibold transition-all ${
@@ -190,7 +265,7 @@ const NetworksPage = () => {
           >
             Featured
           </button>
-          {["students", "startups", "speakers", "sponsors", "venues", "corporate", "services"].map((cat) => (
+          {["students", "startups", "speakers", "sponsors", "venues", "corporate", "services", "saved"].map((cat) => (
             <button
               key={cat}
               onClick={() => setCategory(cat)}
@@ -216,7 +291,19 @@ const NetworksPage = () => {
           />
         </div>
 
+        {loading && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Skeleton className="h-48 rounded-2xl" />
+            <Skeleton className="h-48 rounded-2xl" />
+            <Skeleton className="h-48 rounded-2xl" />
+          </div>
+        )}
+
+        {!loading && visibleItemCount === 0 && !showSaved && <EmptyState />}
+        {!loading && showSaved && <SavedNetworksSection />}
+
         {/* FEATURED NETWORKS - PREMIUM CAROUSEL */}
+        {showFeatured && !loading && (
         <section>
           <div className="flex items-center gap-3 mb-6">
             <Star className="h-6 w-6 text-yellow-500 fill-yellow-500" />
@@ -234,23 +321,23 @@ const NetworksPage = () => {
                   <Users className="h-6 w-6" />
                 </div>
                 <div>
-                  <p className="text-lg font-black text-slate-900">{studentNetwork.items[0].label}</p>
+                  <p className="text-lg font-black text-slate-900">{featuredStudent.label}</p>
                   <p className="text-sm text-slate-600 mt-1">Campus leaders network</p>
                 </div>
                 <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
                   <Users className="h-4 w-4" />
-                  {studentNetwork.items[0].members} active members
+                  {featuredStudent.members} active members
                 </div>
                 <div className="pt-2 space-y-2">
-                  <Button onClick={() => openApply(studentNetwork.items[0].id)} className="w-full bg-orange-600 hover:bg-orange-700 text-white rounded-lg">
+                  <Button onClick={() => openApply(featuredStudent.id)} className="w-full bg-orange-600 hover:bg-orange-700 text-white rounded-lg">
                     Connect Now
                   </Button>
                   <Button
                     variant="outline"
-                    onClick={() => toggleBookmark(studentNetwork.items[0].id)}
+                    onClick={() => toggleBookmark(featuredStudent.id)}
                     className="w-full rounded-lg border-orange-300 text-orange-600 hover:bg-orange-50"
                   >
-                    {bookmarks[studentNetwork.items[0].id] ? <BookmarkCheck className="h-4 w-4 mr-2" /> : <Bookmark className="h-4 w-4 mr-2" />}
+                    {bookmarks[featuredStudent.id] ? <BookmarkCheck className="h-4 w-4 mr-2" /> : <Bookmark className="h-4 w-4 mr-2" />}
                     Save
                   </Button>
                 </div>
@@ -264,24 +351,24 @@ const NetworksPage = () => {
                   <Lightbulb className="h-6 w-6" />
                 </div>
                 <div>
-                  <p className="text-lg font-black text-slate-900">{startupNetwork.items[0].name}</p>
-                  <p className="text-sm text-slate-600 mt-1">{startupNetwork.items[0].tagline}</p>
+                  <p className="text-lg font-black text-slate-900">{featuredStartup.name}</p>
+                  <p className="text-sm text-slate-600 mt-1">{featuredStartup.tagline}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {startupNetwork.items[0].hiring.map((tag) => (
+                  {featuredStartup.hiring.map((tag) => (
                     <Badge key={tag} className="bg-rose-200 text-rose-700 font-semibold rounded-full">{tag}</Badge>
                   ))}
                 </div>
                 <div className="pt-2 space-y-2">
-                  <Button onClick={() => openApply(startupNetwork.items[0].id)} className="w-full bg-rose-600 hover:bg-rose-700 text-white rounded-lg">
+                  <Button onClick={() => openApply(featuredStartup.id)} className="w-full bg-rose-600 hover:bg-rose-700 text-white rounded-lg">
                     Join Team
                   </Button>
                   <Button
                     variant="outline"
-                    onClick={() => toggleBookmark(startupNetwork.items[0].id)}
+                    onClick={() => toggleBookmark(featuredStartup.id)}
                     className="w-full rounded-lg border-rose-300 text-rose-600 hover:bg-rose-50"
                   >
-                    {bookmarks[startupNetwork.items[0].id] ? <BookmarkCheck className="h-4 w-4 mr-2" /> : <Bookmark className="h-4 w-4 mr-2" />}
+                    {bookmarks[featuredStartup.id] ? <BookmarkCheck className="h-4 w-4 mr-2" /> : <Bookmark className="h-4 w-4 mr-2" />}
                     Save
                   </Button>
                 </div>
@@ -295,23 +382,23 @@ const NetworksPage = () => {
                   <Megaphone className="h-6 w-6" />
                 </div>
                 <div>
-                  <p className="text-lg font-black text-slate-900">{speakerNetwork.items[0].name}</p>
-                  <p className="text-sm text-slate-600 mt-1">Expert in {speakerNetwork.items[0].topic}</p>
+                  <p className="text-lg font-black text-slate-900">{featuredSpeaker.name}</p>
+                  <p className="text-sm text-slate-600 mt-1">Expert in {featuredSpeaker.topic}</p>
                 </div>
                 <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
                   <Calendar className="h-4 w-4 text-yellow-600" />
-                  {speakerNetwork.items[0].upcoming ? "Upcoming session" : "Past sessions"}
+                  {featuredSpeaker.upcoming ? "Upcoming session" : "Past sessions"}
                 </div>
                 <div className="pt-2 space-y-2">
-                  <Button onClick={() => openApply(speakerNetwork.items[0].id)} className="w-full bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg">
+                  <Button onClick={() => openApply(featuredSpeaker.id)} className="w-full bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg">
                     Register Now
                   </Button>
                   <Button
                     variant="outline"
-                    onClick={() => toggleBookmark(speakerNetwork.items[0].id)}
+                    onClick={() => toggleBookmark(featuredSpeaker.id)}
                     className="w-full rounded-lg border-yellow-300 text-yellow-600 hover:bg-yellow-50"
                   >
-                    {bookmarks[speakerNetwork.items[0].id] ? <BookmarkCheck className="h-4 w-4 mr-2" /> : <Bookmark className="h-4 w-4 mr-2" />}
+                    {bookmarks[featuredSpeaker.id] ? <BookmarkCheck className="h-4 w-4 mr-2" /> : <Bookmark className="h-4 w-4 mr-2" />}
                     Save
                   </Button>
                 </div>
@@ -319,8 +406,10 @@ const NetworksPage = () => {
             </motion.div>
           </div>
         </section>
+        )}
 
         {/* STUDENT NETWORK SECTION */}
+        {showStudents && studentNetwork.items.length > 0 && (
         <section>
           <div className="flex items-center gap-3 mb-6">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 text-white">
@@ -360,8 +449,10 @@ const NetworksPage = () => {
             ))}
           </div>
         </section>
+        )}
 
         {/* STARTUP NETWORK SECTION */}
+        {showStartups && startupNetwork.items.length > 0 && (
         <section>
           <div className="flex items-center gap-3 mb-6">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-rose-500 to-rose-600 text-white">
@@ -399,8 +490,10 @@ const NetworksPage = () => {
             ))}
           </div>
         </section>
+        )}
 
         {/* SPEAKER NETWORK SECTION */}
+        {showSpeakers && speakerNetwork.items.length > 0 && (
         <section>
           <div className="flex items-center gap-3 mb-6">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-yellow-500 to-yellow-600 text-white">
@@ -441,8 +534,10 @@ const NetworksPage = () => {
             ))}
           </div>
         </section>
+        )}
 
         {/* SPONSOR NETWORK SECTION */}
+        {showSponsors && sponsorNetwork.items.length > 0 && (
         <section>
           <div className="flex items-center gap-3 mb-6">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
@@ -483,8 +578,10 @@ const NetworksPage = () => {
             ))}
           </div>
         </section>
+        )}
 
         {/* VENUE NETWORK SECTION */}
+        {showVenues && venueNetwork.items.length > 0 && (
         <section>
           <div className="flex items-center gap-3 mb-6">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 text-white">
@@ -520,8 +617,10 @@ const NetworksPage = () => {
             ))}
           </div>
         </section>
+        )}
 
         {/* CORPORATE NETWORK SECTION */}
+        {showCorporate && corporateNetwork.items.length > 0 && (
         <section>
           <div className="flex items-center gap-3 mb-6">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-slate-600 to-slate-700 text-white">
@@ -562,8 +661,10 @@ const NetworksPage = () => {
             ))}
           </div>
         </section>
+        )}
 
         {/* SERVICE PARTNERS SECTION */}
+        {showServices && servicePartners.items.length > 0 && (
         <section>
           <div className="flex items-center gap-3 mb-6">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 text-white">
@@ -603,6 +704,7 @@ const NetworksPage = () => {
             ))}
           </div>
         </section>
+        )}
 
         {/* CONNECT DIALOG */}
         <Dialog open={applyOpen} onOpenChange={setApplyOpen}>
@@ -616,7 +718,7 @@ const NetworksPage = () => {
                 <p className="text-sm text-slate-700"><span className="font-semibold">What happens next:</span> Your profile will be shared with this network and they'll be able to reach out to you directly.</p>
               </div>
               <div className="flex gap-3 pt-4">
-                <Button onClick={() => { setApplyOpen(false); }} className="flex-1 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-semibold">
+                <Button onClick={confirmConnection} className="flex-1 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-semibold">
                   Confirm Connection
                 </Button>
                 <Button variant="outline" onClick={() => setApplyOpen(false)} className="flex-1 rounded-lg border-slate-300">
@@ -627,14 +729,6 @@ const NetworksPage = () => {
           </DialogContent>
         </Dialog>
 
-        {/* Loading skeleton */}
-        {loading ? (
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <Skeleton className="h-48 rounded-2xl" />
-            <Skeleton className="h-48 rounded-2xl" />
-            <Skeleton className="h-48 rounded-2xl" />
-          </div>
-        ) : null}
       </div>
     </StudentDashboardNavLayout>
   );
