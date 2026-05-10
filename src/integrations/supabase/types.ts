@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      network_bookmarks: {
+        Row: {
+          id: string
+          user_id: string
+          item_id: string
+          item_type: string
+          item_title: string | null
+          item_subtitle: string | null
+          bookmarked_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          item_id: string
+          item_type?: string
+          item_title?: string | null
+          item_subtitle?: string | null
+          bookmarked_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          item_id?: string
+          item_type?: string
+          item_title?: string | null
+          item_subtitle?: string | null
+          bookmarked_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null

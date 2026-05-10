@@ -56,6 +56,8 @@ import {
   type OutcomeItem,
   type ProgramItem,
 } from "@/lib/csrImpactApi";
+import { loadCsrBookmarkIds, persistCsrBookmark } from "@/lib/csrBookmarks";
+import { useAuth } from "@/hooks/useAuth";
 
 const programCategories = ["All", "Community", "Gender", "Education"];
 const opportunityCategories = ["All", "Volunteer Work", "NGO Internships", "Impact Projects"];
@@ -104,6 +106,7 @@ const pulseVariants = {
 };
 
 const CsrImpactPage = () => {
+  const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [programCategory, setProgramCategory] = useState("All");
@@ -168,12 +171,39 @@ const CsrImpactPage = () => {
     };
   }, [selectedProgramId]);
 
+  useEffect(() => {
+    let active = true;
+    void (async () => {
+      const ids = await loadCsrBookmarkIds();
+      if (active) setSavedItems(ids);
+    })();
+    return () => { active = false; };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.uid]);
+
   const totalSaved = Object.values(savedItems).filter(Boolean).length;
+
+  const getItemMeta = (itemType: CsrImpactItemType, id: string): { item_title?: string; item_subtitle?: string } => {
+    if (itemType === "program") {
+      const p = programs.find((x) => x.id === id);
+      return p ? { item_title: p.title, item_subtitle: p.category } : {};
+    }
+    if (itemType === "opportunity") {
+      const o = opportunities.find((x) => x.id === id);
+      return o ? { item_title: o.title, item_subtitle: o.organization } : {};
+    }
+    if (itemType === "campaign") {
+      const c = campaigns.find((x) => x.id === id);
+      return c ? { item_title: c.title, item_subtitle: c.organizer } : {};
+    }
+    return {};
+  };
 
   const toggleSaved = (itemType: CsrImpactItemType, id: string) => {
     const nextState = !savedItems[id];
     setSavedItems((current) => ({ ...current, [id]: nextState }));
-    void toggleCsrImpactBookmark(itemType, id, nextState);
+    const meta = getItemMeta(itemType, id);
+    void persistCsrBookmark(itemType, id, nextState, meta);
   };
 
   const markJoined = (

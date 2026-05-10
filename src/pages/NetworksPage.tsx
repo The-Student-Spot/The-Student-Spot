@@ -12,12 +12,14 @@ import {
   connectNetworkItem,
   loadNetworksDashboard,
   networksFallbackData,
-  toggleNetworkBookmark,
 } from "@/lib/networksApi";
+import { loadBookmarkIds, persistBookmark } from "@/lib/networkBookmarks";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 const NetworksPage = () => {
   const { toast } = useToast();
+  const { user } = useAuth();
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [bookmarks, setBookmarks] = useState<Record<string, boolean>>({});
@@ -35,6 +37,17 @@ const NetworksPage = () => {
     corporateNetwork,
     servicePartners,
   } = networkData;
+
+  // Load persisted bookmarks from Supabase on mount
+  useEffect(() => {
+    let active = true;
+    void (async () => {
+      const ids = await loadBookmarkIds();
+      if (active) setBookmarks(ids);
+    })();
+    return () => { active = false; };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.uid]);
 
   useEffect(() => {
     let active = true;
@@ -54,10 +67,31 @@ const NetworksPage = () => {
     };
   }, [query, category]);
 
+  // Helper to look up metadata for any item id across all network categories
+  const getItemMeta = (id: string): { item_type: string; item_title: string; item_subtitle: string } => {
+    const { studentNetwork, startupNetwork, speakerNetwork, sponsorNetwork, venueNetwork, corporateNetwork, servicePartners } = networkData;
+    const student = studentNetwork.items.find((i) => i.id === id);
+    if (student) return { item_type: "Student Network", item_title: student.label, item_subtitle: `${student.members} members` };
+    const startup = startupNetwork.items.find((i) => i.id === id);
+    if (startup) return { item_type: "Startup Network", item_title: startup.name, item_subtitle: startup.tagline };
+    const speaker = speakerNetwork.items.find((i) => i.id === id);
+    if (speaker) return { item_type: "Speaker Network", item_title: speaker.name, item_subtitle: speaker.topic };
+    const sponsor = sponsorNetwork.items.find((i) => i.id === id);
+    if (sponsor) return { item_type: "Sponsor Network", item_title: sponsor.name, item_subtitle: sponsor.opportunities.join(", ") };
+    const venue = venueNetwork.items.find((i) => i.id === id);
+    if (venue) return { item_type: "Venue Network", item_title: venue.name, item_subtitle: `${venue.type} • ${venue.location}` };
+    const corp = corporateNetwork.items.find((i) => i.id === id);
+    if (corp) return { item_type: "Corporate Network", item_title: corp.name, item_subtitle: corp.openings.join(", ") };
+    const svc = servicePartners.items.find((i) => i.id === id);
+    if (svc) return { item_type: svc.category, item_title: svc.name, item_subtitle: svc.services.join(", ") };
+    return { item_type: "Network", item_title: id, item_subtitle: "" };
+  };
+
   const toggleBookmark = (id: string) => {
     const nextState = !bookmarks[id];
     setBookmarks((current) => ({ ...current, [id]: nextState }));
-    void toggleNetworkBookmark(id, nextState);
+    const meta = getItemMeta(id);
+    void persistBookmark(id, nextState, meta);
     toast({
       title: nextState ? "Saved" : "Removed",
       description: nextState ? "Network saved for later." : "Network removed from saved items.",

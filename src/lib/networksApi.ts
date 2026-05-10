@@ -213,7 +213,7 @@ const matchesSearch = (item: unknown, search: string) => {
 
 const filterFallback = (filters: NetworksFilters): NetworksDashboardData => {
   const search = filters.searchQuery.trim();
-  const show = (category: string) => filters.category === "all" || filters.category === category;
+  const show = (category: string) => filters.category === "all" || filters.category === "saved" || filters.category === category;
   return {
     studentNetwork: { ...networksFallbackData.studentNetwork, items: show("students") ? networksFallbackData.studentNetwork.items.filter((item) => matchesSearch(item, search)) : [] },
     startupNetwork: { ...networksFallbackData.startupNetwork, items: show("startups") ? networksFallbackData.startupNetwork.items.filter((item) => matchesSearch(item, search)) : [] },

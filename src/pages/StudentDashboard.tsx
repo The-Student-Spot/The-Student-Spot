@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -43,6 +43,7 @@ import {
 } from "lucide-react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { loadUserBookmarks, type SavedNetworkItem } from "@/lib/networkBookmarks";
 
 export const dashboardSections = [
   {
@@ -202,6 +203,23 @@ const StudentDashboard = () => {
   const navigate = useNavigate();
   const { section } = useParams();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [savedNetworks, setSavedNetworks] = useState<SavedNetworkItem[]>([]);
+  const [savedLoading, setSavedLoading] = useState(true);
+
+  useEffect(() => {
+    let active = true;
+    setSavedLoading(true);
+    void (async () => {
+      const items = await loadUserBookmarks();
+      if (active) {
+        setSavedNetworks(items);
+        setSavedLoading(false);
+      }
+    })();
+    return () => { active = false; };
+  // Re-run once Firebase auth resolves (user.uid becomes available)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.uid]);
 
   const handleLogout = async () => {
     await logout();
@@ -420,6 +438,59 @@ const StudentDashboard = () => {
               <section id="networks" className="scroll-mt-24">
                 <h2 className="text-lg font-semibold mb-1 text-slate-700">Networks</h2>
                 <p className="text-sm text-muted-foreground mb-4">Connect with peers, collaborators, and resources.</p>
+
+                {/* Saved Networks Panel */}
+                {savedLoading ? (
+                  <div className="bg-card rounded-xl p-5 border border-slate-200 mb-5 animate-pulse h-28" />
+                ) : savedNetworks.length > 0 ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl border border-yellow-200 p-5 mb-5"
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-2">
+                        <Handshake className="h-5 w-5 text-yellow-600" />
+                        <span className="font-semibold text-slate-800">Saved Networks</span>
+                        <Badge className="bg-yellow-400 text-yellow-900 font-bold">{savedNetworks.length}</Badge>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => navigate("/student-module/networks")}
+                        className="text-yellow-700 hover:text-yellow-900 hover:bg-yellow-100 text-xs gap-1"
+                      >
+                        View All <ChevronRight className="h-3 w-3" />
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {savedNetworks.slice(0, 6).map((item) => (
+                        <div
+                          key={item.item_id}
+                          onClick={() => navigate("/student-module/networks")}
+                          className="cursor-pointer rounded-lg bg-white border border-yellow-200 px-3 py-2 hover:border-yellow-400 hover:shadow-sm transition-all"
+                        >
+                          <p className="text-xs font-semibold text-slate-800 truncate max-w-[160px]">{item.item_title ?? item.item_id}</p>
+                          <p className="text-[10px] text-yellow-700 font-medium mt-0.5">{item.item_type}</p>
+                        </div>
+                      ))}
+                      {savedNetworks.length > 6 && (
+                        <div
+                          onClick={() => navigate("/student-module/networks")}
+                          className="cursor-pointer rounded-lg bg-yellow-100 border border-yellow-300 px-3 py-2 flex items-center justify-center hover:bg-yellow-200 transition-all"
+                        >
+                          <span className="text-xs font-semibold text-yellow-800">+{savedNetworks.length - 6} more</span>
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                ) : (
+                  <div className="bg-card rounded-xl border border-dashed border-slate-200 p-4 mb-5 text-center">
+                    <Handshake className="h-6 w-6 text-slate-300 mx-auto mb-2" />
+                    <p className="text-xs text-muted-foreground">No saved networks yet. <button onClick={() => navigate("/student-module/networks")} className="text-yellow-600 font-semibold hover:underline">Browse Networks →</button></p>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
                   {dashboardSections[7].items.map((item) => <DashboardCard key={item.title} {...item} />)}
                 </div>

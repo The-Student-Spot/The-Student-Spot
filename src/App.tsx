@@ -63,6 +63,7 @@ const App = () => (
             <Route path="/student-dashboard" element={<StudentDashboard />} />
             <Route path="/student-dashboard/:section" element={<StudentDashboard />} />
             <Route path="/student-module/csrImpact" element={<Navigate to="/dashboard/csr-impact" replace />} />
+            <Route path="/student-module/networks" element={<Navigate to="/dashboard/networks" replace />} />
             <Route path="/student-module/:moduleId" element={<ModulePage />} />
             <Route path="/dashboard/csr" element={<Navigate to="/dashboard/csr-impact" replace />} />
             <Route path="/dashboard/csr-impact" element={<CsrImpactPage />} />
